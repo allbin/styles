@@ -1,2 +1,2 @@
 # styles
-A repo for storing the styleguide for Allbin and base component examples.
+A repo for storing the style guide for Allbin and base component examples.
