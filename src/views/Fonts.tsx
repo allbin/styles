@@ -1,0 +1,205 @@
+import React from 'react';
+
+const Fonts: React.FC = () => {
+  return (
+    <div className="mx-6 mt-6">
+      <div className="my-8 grid grid-cols-12 gap-2">
+        <h1>h1</h1>
+        <h1 className="text-text-50">50</h1>
+        <h1 className="text-text-100">100</h1>
+        <h1 className="text-text-200">200</h1>
+        <h1 className="text-text-300">300</h1>
+        <h1 className="text-text-400">400</h1>
+        <h1 className="text-text-500">500</h1>
+        <h1 className="text-text-600">600</h1>
+        <h1 className="text-text-700">700</h1>
+        <h1 className="text-text-800">800</h1>
+        <h1 className="text-text-900">900</h1>
+        <h1 className="text-text-950">950</h1>
+        <h2>h2</h2>
+        <h2 className="text-text-50">50</h2>
+        <h2 className="text-text-100">100</h2>
+        <h2 className="text-text-200">200</h2>
+        <h2 className="text-text-300">300</h2>
+        <h2 className="text-text-400">400</h2>
+        <h2 className="text-text-500">500</h2>
+        <h2 className="text-text-600">600</h2>
+        <h2 className="text-text-700">700</h2>
+        <h2 className="text-text-800">800</h2>
+        <h2 className="text-text-900">900</h2>
+        <h2 className="text-text-950">950</h2>
+        <h3>h3</h3>
+        <h3 className="text-text-50">50</h3>
+        <h3 className="text-text-100">100</h3>
+        <h3 className="text-text-200">200</h3>
+        <h3 className="text-text-300">300</h3>
+        <h3 className="text-text-400">400</h3>
+        <h3 className="text-text-500">500</h3>
+        <h3 className="text-text-600">600</h3>
+        <h3 className="text-text-700">700</h3>
+        <h3 className="text-text-800">800</h3>
+        <h3 className="text-text-900">900</h3>
+        <h3 className="text-text-950">950</h3>
+        <h4>h4</h4>
+        <h4 className="text-text-50">50</h4>
+        <h4 className="text-text-100">100</h4>
+        <h4 className="text-text-200">200</h4>
+        <h4 className="text-text-300">300</h4>
+        <h4 className="text-text-400">400</h4>
+        <h4 className="text-text-500">500</h4>
+        <h4 className="text-text-600">600</h4>
+        <h4 className="text-text-700">700</h4>
+        <h4 className="text-text-800">800</h4>
+        <h4 className="text-text-900">900</h4>
+        <h4 className="text-text-950">950</h4>
+        <h5>h5</h5>
+        <h5 className="text-text-50">50</h5>
+        <h5 className="text-text-100">100</h5>
+        <h5 className="text-text-200">200</h5>
+        <h5 className="text-text-300">300</h5>
+        <h5 className="text-text-400">400</h5>
+        <h5 className="text-text-500">500</h5>
+        <h5 className="text-text-600">600</h5>
+        <h5 className="text-text-700">700</h5>
+        <h5 className="text-text-800">800</h5>
+        <h5 className="text-text-900">900</h5>
+        <h5 className="text-text-950">950</h5>
+        <h6>h6</h6>
+        <h6 className="text-text-50">50</h6>
+        <h6 className="text-text-100">100</h6>
+        <h6 className="text-text-200">200</h6>
+        <h6 className="text-text-300">300</h6>
+        <h6 className="text-text-400">400</h6>
+        <h6 className="text-text-500">500</h6>
+        <h6 className="text-text-600">600</h6>
+        <h6 className="text-text-700">700</h6>
+        <h6 className="text-text-800">800</h6>
+        <h6 className="text-text-900">900</h6>
+        <h6 className="text-text-950">950</h6>
+      </div>
+      <div className="mt-10 flex flex-col gap-2">
+        Font sizes, default font
+        <div className="mb-6 grid grid-cols-10 gap-2 font-sans">
+          <p className="italic">xs</p>
+          <p className="text-xs font-thin">Thin</p>
+          <p className="text-xs font-extralight">Extra light</p>
+          <p className="text-xs font-light">Light</p>
+          <p className="text-xs font-normal">Normal</p>
+          <p className="text-xs font-medium">Medium</p>
+          <p className="text-xs font-semibold">Semi bold</p>
+          <p className="text-xs font-bold">Bold</p>
+          <p className="text-xs font-extrabold">Extra bold</p>
+          <p className="text-xs font-black">Black</p>
+          <p className="italic">sm</p>
+          <p className="text-sm font-thin">Thin</p>
+          <p className="text-sm font-extralight">Extra light</p>
+          <p className="text-sm font-light">Light</p>
+          <p className="text-sm font-normal">Normal</p>
+          <p className="text-sm font-medium">Medium</p>
+          <p className="text-sm font-semibold">Semi bold</p>
+          <p className="text-sm font-bold">Bold</p>
+          <p className="text-sm font-extrabold">Extra bold</p>
+          <p className="text-sm font-black">Black</p>
+          <p className="italic">base (md)</p>
+          <p className="text-base font-thin">Thin</p>
+          <p className="text-base font-extralight">Extra light</p>
+          <p className="text-base font-light">Light</p>
+          <p className="text-base font-normal">Normal</p>
+          <p className="text-base font-medium">Medium</p>
+          <p className="text-base font-semibold">Semi bold</p>
+          <p className="text-base font-bold">Bold</p>
+          <p className="text-base font-extrabold">Extra bold</p>
+          <p className="text-base font-black">Black</p>
+          <p className="italic">lg</p>
+          <p className="text-lg font-thin">Thin</p>
+          <p className="text-lg font-extralight">Extra light</p>
+          <p className="text-lg font-light">Light</p>
+          <p className="text-lg font-normal">Normal</p>
+          <p className="text-lg font-medium">Medium</p>
+          <p className="text-lg font-semibold">Semi bold</p>
+          <p className="text-lg font-bold">Bold</p>
+          <p className="text-lg font-extrabold">Extra bold</p>
+          <p className="text-lg font-black">Black</p>
+          <p className="italic">xl</p>
+          <p className="text-xl font-thin">Thin</p>
+          <p className="text-xl font-extralight">Extra light</p>
+          <p className="text-xl font-light">Light</p>
+          <p className="text-xl font-normal">Normal</p>
+          <p className="text-xl font-medium">Medium</p>
+          <p className="text-xl font-semibold">Semi bold</p>
+          <p className="text-xl font-bold">Bold</p>
+          <p className="text-xl font-extrabold">Extra bold</p>
+          <p className="text-xl font-black">Black</p>
+        </div>
+        Font sizes, alternative font
+        <div className="grid grid-cols-10 gap-2 font-work">
+          <p className="italic">xs</p>
+          <p className="text-xs font-thin">Thin</p>
+          <p className="text-xs font-extralight">Extra light</p>
+          <p className="text-xs font-light">Light</p>
+          <p className="text-xs font-normal">Normal</p>
+          <p className="text-xs font-medium">Medium</p>
+          <p className="text-xs font-semibold">Semi bold</p>
+          <p className="text-xs font-bold">Bold</p>
+          <p className="text-xs font-extrabold">Extra bold</p>
+          <p className="text-xs font-black">Black</p>
+          <p className="italic">sm</p>
+          <p className="text-sm font-thin">Thin</p>
+          <p className="text-sm font-extralight">Extra light</p>
+          <p className="text-sm font-light">Light</p>
+          <p className="text-sm font-normal">Normal</p>
+          <p className="text-sm font-medium">Medium</p>
+          <p className="text-sm font-semibold">Semi bold</p>
+          <p className="text-sm font-bold">Bold</p>
+          <p className="text-sm font-extrabold">Extra bold</p>
+          <p className="text-sm font-black">Black</p>
+          <p className="italic">base</p>
+          <p className="text-base font-thin">Thin</p>
+          <p className="text-base font-extralight">Extra light</p>
+          <p className="text-base font-light">Light</p>
+          <p className="text-base font-normal">Normal</p>
+          <p className="text-base font-medium">Medium</p>
+          <p className="text-base font-semibold">Semi bold</p>
+          <p className="text-base font-bold">Bold</p>
+          <p className="text-base font-extrabold">Extra bold</p>
+          <p className="text-base font-black">Black</p>
+          <p className="italic">lg</p>
+          <p className="text-lg font-thin">Thin</p>
+          <p className="text-lg font-extralight">Extra light</p>
+          <p className="text-lg font-light">Light</p>
+          <p className="text-lg font-normal">Normal</p>
+          <p className="text-lg font-medium">Medium</p>
+          <p className="text-lg font-semibold">Semi bold</p>
+          <p className="text-lg font-bold">Bold</p>
+          <p className="text-lg font-extrabold">Extra bold</p>
+          <p className="text-lg font-black">Black</p>
+          <p className="italic">xl</p>
+          <p className="text-xl font-thin">Thin</p>
+          <p className="text-xl font-extralight">Extra light</p>
+          <p className="text-xl font-light">Light</p>
+          <p className="text-xl font-normal">Normal</p>
+          <p className="text-xl font-medium">Medium</p>
+          <p className="text-xl font-semibold">Semi bold</p>
+          <p className="text-xl font-bold">Bold</p>
+          <p className="text-xl font-extrabold">Extra bold</p>
+          <p className="text-xl font-black">Black</p>
+        </div>
+      </div>
+      <p className="mt-8">
+        Example default text <br /> Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit. Curabitur ultricies, mauris sed faucibus sollicitudin,
+        dui lacus ornare justo, ac euismod sapien dui sed odio. Pellentesque et
+        erat risus. Quisque id diam lectus. Fusce dignissim nisi quis justo
+        eleifend iaculis. Aliquam non mi non erat vehicula semper et quis eros.
+        Sed ut nibh tincidunt, luctus ipsum ac, elementum est. Vivamus bibendum
+        purus et sem consectetur feugiat. Quisque est massa, egestas a
+        condimentum non, tristique at purus. Curabitur lobortis arcu a neque
+        blandit aliquet. Pellentesque ac turpis sit amet sem commodo aliquet id
+        eget enim. Phasellus sollicitudin velit vel iaculis maximus. Duis ut
+        posuere sem, eget congue est.
+      </p>
+    </div>
+  );
+};
+
+export default Fonts;

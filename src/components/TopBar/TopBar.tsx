@@ -50,7 +50,7 @@ const TopBar: React.FC = () => {
           icon={<MagnifyingGlassIcon className="size-5" />}
         />
       </div>
-      <div className="ml-auto flex w-64 gap-1 px-1">
+      <div className="ml-auto flex w-80 gap-1 px-1">
         <Select options={themes} onSelect={(v) => setTheme(v)} value={theme} />
         <Profile />
       </div>

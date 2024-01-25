@@ -2,12 +2,12 @@ import React, { PropsWithChildren } from 'react';
 import { cn } from '../../helpers/classnames';
 import { NavLink } from 'react-router-dom';
 
-interface NavElementProps {
+interface GalleryLinkProps {
   to: string;
   end?: boolean;
 }
 
-const NavElement: React.FC<PropsWithChildren<NavElementProps>> = ({
+const GalleryLink: React.FC<PropsWithChildren<GalleryLinkProps>> = ({
   to,
   children,
   end,
@@ -24,15 +24,15 @@ const NavElement: React.FC<PropsWithChildren<NavElementProps>> = ({
         <>
           <div
             className={cn(
-              'absolute -inset-x-2 h-full rounded bg-transparent transition-all duration-300 group-hover:inset-x-1 group-hover:bg-secondary-200',
+              'absolute -inset-x-2 bottom-1 h-1 bg-transparent transition-all duration-300 group-hover:inset-x-1 group-hover:bg-secondary-200',
               isActive &&
                 'inset-x-1 bg-secondary-600 group-hover:bg-secondary-700',
             )}
           />
           <div
             className={cn(
-              'relative flex items-center gap-1 text-text-800',
-              isActive && 'text-text-100',
+              'relative flex items-center gap-1 text-text-400',
+              isActive && 'text-text-900',
             )}
           >
             {children}
@@ -43,4 +43,4 @@ const NavElement: React.FC<PropsWithChildren<NavElementProps>> = ({
   );
 };
 
-export default NavElement;
+export default GalleryLink;

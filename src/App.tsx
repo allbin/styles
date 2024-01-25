@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { ThemeCtx } from './contexts/ThemeContext';
+import { cn } from './helpers/classnames';
 import Home from './views/home/Home';
 import Colors from './views/Colors';
 import Root from './views/Root';
-import { ThemeCtx } from './contexts/ThemeContext';
-import { cn } from './helpers/classnames';
+import Gallery from './views/gallery/Gallery';
+import Fonts from './views/Fonts';
+import Icons from './views/Icons/Icons';
 
 const App: React.FC = () => {
   const [theme] = useContext(ThemeCtx);
@@ -17,6 +20,9 @@ const App: React.FC = () => {
         <Routes>
           <Route element={<Root />}>
             <Route path="colors" element={<Colors />} />
+            <Route path="gallery/*" element={<Gallery />} />
+            <Route path="fonts" element={<Fonts />} />
+            <Route path="icons" element={<Icons />} />
             <Route path="*" element={<Home />} />
           </Route>
         </Routes>

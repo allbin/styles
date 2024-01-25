@@ -313,6 +313,81 @@ const Colors: React.FC = () => {
         <div className="size-10 bg-background-900/10" />
         <div className="size-10 bg-background-950/10" />
       </div>
+      <h2>Text</h2>
+      <div className="grid grid-cols-12 text-sm">
+        <span></span>
+        <span>0</span>
+        <span>100</span>
+        <span>200</span>
+        <span>300</span>
+        <span>400</span>
+        <span>500</span>
+        <span>600</span>
+        <span>700</span>
+        <span>800</span>
+        <span>900</span>
+        <span>950</span>
+        100
+        <div className="size-10 bg-text-50" />
+        <div className="size-10 bg-text-100" />
+        <div className="size-10 bg-text-200" />
+        <div className="size-10 bg-text-300" />
+        <div className="size-10 bg-text-400" />
+        <div className="size-10 bg-text-500" />
+        <div className="size-10 bg-text-600" />
+        <div className="size-10 bg-text-700" />
+        <div className="size-10 bg-text-800" />
+        <div className="size-10 bg-text-900" />
+        <div className="size-10 bg-text-950" />
+        70
+        <div className="size-10 bg-text-50/70" />
+        <div className="size-10 bg-text-100/70" />
+        <div className="size-10 bg-text-200/70" />
+        <div className="size-10 bg-text-300/70" />
+        <div className="size-10 bg-text-400/70" />
+        <div className="size-10 bg-text-500/70" />
+        <div className="size-10 bg-text-600/70" />
+        <div className="size-10 bg-text-700/70" />
+        <div className="size-10 bg-text-800/70" />
+        <div className="size-10 bg-text-900/70" />
+        <div className="size-10 bg-text-950/70" />
+        50
+        <div className="size-10 bg-text-50/50" />
+        <div className="size-10 bg-text-100/50" />
+        <div className="size-10 bg-text-200/50" />
+        <div className="size-10 bg-text-300/50" />
+        <div className="size-10 bg-text-400/50" />
+        <div className="size-10 bg-text-500/50" />
+        <div className="size-10 bg-text-600/50" />
+        <div className="size-10 bg-text-700/50" />
+        <div className="size-10 bg-text-800/50" />
+        <div className="size-10 bg-text-900/50" />
+        <div className="size-10 bg-text-950/50" />
+        30
+        <div className="size-10 bg-text-50/30" />
+        <div className="size-10 bg-text-100/30" />
+        <div className="size-10 bg-text-200/30" />
+        <div className="size-10 bg-text-300/30" />
+        <div className="size-10 bg-text-400/30" />
+        <div className="size-10 bg-text-500/30" />
+        <div className="size-10 bg-text-600/30" />
+        <div className="size-10 bg-text-700/30" />
+        <div className="size-10 bg-text-800/30" />
+        <div className="size-10 bg-text-900/30" />
+        <div className="size-10 bg-text-950/30" />
+        10
+        <div className="size-10 bg-text-50/10" />
+        <div className="size-10 bg-text-100/10" />
+        <div className="size-10 bg-text-200/10" />
+        <div className="size-10 bg-text-300/10" />
+        <div className="size-10 bg-text-400/10" />
+        <div className="size-10 bg-text-500/10" />
+        <div className="size-10 bg-text-600/10" />
+        <div className="size-10 bg-text-700/10" />
+        <div className="size-10 bg-text-800/10" />
+        <div className="size-10 bg-text-900/10" />
+        <div className="size-10 bg-text-950/10" />
+      </div>
     </div>
   );
 };
