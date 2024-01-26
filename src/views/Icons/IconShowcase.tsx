@@ -24,10 +24,10 @@ const IconShowcase: React.FC<IconShowcaseProps> = ({ role, lib, Icon }) => {
         <Button filled>
           <Icon className="size-5" /> On filled btn
         </Button>
-        <div className="flex aspect-square h-8 items-center justify-center gap-1 rounded bg-background-900 text-text-50">
+        <div className="flex aspect-square h-8 items-center justify-center gap-1 bg-background-900 text-text-50">
           <Icon className="size-5" />
         </div>
-        <div className="flex aspect-square h-8 items-center justify-center gap-1 rounded bg-background-50 text-text-950">
+        <div className="flex aspect-square h-8 items-center justify-center gap-1 bg-background-50 text-text-950">
           <Icon className="size-5" />
         </div>
         <div className="flex items-center gap-1 p-1 text-primary-700">

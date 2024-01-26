@@ -1,25 +1,31 @@
 import React from 'react';
 import IconShowcase, { IconShowcaseProps } from './IconShowcase';
 import { IconBridge3d, IconBus, IconBusStop, IconText } from '@allbin/icons';
+// import {
+//   ListBulletIcon,
+//   QrCodeIcon,
+//   Bars3Icon,
+// } from '@heroicons/react/24/solid';
 import {
+  LinkIcon,
+  MapIcon,
   HomeIcon,
+  MapPinIcon,
   ListBulletIcon,
   QrCodeIcon,
   Bars3Icon,
-  MapPinIcon,
-} from '@heroicons/react/24/solid';
-import { LinkIcon, MapIcon } from '@heroicons/react/24/outline';
+} from '@heroicons/react/24/outline';
 
 const icons: IconShowcaseProps[] = [
   {
     Icon: HomeIcon,
     role: 'Home',
-    lib: 'hero/solid/HomeIcon',
+    lib: 'hero/HomeIcon',
   },
   {
     Icon: QrCodeIcon,
     role: 'Qr code',
-    lib: 'hero/solid/QrCodeIcon',
+    lib: 'hero/QrCodeIcon',
   },
   {
     Icon: IconText,
@@ -29,12 +35,12 @@ const icons: IconShowcaseProps[] = [
   {
     Icon: ListBulletIcon,
     role: 'Bullet list',
-    lib: 'hero/solid/ListbulletIcon',
+    lib: 'hero/ListbulletIcon',
   },
   {
     Icon: Bars3Icon,
     role: 'Paragraph',
-    lib: 'hero/solid/Bars3Icon',
+    lib: 'hero/Bars3Icon',
   },
   {
     Icon: IconBus,
@@ -54,17 +60,17 @@ const icons: IconShowcaseProps[] = [
   {
     Icon: LinkIcon,
     role: 'Affected routes',
-    lib: 'hero/outline/LinkIcon',
+    lib: 'hero/LinkIcon',
   },
   {
     Icon: MapIcon,
     role: 'Map',
-    lib: 'hero/outline/MapIcon',
+    lib: 'hero/MapIcon',
   },
   {
     Icon: MapPinIcon,
     role: 'Map marker',
-    lib: 'hero/outline/MapPinIcon',
+    lib: 'hero/MapPinIcon',
   },
 ];
 

@@ -4,6 +4,12 @@ const Colors: React.FC = () => {
   return (
     <div className="mx-auto flex max-w-[900px] flex-col gap-5 text-text-900">
       <p>
+        Color picker/generator:{' '}
+        <a href="https://www.realtimecolors.com/">
+          https://www.realtimecolors.com/
+        </a>
+      </p>
+      <p>
         These are the colors assigned to the selected theme. Buttons and labels
         and text and such should use one of these defined colors.
       </p>

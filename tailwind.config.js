@@ -22,7 +22,8 @@ export default {
       },
       fontFamily: {
         sans: ['AlbertSans', ...defaultTheme.fontFamily.sans],
-        work: ['WorkSans'],
+        mono: ['FiraCode', ...defaultTheme.fontFamily.mono],
+        serif: ['Bitter', ...defaultTheme.fontFamily.serif],
       },
       colors: {
         text: {

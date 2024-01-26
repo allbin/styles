@@ -3,7 +3,8 @@ import React from 'react';
 const Fonts: React.FC = () => {
   return (
     <div className="mx-6 mt-6">
-      <div className="my-8 grid grid-cols-12 gap-2">
+      Headings, colored by shade
+      <div className="mb-8 grid grid-cols-12 gap-2">
         <h1>h1</h1>
         <h1 className="text-text-50">50</h1>
         <h1 className="text-text-100">100</h1>
@@ -78,7 +79,7 @@ const Fonts: React.FC = () => {
         <h6 className="text-text-950">950</h6>
       </div>
       <div className="mt-10 flex flex-col gap-2">
-        Font sizes, default font
+        Font sizes, default (sans) font
         <div className="mb-6 grid grid-cols-10 gap-2 font-sans">
           <p className="italic">xs</p>
           <p className="text-xs font-thin">Thin</p>
@@ -131,8 +132,61 @@ const Fonts: React.FC = () => {
           <p className="text-xl font-extrabold">Extra bold</p>
           <p className="text-xl font-black">Black</p>
         </div>
-        Font sizes, alternative font
-        <div className="grid grid-cols-10 gap-2 font-work">
+        Font sizes, serif font
+        <div className="grid grid-cols-10 gap-2 font-serif">
+          <p className="italic">xs</p>
+          <p className="text-xs font-thin">Thin</p>
+          <p className="text-xs font-extralight">Extra light</p>
+          <p className="text-xs font-light">Light</p>
+          <p className="text-xs font-normal">Normal</p>
+          <p className="text-xs font-medium">Medium</p>
+          <p className="text-xs font-semibold">Semi bold</p>
+          <p className="text-xs font-bold">Bold</p>
+          <p className="text-xs font-extrabold">Extra bold</p>
+          <p className="text-xs font-black">Black</p>
+          <p className="italic">sm</p>
+          <p className="text-sm font-thin">Thin</p>
+          <p className="text-sm font-extralight">Extra light</p>
+          <p className="text-sm font-light">Light</p>
+          <p className="text-sm font-normal">Normal</p>
+          <p className="text-sm font-medium">Medium</p>
+          <p className="text-sm font-semibold">Semi bold</p>
+          <p className="text-sm font-bold">Bold</p>
+          <p className="text-sm font-extrabold">Extra bold</p>
+          <p className="text-sm font-black">Black</p>
+          <p className="italic">base</p>
+          <p className="text-base font-thin">Thin</p>
+          <p className="text-base font-extralight">Extra light</p>
+          <p className="text-base font-light">Light</p>
+          <p className="text-base font-normal">Normal</p>
+          <p className="text-base font-medium">Medium</p>
+          <p className="text-base font-semibold">Semi bold</p>
+          <p className="text-base font-bold">Bold</p>
+          <p className="text-base font-extrabold">Extra bold</p>
+          <p className="text-base font-black">Black</p>
+          <p className="italic">lg</p>
+          <p className="text-lg font-thin">Thin</p>
+          <p className="text-lg font-extralight">Extra light</p>
+          <p className="text-lg font-light">Light</p>
+          <p className="text-lg font-normal">Normal</p>
+          <p className="text-lg font-medium">Medium</p>
+          <p className="text-lg font-semibold">Semi bold</p>
+          <p className="text-lg font-bold">Bold</p>
+          <p className="text-lg font-extrabold">Extra bold</p>
+          <p className="text-lg font-black">Black</p>
+          <p className="italic">xl</p>
+          <p className="text-xl font-thin">Thin</p>
+          <p className="text-xl font-extralight">Extra light</p>
+          <p className="text-xl font-light">Light</p>
+          <p className="text-xl font-normal">Normal</p>
+          <p className="text-xl font-medium">Medium</p>
+          <p className="text-xl font-semibold">Semi bold</p>
+          <p className="text-xl font-bold">Bold</p>
+          <p className="text-xl font-extrabold">Extra bold</p>
+          <p className="text-xl font-black">Black</p>
+        </div>
+        Font sizes, mono font
+        <div className="grid grid-cols-10 gap-2 font-mono">
           <p className="italic">xs</p>
           <p className="text-xs font-thin">Thin</p>
           <p className="text-xs font-extralight">Extra light</p>
@@ -186,7 +240,33 @@ const Fonts: React.FC = () => {
         </div>
       </div>
       <p className="mt-8">
-        Example default text <br /> Lorem ipsum dolor sit amet, consectetur
+        Example default (sans) text <br /> Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Curabitur ultricies, mauris sed faucibus
+        sollicitudin, dui lacus ornare justo, ac euismod sapien dui sed odio.
+        Pellentesque et erat risus. Quisque id diam lectus. Fusce dignissim nisi
+        quis justo eleifend iaculis. Aliquam non mi non erat vehicula semper et
+        quis eros. Sed ut nibh tincidunt, luctus ipsum ac, elementum est.
+        Vivamus bibendum purus et sem consectetur feugiat. Quisque est massa,
+        egestas a condimentum non, tristique at purus. Curabitur lobortis arcu a
+        neque blandit aliquet. Pellentesque ac turpis sit amet sem commodo
+        aliquet id eget enim. Phasellus sollicitudin velit vel iaculis maximus.
+        Duis ut posuere sem, eget congue est.
+      </p>
+      <p className="mt-8 font-serif">
+        Example serif text <br /> Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit. Curabitur ultricies, mauris sed faucibus sollicitudin,
+        dui lacus ornare justo, ac euismod sapien dui sed odio. Pellentesque et
+        erat risus. Quisque id diam lectus. Fusce dignissim nisi quis justo
+        eleifend iaculis. Aliquam non mi non erat vehicula semper et quis eros.
+        Sed ut nibh tincidunt, luctus ipsum ac, elementum est. Vivamus bibendum
+        purus et sem consectetur feugiat. Quisque est massa, egestas a
+        condimentum non, tristique at purus. Curabitur lobortis arcu a neque
+        blandit aliquet. Pellentesque ac turpis sit amet sem commodo aliquet id
+        eget enim. Phasellus sollicitudin velit vel iaculis maximus. Duis ut
+        posuere sem, eget congue est.
+      </p>
+      <p className="mt-8 font-mono">
+        Example mono text <br /> Lorem ipsum dolor sit amet, consectetur
         adipiscing elit. Curabitur ultricies, mauris sed faucibus sollicitudin,
         dui lacus ornare justo, ac euismod sapien dui sed odio. Pellentesque et
         erat risus. Quisque id diam lectus. Fusce dignissim nisi quis justo
