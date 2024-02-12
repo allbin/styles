@@ -3,11 +3,17 @@ import { Route, Routes } from 'react-router-dom';
 import Btn from './Btn';
 import GalleryLink from './GalleryLink';
 import GalleryCheckbox from '../../components/Checkbox/GalleryCheckbox';
+import GalleryPositionPad from '../../components/PositionPad/GalleryPositionPad';
 
 const gallery = [
   { path: 'btn', label: 'Button', component: <Btn /> },
   { path: 'checkbox', label: 'Checkbox', component: <GalleryCheckbox /> },
   { path: 'btn3', label: 'Button', component: <Btn /> },
+  {
+    path: 'positionpad',
+    label: 'PositionPad',
+    component: <GalleryPositionPad />,
+  },
 ];
 
 const Gallery: React.FC = () => {
