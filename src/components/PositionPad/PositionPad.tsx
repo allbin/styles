@@ -58,7 +58,11 @@ const PositionPad: React.FC<PositionPadProps> = ({
   const selectable_positions = selectable || all_positions;
   return (
     <div className={cn('flex flex-col gap-1', className)}>
-      {label && <label>{label}</label>}
+      {label && (
+        <div className="text-sm leading-6">
+          <label className="font-medium">{label}</label>
+        </div>
+      )}
       <div className="flex flex-wrap justify-center">
         {all_positions.map((position) => {
           const Icon = icon_by_position[position];

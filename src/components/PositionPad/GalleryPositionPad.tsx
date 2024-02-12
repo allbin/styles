@@ -10,7 +10,7 @@ const GalleryPositionPad: React.FC = () => {
   const ordinals_selectable = ['tl', 'tr', 'bl', 'br'];
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <PositionPad
         disabled
         label="A disabled PositionPad"
