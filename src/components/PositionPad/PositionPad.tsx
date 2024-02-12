@@ -63,7 +63,11 @@ const PositionPad: React.FC<PositionPadProps> = ({
         {all_positions.map((position) => {
           const Icon = icon_by_position[position];
           return (
-            <div className="flex basis-1/3 justify-center" id={position}>
+            <div
+              key={position}
+              className="flex basis-1/3 justify-center"
+              id={position}
+            >
               {selectable_positions.includes(position) && (
                 <button
                   onClick={() => onSelect(position)}
