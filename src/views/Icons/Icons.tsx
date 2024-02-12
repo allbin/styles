@@ -14,6 +14,15 @@ import {
   ListBulletIcon,
   QrCodeIcon,
   Bars3Icon,
+  ArrowUpLeftIcon,
+  ArrowUpIcon,
+  ArrowUpRightIcon,
+  ArrowRightIcon,
+  ArrowDownRightIcon,
+  ArrowDownIcon,
+  ArrowDownLeftIcon,
+  ArrowLeftIcon,
+  ArrowsPointingInIcon,
 } from '@heroicons/react/24/outline';
 
 const icons: IconShowcaseProps[] = [
@@ -71,6 +80,31 @@ const icons: IconShowcaseProps[] = [
     Icon: MapPinIcon,
     role: 'Map marker',
     lib: 'hero/MapPinIcon',
+  },
+  { Icon: ArrowUpLeftIcon, role: 'Arrow up left', lib: 'hero/ArrowUpLeftIcon' },
+  { Icon: ArrowUpIcon, role: 'Arrow up', lib: 'hero/ArrowUpIcon' },
+  {
+    Icon: ArrowUpRightIcon,
+    role: 'Arrow up right',
+    lib: 'hero/ArrowUpRightIcon',
+  },
+  { Icon: ArrowRightIcon, role: 'Arrow right', lib: 'hero/ArrowRightIcon' },
+  {
+    Icon: ArrowDownRightIcon,
+    role: 'Arrow down right',
+    lib: 'hero/ArrowDownRightIcon',
+  },
+  { Icon: ArrowDownIcon, role: 'Arrow down', lib: 'hero/ArrowDownIcon' },
+  {
+    Icon: ArrowDownLeftIcon,
+    role: 'Arrow down left',
+    lib: 'hero/ArrowDownLeftIcon',
+  },
+  { Icon: ArrowLeftIcon, role: 'Arrow left', lib: 'hero/ArrowLeftIcon' },
+  {
+    Icon: ArrowsPointingInIcon,
+    role: 'Center',
+    lib: 'hero/ArrowsPointingInIcon',
   },
 ];
 
