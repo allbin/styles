@@ -4,10 +4,12 @@ import Btn from './Btn';
 import GalleryLink from './GalleryLink';
 import GalleryCheckbox from '../../components/Checkbox/GalleryCheckbox';
 import GalleryPositionPad from '../../components/PositionPad/GalleryPositionPad';
+import GallerySlider from '../../components/Slider/GallerySlider';
 
 const gallery = [
   { path: 'btn', label: 'Button', component: <Btn /> },
   { path: 'checkbox', label: 'Checkbox', component: <GalleryCheckbox /> },
+  { path: 'slider', label: 'Slider', component: <GallerySlider /> },
   { path: 'btn3', label: 'Button', component: <Btn /> },
   {
     path: 'positionpad',

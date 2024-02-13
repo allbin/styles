@@ -17,22 +17,22 @@ import { Tooltip } from 'react-tooltip';
 import { cn } from '../../helpers/classnames';
 
 interface CheckboxProps {
+  id: string;
   value?: boolean;
   label?: string;
   description?: string;
   tooltip?: string;
-  id?: string;
   disabled?: boolean;
   className?: string;
   onChange?: (checked: boolean) => void;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
+  id,
   value,
   label,
   description,
   tooltip,
-  id,
   disabled,
   className,
   onChange,
@@ -41,7 +41,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
     <>
       <Tooltip place="top-start" id="checkbox-tooltip" delayShow={500} />
       <div
-        onClick={() => onChange && onChange(!value)}
         data-tooltip-id="checkbox-tooltip"
         data-tooltip-content={tooltip}
         className={cn(
@@ -54,6 +53,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
           <input
             disabled={disabled}
             checked={value}
+            onChange={() => onChange && onChange(!value)}
             id={id}
             name={id}
             type="checkbox"
@@ -69,6 +69,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         {(label || description) && (
           <div className="ml-3 text-sm leading-6">
             <label
+              htmlFor={id}
               className={cn(
                 'cursor-pointer font-medium text-text-900 group-hover:text-accent-700',
                 disabled &&

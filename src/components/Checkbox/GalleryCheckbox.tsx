@@ -12,11 +12,12 @@ const GalleryCheckbox: React.FC = () => {
   return (
     <div>
       Checkbox with no props
-      <Checkbox className="mb-4" />
+      <Checkbox id="checkbox-1" className="mb-4" />
       Checkbox with label
-      <Checkbox className="mb-4" label="Checkbox Label" />
+      <Checkbox id="checkbox-2" className="mb-4" label="Checkbox Label" />
       Checkbox with only description (with external state)
       <Checkbox
+        id="checkbox-3"
         value={checked}
         onChange={handleChange}
         className="mb-4"
@@ -24,12 +25,14 @@ const GalleryCheckbox: React.FC = () => {
       />
       Checkbox with label and description
       <Checkbox
+        id="checkbox-4"
         className="mb-4"
         label="Checkbox Label"
         description="This is a description for the checkbox"
       />
       Checkbox with tooltip (with external state)
       <Checkbox
+        id="checkbox-5"
         value={checked}
         onChange={handleChange}
         className="mb-4"
@@ -39,6 +42,7 @@ const GalleryCheckbox: React.FC = () => {
       />
       Another checkbox with tooltip (with external state)
       <Checkbox
+        id="checkbox-6"
         value={checked}
         onChange={handleChange}
         className="mb-4"
@@ -48,6 +52,7 @@ const GalleryCheckbox: React.FC = () => {
       />
       Disabled checkbox
       <Checkbox
+        id="checkbox-7"
         className="mb-4"
         label="Checkbox Label"
         description="This is a description for the checkbox"
@@ -56,6 +61,7 @@ const GalleryCheckbox: React.FC = () => {
       />
       Disabled checked checkbox
       <Checkbox
+        id="checkbox-8"
         className="mb-4"
         label="Checkbox Label"
         description="This is a description for the checkbox"
@@ -65,6 +71,7 @@ const GalleryCheckbox: React.FC = () => {
       />
       Disabled checked checkbox (with external state)
       <Checkbox
+        id="checkbox-9"
         value={checked}
         onChange={handleChange}
         className="mb-4"
