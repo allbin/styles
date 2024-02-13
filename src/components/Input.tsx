@@ -5,6 +5,7 @@ import { Tooltip } from 'react-tooltip';
 interface InputProps {
   id: string;
   label?: string;
+  disabled?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   value?: string;
   placeholder?: string;
@@ -15,6 +16,7 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
   id,
   label,
+  disabled,
   onChange,
   value,
   placeholder,
@@ -44,8 +46,9 @@ const Input: React.FC<InputProps> = ({
         )}
         <input
           id={id}
+          disabled={disabled}
           className={cn(
-            'block w-full rounded-md border-0 py-1.5 pl-2 text-text-900 ring-1 ring-inset ring-secondary-300 placeholder:text-text-400 focus:ring-0 focus:ring-accent-600',
+            'block w-full rounded-md border-0 bg-background-50 py-1.5 pl-2 ring-1 ring-inset ring-secondary-300 placeholder:text-text-400 focus:ring-0 focus:ring-accent-600 disabled:bg-background-300/50',
             invalid && 'text-red-700 ring-red-600 focus:ring-red-600',
             icon && 'pl-10',
           )}
