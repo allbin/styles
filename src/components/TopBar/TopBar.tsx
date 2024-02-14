@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Profile from './Profile';
 import { ThemeCtx } from '../../contexts/ThemeContext';
 import Select from '../Select';
-import Input from '../Input';
+import Input from '../Input/Input';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 const themes = [

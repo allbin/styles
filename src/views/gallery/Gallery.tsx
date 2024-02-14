@@ -5,9 +5,11 @@ import GalleryLink from './GalleryLink';
 import GalleryCheckbox from '../../components/Checkbox/GalleryCheckbox';
 import GalleryPositionPad from '../../components/PositionPad/GalleryPositionPad';
 import GallerySlider from '../../components/Slider/GallerySlider';
+import GalleryInput from '../../components/Input/GalleryInput';
 
 const gallery = [
   { path: 'btn', label: 'Button', component: <Btn /> },
+  { path: 'input', label: 'Input', component: <GalleryInput /> },
   { path: 'checkbox', label: 'Checkbox', component: <GalleryCheckbox /> },
   { path: 'slider', label: 'Slider', component: <GallerySlider /> },
   { path: 'btn3', label: 'Button', component: <Btn /> },
