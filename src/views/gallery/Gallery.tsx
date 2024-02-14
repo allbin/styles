@@ -6,6 +6,8 @@ import GalleryCheckbox from '../../components/Checkbox/GalleryCheckbox';
 import GalleryPositionPad from '../../components/PositionPad/GalleryPositionPad';
 import GallerySlider from '../../components/Slider/GallerySlider';
 import GalleryInput from '../../components/Input/GalleryInput';
+import GalleryToggleButtonGroup from '../../components/GalleryToggleButtonGroup';
+import GalleryToggleButton from '../../components/GalleyToggleButton';
 
 const gallery = [
   { path: 'btn', label: 'Button', component: <Btn /> },
@@ -17,6 +19,16 @@ const gallery = [
     path: 'positionpad',
     label: 'PositionPad',
     component: <GalleryPositionPad />,
+  },
+  {
+    path: 'togglebutton',
+    label: 'ToggleButton',
+    component: <GalleryToggleButton />,
+  },
+  {
+    path: 'togglebuttongroup',
+    label: 'ToggleButtonGroup',
+    component: <GalleryToggleButtonGroup />,
   },
 ];
 

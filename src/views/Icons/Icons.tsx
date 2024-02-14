@@ -1,6 +1,15 @@
 import React from 'react';
 import IconShowcase, { IconShowcaseProps } from './IconShowcase';
-import { IconBridge3d, IconBus, IconBusStop, IconText } from '@allbin/icons';
+import {
+  IconAlignLeft,
+  IconAlignCenter,
+  IconAlignRight,
+  IconItalic,
+  IconBridge3d,
+  IconBus,
+  IconBusStop,
+  IconText,
+} from '@allbin/icons';
 // import {
 //   ListBulletIcon,
 //   QrCodeIcon,
@@ -106,6 +115,14 @@ const icons: IconShowcaseProps[] = [
     role: 'Center',
     lib: 'hero/ArrowsPointingInIcon',
   },
+  { Icon: IconAlignLeft, role: 'Align left', lib: 'allbin/IconAlignLeft' },
+  {
+    Icon: IconAlignCenter,
+    role: 'Align center',
+    lib: 'allbin/IconAlignCenter',
+  },
+  { Icon: IconAlignRight, role: 'Align right', lib: 'allbin/IconAlignRight' },
+  { Icon: IconItalic, role: 'Italic', lib: 'allbin/IconItalic' },
 ];
 
 const Icons: React.FC = () => {
