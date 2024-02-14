@@ -10,6 +10,7 @@ interface InputProps {
   value?: string;
   placeholder?: string;
   icon?: React.ReactNode;
+  tooltip?: string;
   invalid?: string;
 }
 
@@ -21,11 +22,17 @@ const Input: React.FC<InputProps> = ({
   value,
   placeholder,
   icon,
+  tooltip,
   invalid,
 }) => {
   return (
-    <div className="relative grow">
-      <Tooltip variant="error" id={id} />
+    <div
+      className="relative grow"
+      data-tooltip-id={id}
+      data-tooltip-content={invalid || tooltip}
+      data-tooltip-variant={invalid ? 'error' : undefined}
+    >
+      <Tooltip id={id} delayShow={300} delayHide={1} />
       {label && (
         <label
           htmlFor={id}
@@ -53,8 +60,6 @@ const Input: React.FC<InputProps> = ({
             invalid && 'text-red-700 ring-1 ring-red-600 focus:outline-red-600',
             icon && 'pl-10',
           )}
-          data-tooltip-id={id}
-          data-tooltip-content={invalid}
           placeholder={placeholder}
           value={value}
           onChange={onChange}

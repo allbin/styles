@@ -12,8 +12,9 @@ const GalleryInput: React.FC = () => {
         id="input-3"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        label="Input Label with placeholder (invalid if value is 'invalid')"
+        label="Input Label with placeholder and tooltip (invalid if value is 'invalid')"
         placeholder="Placeholder"
+        tooltip="This is a tooltip"
         invalid={value === 'invalid' ? 'Invalid input' : undefined}
       />
       <Input disabled id="input-3" label="Disabled Input" />
