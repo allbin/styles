@@ -32,6 +32,10 @@ import {
   ArrowDownLeftIcon,
   ArrowLeftIcon,
   ArrowsPointingInIcon,
+  MagnifyingGlassIcon,
+  PlusIcon,
+  ScissorsIcon,
+  TrashIcon,
 } from '@heroicons/react/24/outline';
 
 const icons: IconShowcaseProps[] = [
@@ -123,6 +127,14 @@ const icons: IconShowcaseProps[] = [
   },
   { Icon: IconAlignRight, role: 'Align right', lib: 'allbin/IconAlignRight' },
   { Icon: IconItalic, role: 'Italic', lib: 'allbin/IconItalic' },
+  {
+    Icon: MagnifyingGlassIcon,
+    role: 'Search',
+    lib: 'hero/MagnifyingGlassIcon',
+  },
+  { Icon: PlusIcon, role: 'Add', lib: 'hero/PlusIcon' },
+  { Icon: TrashIcon, role: 'Delete', lib: 'hero/TrashIcon' },
+  { Icon: ScissorsIcon, role: 'Cut', lib: 'hero/ScissorsIcon' },
 ];
 
 const Icons: React.FC = () => {
