@@ -8,13 +8,14 @@ import GallerySlider from '../../components/Slider/GallerySlider';
 import GalleryInput from '../../components/Input/GalleryInput';
 import GalleryToggleButtonGroup from '../../components/GalleryToggleButtonGroup';
 import GalleryToggleButton from '../../components/GalleyToggleButton';
+import GalleryTextArea from '../../components/TextArea/GalleryTextArea';
 
 const gallery = [
   { path: 'btn', label: 'Button', component: <Btn /> },
   { path: 'input', label: 'Input', component: <GalleryInput /> },
   { path: 'checkbox', label: 'Checkbox', component: <GalleryCheckbox /> },
   { path: 'slider', label: 'Slider', component: <GallerySlider /> },
-  { path: 'btn3', label: 'Button', component: <Btn /> },
+  { path: 'textarea', label: 'Textarea', component: <GalleryTextArea /> },
   {
     path: 'positionpad',
     label: 'PositionPad',
