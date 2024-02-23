@@ -20,6 +20,9 @@
 
 /** Colors from https://www.realtimecolors.com/ */
 @layer base {
+  *::selection {
+    @apply bg-accent-800 text-text-50;
+  }
   h1 {
     @apply font-serif text-6xl font-thin text-text-600;
   }
