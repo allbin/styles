@@ -3,42 +3,40 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "AlbertSans";
-  src: url("./assets/AlbertSans-Variable.ttf");
+  font-family: 'AlbertSans';
+  src: url('./assets/AlbertSans-Variable.ttf');
 }
 @font-face {
-  font-family: "FiraCode";
-  src: url("./assets/FiraCode-Variable.ttf");
+  font-family: 'FiraCode';
+  src: url('./assets/FiraCode-Variable.ttf');
 }
 @font-face {
-  font-family: "Bitter";
-  src: url("./assets/Bitter-Variable.ttf");
+  font-family: 'Bitter';
+  src: url('./assets/Bitter-Variable.ttf');
 }
 
 @layer utilities {
-
 }
-
 
 /** Colors from https://www.realtimecolors.com/ */
 @layer base {
   h1 {
-    @apply text-text-600 font-serif font-thin text-6xl;
+    @apply font-serif text-6xl font-thin text-text-600;
   }
   h2 {
-    @apply text-text-600 font-serif font-light text-4xl;
+    @apply font-serif text-4xl font-light text-text-600;
   }
   h3 {
-    @apply text-text-600 font-serif font-medium text-xl;
+    @apply font-serif text-xl font-medium text-text-600;
   }
   h4 {
-    @apply text-text-600 font-serif font-medium text-base;
+    @apply font-serif text-base font-medium text-text-600;
   }
   h5 {
-    @apply text-text-600 font-serif font-medium text-sm;
+    @apply font-serif text-sm font-medium text-text-600;
   }
   h6 {
-    @apply text-text-600 font-serif font-bold text-sm;
+    @apply font-serif text-sm font-bold text-text-600;
   }
   :root {
     --text-50: 244 242 241;
@@ -100,7 +98,6 @@
     --accent-800: 45 57 45;
     --accent-900: 23 28 23;
     --accent-950: 11 14 11;
-
   }
   .dark {
     --text-50: 14 12 11;

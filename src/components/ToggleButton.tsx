@@ -28,8 +28,8 @@ const ToggleButton: React.FC<PropsWithChildren<ToggleButtonProps>> = ({
         data-tooltip-content={tooltip}
         data-tooltip-delay-show={300}
         className={cn(
-          'flex items-center justify-center gap-1 rounded border border-primary-600 bg-background-50 p-1 text-primary-600',
-          value && 'bg-primary-600 text-primary-200',
+          'flex items-center justify-center gap-1 rounded border border-primary-600 bg-background-50 p-1 text-primary-700',
+          value && 'bg-primary-600 text-primary-50',
           disabled &&
             'cursor-default border-background-600 bg-background-300 text-primary-600 opacity-50',
           className,

@@ -12,9 +12,9 @@ export interface IconShowcaseProps {
 
 const IconShowcase: React.FC<IconShowcaseProps> = ({ role, lib, Icon }) => {
   return (
-    <div className="relative mt-4 rounded border border-accent-300 p-3">
+    <div className="relative mt-4 rounded border border-primary-300 bg-background-50 p-3">
       <div className="absolute -top-4 h-5 text-xs">
-        Role <span className="mr-4 font-semibold">{role}</span>Lib
+        Role <span className="mr-4 font-semibold">{role}</span>Lib{' '}
         <span className="ml-1 font-semibold">{lib}</span>
       </div>
       <div className="flex flex-wrap justify-evenly gap-3">

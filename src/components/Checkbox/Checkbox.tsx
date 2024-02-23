@@ -39,12 +39,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
 }) => {
   return (
     <>
-      <Tooltip place="top-start" id="checkbox-tooltip" delayShow={500} />
+      <Tooltip place="top" id="checkbox-tooltip" delayShow={500} />
       <div
         data-tooltip-id="checkbox-tooltip"
         data-tooltip-content={tooltip}
         className={cn(
-          'group relative flex cursor-pointer items-start',
+          'group relative flex w-fit cursor-pointer items-start',
           disabled && 'cursor-default',
           className,
         )}
@@ -58,7 +58,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
             name={id}
             type="checkbox"
             className={cn(
-              'form-checkbox cursor-pointer rounded border-accent-300 bg-background-100 text-accent-600 focus:ring-accent-600 group-hover:bg-accent-300 checked:group-hover:bg-accent-700',
+              'form-checkbox size-5 cursor-pointer rounded border-primary-300 bg-background-50 text-primary-600 checked:bg-primary-500 focus:ring-primary-600 group-hover:bg-primary-300 checked:group-hover:bg-primary-700',
               disabled &&
                 'cursor-default border-gray-300 bg-gray-300 text-gray-500 checked:bg-gray-300 group-hover:bg-gray-300 checked:group-hover:bg-gray-300',
               disabled &&
@@ -71,14 +71,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
             <label
               htmlFor={id}
               className={cn(
-                'cursor-pointer font-medium text-text-900 group-hover:text-accent-700',
+                'cursor-pointer font-medium text-text-900 group-hover:text-primary-700',
                 disabled &&
                   'cursor-default text-text-700 group-hover:text-text-700',
               )}
             >
-              {label ? label : <span>&nbsp;</span>}
+              {label ?? <span>&nbsp;</span>}
             </label>
-            {description && <p className="text-text-500">{description}</p>}
+            {description && <p className="text-text-700">{description}</p>}
           </div>
         )}
       </div>

@@ -19,17 +19,18 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
 }) => {
   return (
     <button
-      onClick={() => onClick && onClick()}
+      onClick={() => onClick?.()}
       data-tooltip-id="button-tooltip"
       data-tooltip-content={tooltip}
       className={cn(
-        'flex min-h-[36px] items-center justify-center gap-2 rounded border border-primary-600 px-4 py-1 font-medium hover:bg-primary-200 disabled:border-gray-400 disabled:bg-transparent disabled:text-opacity-70 disabled:hover:bg-transparent',
-        red && 'border-red-400 text-red-800 hover:bg-red-200',
+        'flex min-h-[36px] items-center justify-center gap-2 rounded-md border border-primary-600 px-5 py-1 font-medium transition-colors hover:bg-primary-200 active:opacity-85 disabled:border-gray-400 disabled:bg-transparent disabled:text-gray-400',
+        red &&
+          'border-red-700 text-red-800 hover:bg-red-500/50 hover:text-red-600',
         filled &&
-          'disabled:bg-primary-90 border-primary-600 bg-primary-600 text-text-50 hover:border-primary-500 hover:bg-primary-700 disabled:hover:border-primary-600 disabled:hover:bg-primary-600',
+          'border-primary-500 bg-primary-500 text-text-50 hover:border-primary-500 hover:bg-primary-700 disabled:border-primary-300 disabled:bg-primary-300 disabled:text-text-700 disabled:hover:border-primary-300 disabled:hover:bg-primary-300',
         filled &&
           red &&
-          'border-orange-700 bg-orange-700 hover:border-red-400 hover:bg-orange-800 disabled:border-orange-700 disabled:bg-orange-700 disabled:hover:border-orange-700 disabled:hover:bg-orange-700',
+          'border-red-700 bg-red-700 text-red-50 hover:border-red-800 hover:bg-red-600 hover:text-red-50 disabled:border-red-900/80 disabled:bg-red-900/80 disabled:text-red-900 disabled:hover:border-red-900/80 disabled:hover:bg-red-900/80',
         className,
       )}
       {...props}

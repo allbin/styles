@@ -13,8 +13,10 @@ const Root: React.FC = () => {
         <div className="w-[300px] shrink-0">
           <LeftPanel />
         </div>
-        <div className="grow">
-          <Outlet />
+        <div className="grow px-4">
+          <div className="grow rounded-xl bg-background-100 p-10">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

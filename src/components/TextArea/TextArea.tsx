@@ -20,7 +20,7 @@ const TextArea: React.FC<TextAreaProps> = ({
     <textarea
       disabled={disabled}
       className={cn(
-        'h-32 w-full cursor-pointer rounded-md border border-primary-600 bg-background-50 p-2 text-text-800 disabled:cursor-default disabled:border-background-300 disabled:bg-background-200 disabled:text-text-500',
+        'block h-32 min-h-32 w-full rounded-md border-0 bg-background-50 px-2 py-1.5 outline-secondary-500 ring-1 ring-inset ring-secondary-300 placeholder:text-text-700 hover:ring-primary-600 focus:ring-0 disabled:bg-background-300/50 disabled:text-text-700 disabled:ring-primary-300',
         className,
       )}
       placeholder={placeholder}

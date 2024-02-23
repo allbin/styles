@@ -16,7 +16,7 @@ const App: React.FC = () => {
     <div
       className={cn(theme, 'relative min-h-full w-full font-sans font-light')}
     >
-      <div className="relative h-screen w-full overflow-x-hidden bg-background-100 bg-gradient-to-t from-transparent to-primary-50/70 text-text-900">
+      <div className="relative h-screen w-full overflow-x-hidden bg-background-50 text-text-900">
         <Routes>
           <Route element={<Root />}>
             <Route path="colors" element={<Colors />} />

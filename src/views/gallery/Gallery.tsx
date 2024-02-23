@@ -35,8 +35,8 @@ const gallery = [
 
 const Gallery: React.FC = () => {
   return (
-    <div className="ml-6 mt-6 flex">
-      <div className="mr-6 grow">
+    <div className="flex gap-6">
+      <div className="grow">
         <div>
           <Routes>
             {gallery.map(({ component, path }) => (

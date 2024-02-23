@@ -17,7 +17,7 @@ const GalleryLink: React.FC<PropsWithChildren<GalleryLinkProps>> = ({
       to={to}
       end={end}
       className={cn(
-        'group relative flex h-8 items-center pl-2 font-work font-medium',
+        'font-work group relative flex h-8 items-center pl-2 font-medium',
       )}
     >
       {({ isActive }) => (
@@ -31,7 +31,7 @@ const GalleryLink: React.FC<PropsWithChildren<GalleryLinkProps>> = ({
           />
           <div
             className={cn(
-              'relative flex items-center gap-1 text-text-400',
+              'relative flex items-center gap-1 text-text-700',
               isActive && 'text-text-900',
             )}
           >

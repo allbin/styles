@@ -27,12 +27,12 @@ const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <div
-      className="relative grow"
+      className="group relative grow"
       data-tooltip-id={id}
-      data-tooltip-content={invalid || tooltip}
+      data-tooltip-content={invalid ?? tooltip}
       data-tooltip-variant={invalid ? 'error' : undefined}
     >
-      <Tooltip id={id} delayShow={300} delayHide={1} />
+      {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
       {label && (
         <label
           htmlFor={id}
@@ -45,7 +45,7 @@ const Input: React.FC<InputProps> = ({
         {icon && (
           <div
             className={cn(
-              'pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-primary-500',
+              'pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-secondary-500 group-focus-within:text-text-700 group-hover:text-primary-700',
               invalid && 'text-red-700',
             )}
           >
@@ -56,8 +56,9 @@ const Input: React.FC<InputProps> = ({
           id={id}
           disabled={disabled}
           className={cn(
-            'block w-full rounded-md border-0 bg-background-50 py-1.5 pl-2 outline-accent-500 ring-1 ring-inset ring-secondary-300 placeholder:text-text-400 focus:ring-0 focus:ring-accent-600 disabled:bg-background-300/50 disabled:text-text-700',
-            invalid && 'text-red-700 ring-1 ring-red-600 focus:outline-red-600',
+            'block w-full rounded-md border-0 border-secondary-500 bg-background-50 px-2 py-1.5 ring-1 ring-inset ring-secondary-300 placeholder:text-text-700 hover:ring-primary-600 focus:ring-0 disabled:bg-background-300/50 disabled:text-text-700/50 disabled:ring-primary-300',
+            invalid &&
+              'text-red-700 ring-1 ring-red-600 hover:ring-red-800 focus:outline-red-600',
             icon && 'pl-10',
           )}
           placeholder={placeholder}

@@ -49,7 +49,7 @@ const Slider: React.FC<SliderProps> = ({
         step={step}
         onValueChange={(value) => onChange(value)}
         className={cn(
-          'relative mt-1 flex w-full cursor-pointer touch-none select-none items-center',
+          'group relative flex w-full cursor-pointer touch-none select-none items-center py-1',
           disabled && 'cursor-default',
         )}
         disabled={disabled}
@@ -57,14 +57,14 @@ const Slider: React.FC<SliderProps> = ({
       >
         <Track
           className={cn(
-            'relative h-2 w-full grow overflow-hidden rounded-full bg-secondary-400',
-            disabled && 'bg-gray-300',
+            'relative h-2 w-full grow overflow-hidden rounded-full bg-primary-300 group-hover:bg-primary-400 ',
+            disabled && '!bg-gray-300',
           )}
         >
           <Range
             className={cn(
-              'absolute h-full bg-secondary-600',
-              disabled && 'bg-gray-400',
+              'absolute h-full bg-primary-600 group-hover:bg-primary-700',
+              disabled && '!bg-gray-400',
             )}
           />
         </Track>
@@ -73,7 +73,7 @@ const Slider: React.FC<SliderProps> = ({
             <Thumb
               key={i}
               className={cn(
-                'focus-visible:ring-ring block h-5 w-5 rounded-full border-2 border-secondary-500 bg-background-200 ring-offset-background-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+                'focus-visible:ring-ring block size-5 rounded-full border-2 border-primary-500 bg-primary-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-hover:size-6 group-active:bg-primary-600',
                 disabled &&
                   'border-gray-300 bg-gray-300 ring-gray-300 ring-offset-gray-300',
               )}
