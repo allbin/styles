@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 import { cn } from '../../helpers/classnames';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   tooltip?: string;
   filled?: boolean;

@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from './Button';
+import IconButton from './IconButton';
+import { IconHalfCookie } from '@allbin/icons';
 
 const Btn: React.FC = () => {
   return (
@@ -49,6 +51,24 @@ const Btn: React.FC = () => {
         <Button filled round>
           Filled round button
         </Button>
+      </div>
+      IconButton (works as Button but equal sides and round by default)
+      <div className="flex flex-wrap gap-2">
+        <IconButton>
+          <IconHalfCookie className="size-5" />
+        </IconButton>
+        <IconButton filled>
+          <IconHalfCookie className="size-5" />
+        </IconButton>
+        <IconButton ghost>
+          <IconHalfCookie className="size-5" />
+        </IconButton>
+        <IconButton filled red>
+          <IconHalfCookie className="size-5" />
+        </IconButton>
+        <IconButton ghost red round>
+          <IconHalfCookie className="size-5" />
+        </IconButton>
       </div>
     </div>
   );
