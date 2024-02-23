@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../components/Button/Button';
+import Button from './Button';
 
 const Btn: React.FC = () => {
   return (
@@ -24,7 +24,7 @@ const Btn: React.FC = () => {
         </Button>
       </div>
       Flex column container
-      <div className="flex flex-col gap-2">
+      <div className="mb-8 flex flex-col gap-2">
         <Button>Default button</Button>
         <Button filled>Filled button</Button>
         <Button disabled>Disabled button</Button>
