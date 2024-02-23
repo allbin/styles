@@ -8,6 +8,7 @@ const Btn: React.FC = () => {
       <div className="mb-8 flex flex-wrap gap-2">
         <Button>Default button</Button>
         <Button filled>Filled button</Button>
+        <Button ghost>Ghost button</Button>
         <Button disabled>Disabled button</Button>
         <Button filled disabled>
           Disabled filled button
@@ -27,6 +28,7 @@ const Btn: React.FC = () => {
       <div className="mb-8 flex flex-col gap-2">
         <Button>Default button</Button>
         <Button filled>Filled button</Button>
+        <Button ghost>Ghost button</Button>
         <Button disabled>Disabled button</Button>
         <Button filled disabled>
           Disabled filled button

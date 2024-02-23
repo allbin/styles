@@ -5,6 +5,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   tooltip?: string;
   filled?: boolean;
+  ghost?: boolean;
   red?: true;
 }
 
@@ -14,6 +15,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
   className,
   filled,
   children,
+  ghost,
   red,
   ...props
 }) => {
@@ -23,9 +25,10 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
       data-tooltip-id="button-tooltip"
       data-tooltip-content={tooltip}
       className={cn(
-        'flex min-h-[36px] items-center justify-center gap-2 rounded-md border border-primary-600 px-5 py-1 font-medium transition-colors hover:bg-primary-200 active:opacity-85 disabled:border-gray-400 disabled:bg-transparent disabled:text-gray-400',
+        'flex min-h-[36px] items-center justify-center gap-2 rounded-md border border-primary-600 px-5 py-1 font-medium transition-colors hover:bg-primary-200 active:opacity-80 disabled:border-gray-400 disabled:bg-transparent disabled:text-gray-400 disabled:active:opacity-100',
+        ghost && 'border-none bg-transparent hover:bg-primary-100',
         red &&
-          'border-red-700 text-red-800 hover:bg-red-500/50 hover:text-red-600',
+          'border-red-700 text-red-800 hover:bg-red-400/20 hover:text-red-600',
         filled &&
           'border-primary-500 bg-primary-500 text-text-50 hover:border-primary-500 hover:bg-primary-700 disabled:border-primary-300 disabled:bg-primary-300 disabled:text-text-700 disabled:hover:border-primary-300 disabled:hover:bg-primary-300',
         filled &&
