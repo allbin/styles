@@ -7,6 +7,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   filled?: boolean;
   ghost?: boolean;
   red?: true;
+  round?: boolean;
 }
 
 const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
@@ -17,6 +18,7 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
   children,
   ghost,
   red,
+  round,
   ...props
 }) => {
   return (
@@ -33,7 +35,8 @@ const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
           'border-primary-500 bg-primary-500 text-text-50 hover:border-primary-500 hover:bg-primary-700 disabled:border-primary-300 disabled:bg-primary-300 disabled:text-text-700 disabled:hover:border-primary-300 disabled:hover:bg-primary-300',
         filled &&
           red &&
-          'border-red-700 bg-red-700 text-red-50 hover:border-red-800 hover:bg-red-600 hover:text-red-50 disabled:border-red-900/80 disabled:bg-red-900/80 disabled:text-red-900 disabled:hover:border-red-900/80 disabled:hover:bg-red-900/80',
+          'border-red-700 bg-red-700 text-red-50 hover:border-red-800 hover:bg-red-600 hover:text-red-50 disabled:border-red-900/80 disabled:bg-red-900/60 disabled:text-red-900 disabled:hover:border-red-900/80 disabled:hover:bg-red-900/60',
+        round && 'rounded-full',
         className,
       )}
       {...props}

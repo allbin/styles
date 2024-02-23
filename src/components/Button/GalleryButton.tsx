@@ -23,6 +23,9 @@ const Btn: React.FC = () => {
         <Button red filled disabled>
           Red fill disabled btn
         </Button>
+        <Button filled round>
+          Filled round button
+        </Button>
       </div>
       Flex column container
       <div className="mb-8 flex flex-col gap-2">
@@ -42,6 +45,9 @@ const Btn: React.FC = () => {
         </Button>
         <Button red filled disabled>
           Red fill disabled btn
+        </Button>
+        <Button filled round>
+          Filled round button
         </Button>
       </div>
     </div>
