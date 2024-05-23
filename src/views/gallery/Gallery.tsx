@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
 import Btn from '../../components/Button/GalleryButton';
 import GalleryLink from './GalleryLink';
 import GalleryCheckbox from '../../components/Checkbox/GalleryCheckbox';
