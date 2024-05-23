@@ -1,8 +1,0 @@
-{
-  "globalImports": ["src/main.css"],
-  "plugins": ["react-cosmos-plugin-vite"],
-  "vite": {
-    "configPath": "./vite.config.mts"
-  },
-  "port": 3002
-}
