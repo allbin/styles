@@ -1,5 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
+import GalleryToggleButton from '@/components/GalleyToggleButton';
 
 export const Route = createFileRoute('/gallery/_layout/togglebutton')({
-  component: () => <div>Hello /gallery/_layout/togglebutton!</div>
-})
+  component: GalleryToggleButton,
+});

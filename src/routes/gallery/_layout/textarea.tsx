@@ -1,5 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
+import GalleryTextArea from '@/components/TextArea/GalleryTextArea';
 
 export const Route = createFileRoute('/gallery/_layout/textarea')({
-  component: () => <div>Hello /gallery/_layout/textarea!</div>
-})
+  component: GalleryTextArea,
+});

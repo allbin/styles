@@ -1,5 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
+import SliderGallery from '@/components/Slider/GallerySlider';
 
 export const Route = createFileRoute('/gallery/_layout/slider')({
-  component: () => <div>Hello /gallery/_layout/slider!</div>
-})
+  component: SliderGallery,
+});

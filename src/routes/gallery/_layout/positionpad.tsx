@@ -1,5 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
+import GalleryPositionPad from '@/components/PositionPad/GalleryPositionPad';
 
 export const Route = createFileRoute('/gallery/_layout/positionpad')({
-  component: () => <div>Hello /gallery/_layout/positionpad!</div>
-})
+  component: GalleryPositionPad,
+});
