@@ -10,10 +10,10 @@ const LeftPanel: React.FC = () => {
           <HomeIcon className="size-5" />
           Start
         </NavElement>
-        <NavElement to="colors">Colors</NavElement>
-        <NavElement to="fonts">Text and fonts</NavElement>
-        <NavElement to="gallery">Gallery</NavElement>
-        <NavElement to="icons">Icons</NavElement>
+        <NavElement to="/colors">Colors</NavElement>
+        <NavElement to="/fonts">Text and fonts</NavElement>
+        <NavElement to="/gallery">Gallery</NavElement>
+        <NavElement to="/icons">Icons</NavElement>
       </div>
     </div>
   );

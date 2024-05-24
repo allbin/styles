@@ -1,21 +1,19 @@
 import React, { PropsWithChildren } from 'react';
 import { cn } from '../../helpers/classnames';
-import { NavLink } from 'react-router-dom';
+import { Link, RoutesByPath } from '@tanstack/react-router';
+import { router } from '@/router';
 
 interface NavElementProps {
-  to: string;
-  end?: boolean;
+  to: keyof RoutesByPath<typeof router.routeTree>;
 }
 
 const NavElement: React.FC<PropsWithChildren<NavElementProps>> = ({
   to,
   children,
-  end,
 }) => {
   return (
-    <NavLink
+    <Link
       to={to}
-      end={end}
       className={cn(
         'font-work group relative flex h-8 items-center pl-2 font-medium',
       )}
@@ -38,7 +36,7 @@ const NavElement: React.FC<PropsWithChildren<NavElementProps>> = ({
           </div>
         </>
       )}
-    </NavLink>
+    </Link>
   );
 };
 
