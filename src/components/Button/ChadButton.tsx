@@ -46,15 +46,49 @@ const buttonVariants = cva(
         lg: ['h-[48px]', 'text-lg'],
         xl: ['h-[60px]', 'text-xl'],
       },
+      color: {
+        standard: [],
+        red: [],
+      },
       use: {
         standard: ['px-5', 'py-1', 'rounded-md'],
+        round: ['rounded-full', 'px-5', 'py-1'],
         icon: ['px-0', 'py-0', 'aspect-square', 'rounded-full'],
       },
     },
+    compoundVariants: [
+      {
+        color: 'red',
+        variant: 'outline',
+        class: [
+          'border-red-700',
+          'text-red-700',
+          'hover:bg-red-200',
+          'hover:text-red-600',
+        ],
+      },
+      {
+        color: 'red',
+        variant: 'filled',
+        class: [
+          'bg-red-700',
+          'text-text-50',
+          'hover:border-red-800',
+          'hover:bg-red-600',
+          'hover:text-red-50',
+          'disabled:border-red-900/80',
+          'disabled:bg-red-900/60',
+          'disabled:text-red-900',
+          'disabled:hover:border-red-900/80',
+          'disabled:hover:bg-red-900/60',
+        ],
+      },
+    ],
     defaultVariants: {
       use: 'standard',
       variant: 'outline',
       size: 'md',
+      color: 'standard',
     },
   },
 );
@@ -67,7 +101,7 @@ const iconSizes = {
 };
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   startIcon?: React.ReactNode;
@@ -82,6 +116,7 @@ const ChadButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
       use,
       variant,
       size,
+      color,
       startIcon,
       endIcon,
       loading = false,
@@ -96,7 +131,7 @@ const ChadButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, use, className }))}
+        className={cn(buttonVariants({ variant, size, use, color, className }))}
         ref={ref}
         {...props}
       >
