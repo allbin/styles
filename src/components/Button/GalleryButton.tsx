@@ -20,25 +20,37 @@ const Btn: React.FC = () => {
 
   return (
     <div>
-      <div className="mb-8 flex flex-wrap gap-2">
+      <h2 className="mb-4">Buttons</h2>
+      <h3>Variants</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
         <ChadButton onClick={() => console.log('click')}>
           Standard button
         </ChadButton>
-        <ChadButton variant="filled" disabled>
-          Filled button
-        </ChadButton>
+        <ChadButton variant="filled">Filled button</ChadButton>
         <ChadButton variant="ghost">Ghost button</ChadButton>
         <ChadButton variant="outline" disabled>
           Disabled button
         </ChadButton>
       </div>
-      <div className="mb-8 flex flex-wrap gap-2">
+      <h3>Round</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+        <ChadButton use="round">Standard round button</ChadButton>
+        <ChadButton use="round" variant="filled">
+          Filled round button
+        </ChadButton>
+        <ChadButton use="round" variant="filled" size="lg">
+          Filled large round button
+        </ChadButton>
+      </div>
+      <h3>Sizes</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
         <ChadButton size="sm">Small button</ChadButton>
         <ChadButton size="md">Default medium button</ChadButton>
         <ChadButton size="lg">Large button</ChadButton>
         <ChadButton size="xl">Extra large button</ChadButton>
       </div>
-      <div className="mb-8 flex flex-wrap gap-2">
+      <h3>With icon</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
         <ChadButton startIcon={<IconHalfCookie />}>
           Start icon button
         </ChadButton>
@@ -50,7 +62,8 @@ const Btn: React.FC = () => {
           Start and End icon button
         </ChadButton>
       </div>
-      <div className="mb-8 flex flex-wrap gap-2">
+      <h3>Loading</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
         <ChadButton loading={true} endIcon={<IconHalfCookie />}>
           Loading button
         </ChadButton>
@@ -60,6 +73,22 @@ const Btn: React.FC = () => {
           onClick={() => setIsLoading(true)}
         >
           Click for loading state
+        </ChadButton>
+      </div>
+      <h3>Colors</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+        <ChadButton color="red">Red standard button</ChadButton>
+        <ChadButton color="red" variant="filled">
+          Red filled button
+        </ChadButton>
+        <ChadButton color="red" variant="outline" disabled>
+          Red disabled button
+        </ChadButton>
+        <ChadButton color="red" variant="filled" disabled>
+          Red filled disabled button
+        </ChadButton>
+        <ChadButton use="round" color="red" variant="filled">
+          Red round filled button
         </ChadButton>
       </div>
       <div className="mb-8 flex flex-wrap gap-2">
@@ -72,6 +101,11 @@ const Btn: React.FC = () => {
         <ChadIconButton
           icon={<IconTrash />}
           onClick={() => console.log('Delete')}
+        />
+        <ChadIconButton
+          variant="ghost"
+          className="opacity-50 hover:text-red-400 hover:opacity-100"
+          icon={<IconTrash />}
         />
       </div>
       <div className="mb-8 flex flex-wrap gap-2">
