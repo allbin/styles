@@ -7,6 +7,7 @@ import { ChadButton } from './ChadButton';
 
 interface IconButtonProps {
   onClick?: () => void;
+  className?: string;
   icon: React.ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'xl' | null;
   variant?: 'outline' | 'filled' | 'ghost' | null;
@@ -15,6 +16,7 @@ interface IconButtonProps {
 }
 
 const ChadIconButton: React.FC<IconButtonProps> = ({
+  className,
   icon,
   size,
   variant,
@@ -31,6 +33,7 @@ const ChadIconButton: React.FC<IconButtonProps> = ({
       variant={variant}
       onClick={onClick}
       disabled={disabled}
+      className={className}
     >
       {loading && <Spinner className={`${sizeClass}`} />}
       {!loading && icon && <span className={sizeClass}>{icon}</span>}
