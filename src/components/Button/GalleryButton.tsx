@@ -3,18 +3,40 @@ import Button from './Button';
 import IconButton from './IconButton';
 import { IconHalfCookie } from '@allbin/icons';
 
+// For testing
+import { ChadButton } from './ChadButton';
+
 const Btn: React.FC = () => {
   return (
     <div>
-      Flex container
       <div className="mb-8 flex flex-wrap gap-2">
-        <Button>Default button</Button>
-        <Button filled>Filled button</Button>
-        <Button ghost>Ghost button</Button>
-        <Button disabled>Disabled button</Button>
-        <Button filled disabled>
-          Disabled filled button
-        </Button>
+        <ChadButton>Standard button</ChadButton>
+        <ChadButton variant="filled" disabled>
+          Filled button
+        </ChadButton>
+        <ChadButton variant="ghost">Ghost button</ChadButton>
+        <ChadButton variant="outline" disabled>
+          Disabled button
+        </ChadButton>
+      </div>
+      <div className="mb-8 flex flex-wrap gap-2">
+        <ChadButton size="sm">Small default button</ChadButton>
+        <ChadButton size="md">Medium default button</ChadButton>
+        <ChadButton size="lg">Large button</ChadButton>
+        <ChadButton size="xl">Extra large button</ChadButton>
+      </div>
+      <div className="mb-8 flex flex-wrap gap-2">
+        <ChadButton startIcon={<IconHalfCookie />}>
+          Start icon button
+        </ChadButton>
+        <ChadButton endIcon={<IconHalfCookie />}>End icon button</ChadButton>
+      </div>
+      <div className="mb-8 flex flex-wrap gap-2">
+        <ChadButton loading={true} endIcon={<IconHalfCookie />}>
+          Loading button
+        </ChadButton>
+      </div>
+      <div className="mb-8 flex flex-wrap gap-2">
         <Button red>Red button</Button>
         <Button red filled>
           Red filled button
