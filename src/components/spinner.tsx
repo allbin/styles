@@ -2,8 +2,6 @@ import React from 'react';
 import { cn } from '../helpers/classnames';
 
 export const Spinner: React.FC<{ className?: string }> = ({ className }) => {
-  console.log('Classname inside spinner: ', className);
-
   return (
     <svg
       className={cn('h-12 w-12 animate-spin text-primary-500', className)}
