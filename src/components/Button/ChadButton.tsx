@@ -11,10 +11,7 @@ const buttonVariants = cva(
     'items-center',
     'justify-center',
     'gap-2',
-    'rounded-md',
     'border',
-    'px-5',
-    'py-1',
     'transition-colors',
     'disabled:border-gray-400',
     'disabled:bg-transparent',
@@ -48,15 +45,26 @@ const buttonVariants = cva(
         md: ['h-[36px]', 'text-base'],
         lg: ['h-[48px]', 'text-lg'],
         xl: ['h-[60px]', 'text-xl'],
-        // icon: 'size-10',
+      },
+      use: {
+        standard: ['px-5', 'py-1', 'rounded-md'],
+        icon: ['px-0', 'py-0', 'aspect-square', 'rounded-full'],
       },
     },
     defaultVariants: {
+      use: 'standard',
       variant: 'outline',
       size: 'md',
     },
   },
 );
+
+const iconSizes = {
+  sm: 'size-3',
+  md: 'size-5',
+  lg: 'size-6',
+  xl: 'size-7',
+};
 
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -71,6 +79,7 @@ const ChadButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
+      use,
       variant,
       size,
       startIcon,
@@ -83,25 +92,11 @@ const ChadButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : 'button';
 
-    const getButtonSize = () => {
-      const buttonClassNames = cn(buttonVariants({ variant, size, className }));
-
-      return buttonClassNames.includes('text-sm')
-        ? 'size-3'
-        : buttonClassNames.includes('text-base')
-          ? 'size-5'
-          : buttonClassNames.includes('text-lg')
-            ? 'size-6'
-            : buttonClassNames.includes('text-xl')
-              ? 'size-7'
-              : 'size-5';
-    };
-
-    const buttonSize = getButtonSize();
+    const buttonSize = (size && iconSizes[size]) || iconSizes.md;
 
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, use, className }))}
         ref={ref}
         {...props}
       >
@@ -119,4 +114,4 @@ const ChadButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 ChadButton.displayName = 'ChadButton';
 
-export { ChadButton, buttonVariants };
+export { ChadButton, buttonVariants, iconSizes };
