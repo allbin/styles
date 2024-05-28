@@ -13,10 +13,12 @@ interface IconButtonProps {
   variant?: 'outline' | 'filled' | 'ghost' | null;
   loading?: boolean;
   disabled?: boolean;
+  color?: 'red' | 'green';
 }
 
 const ChadIconButton: React.FC<IconButtonProps> = ({
   className,
+  color,
   icon,
   size,
   variant,
@@ -34,6 +36,7 @@ const ChadIconButton: React.FC<IconButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       className={className}
+      color={color}
     >
       {loading && <Spinner className={`${sizeClass}`} />}
       {!loading && icon && <span className={sizeClass}>{icon}</span>}
