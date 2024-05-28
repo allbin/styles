@@ -1,22 +1,16 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
-// import { Tooltip } from 'react-tooltip';
+import { Tooltip } from 'react-tooltip';
 
 const inputVariants = cva(
   [
-    'block w-full',
+    'block',
+    'w-full',
     'rounded-md',
     'border-0',
-    'border-secondary-500',
-    'bg-background-50',
     'px-2',
     'py-1.5',
-    'ring-1',
-    'ring-inset',
-    'ring-secondary-300',
-    'placeholder:text-text-700',
-    'hover:ring-primary-600',
     'focus:ring-0',
     'disabled:bg-background-300/50',
     'disabled:text-text-700/50',
@@ -25,7 +19,15 @@ const inputVariants = cva(
   {
     variants: {
       variant: {
-        outline: '',
+        outline: [
+          'border-secondary-500',
+          'bg-background-50',
+          'ring-1',
+          'ring-inset',
+          'ring-secondary-300',
+          'placeholder:text-text-700',
+          'hover:ring-primary-600',
+        ],
       },
     },
     defaultVariants: {
@@ -35,7 +37,7 @@ const inputVariants = cva(
 );
 
 const inputClasses = {
-  invalid: [
+  error: [
     'text-red-7000',
     'ring-1',
     'ring-red-600',
@@ -49,28 +51,40 @@ const inputClasses = {
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof inputVariants> {
-  invalid?: boolean;
+  id: string;
+  error?: string;
   placeholder?: string;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
+      id,
       className,
       type,
       variant,
-      invalid,
+      error,
       placeholder,
       startAdornment,
       endAdornment,
+      onChange,
       ...props
     },
     ref,
   ) => {
+    console.log('error: ', id, error);
+
     return (
-      <div className="group relative grow">
+      <div
+        className="group relative grow"
+        data-tooltip-id={id}
+        data-tooltip-content={error}
+        data-tooltip-variant={error ? 'error' : 'dark'}
+      >
+        {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
         <div className="relative grow rounded-md shadow-sm">
           {startAdornment && (
             <div
@@ -94,13 +108,14 @@ const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
             type={type}
             className={cn(
               inputVariants({ variant }),
-              invalid && inputClasses.invalid,
+              error && inputClasses.error,
               startAdornment && inputClasses.startAdornment,
               endAdornment && inputClasses.endAdornment,
               className,
             )}
             ref={ref}
             placeholder={placeholder}
+            onChange={onChange}
             {...props}
           />
           {endAdornment && (

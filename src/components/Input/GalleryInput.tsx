@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from './Input';
-import { FaceSmileIcon } from '@heroicons/react/24/solid';
+import { FaceSmileIcon, TrashIcon } from '@heroicons/react/24/solid';
 
 // For testing
 import { ShadInput } from './ShadInput';
@@ -9,13 +9,33 @@ const GalleryInput: React.FC = () => {
   const [value, setValue] = React.useState('');
   return (
     <div>
+      <h2 className="mb-4">Inputs</h2>
+      <h3>Input fields</h3>
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
-        <ShadInput />
-        <ShadInput disabled />
-        <ShadInput invalid />
-        <ShadInput placeholder="This is a placeholder" />
-        <ShadInput startAdornment={<FaceSmileIcon className="size-5" />} />
-        <ShadInput endAdornment={<FaceSmileIcon className="size-5" />} />
+        <ShadInput id="shad-1" />
+        <ShadInput id="shad-2" disabled />
+        <ShadInput id="shad-3" error="This is an error message" />
+        <ShadInput
+          id="shad-3-1"
+          placeholder="Type error to see error message"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          error={value === 'error' ? 'input error' : undefined}
+        />
+        <ShadInput id="shad-4" placeholder="This is a placeholder" />
+        <ShadInput
+          id="shad-5"
+          startAdornment={<FaceSmileIcon className="size-5" />}
+        />
+        <ShadInput
+          id="shad-6"
+          endAdornment={<FaceSmileIcon className="size-5" />}
+        />
+        <ShadInput
+          id="shad-6"
+          startAdornment={<FaceSmileIcon className="size-5" />}
+          endAdornment={<TrashIcon className="size-5" />}
+        />
       </div>
       <Input id="input-1" />
       <Input id="input-2" label="Input Label" />
