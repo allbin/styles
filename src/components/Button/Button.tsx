@@ -144,6 +144,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       startIcon,
       endIcon,
       full,
+      type = 'button',
       loading = false,
       round,
       asChild = false,
@@ -170,6 +171,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           fullWidthClasses,
         )}
         ref={ref}
+        type={type}
         {...props}
       >
         {loading && <Spinner className={buttonSize} />}
