@@ -21,7 +21,7 @@ const IconShowcase: React.FC<IconShowcaseProps> = ({ role, lib, Icon }) => {
         <Button>
           <Icon className="size-5" /> On button
         </Button>
-        <Button filled>
+        <Button variant="filled">
           <Icon className="size-5" /> On filled btn
         </Button>
         <div className="flex aspect-square h-8 items-center justify-center gap-1 bg-background-900 text-text-50">
