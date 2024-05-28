@@ -32,13 +32,13 @@ const Btn: React.FC = () => {
           Disabled button
         </ChadButton>
       </div>
-      <h3>Round</h3>
+      <h3>Rounded</h3>
       <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
-        <ChadButton use="round">Standard round button</ChadButton>
-        <ChadButton use="round" variant="filled">
+        <ChadButton round>Standard round button</ChadButton>
+        <ChadButton round variant="filled">
           Filled round button
         </ChadButton>
-        <ChadButton use="round" variant="filled" size="lg">
+        <ChadButton round variant="filled" size="lg">
           Filled large round button
         </ChadButton>
       </div>
@@ -49,7 +49,7 @@ const Btn: React.FC = () => {
         <ChadButton size="lg">Large button</ChadButton>
         <ChadButton size="xl">Extra large button</ChadButton>
       </div>
-      <h3>With icon</h3>
+      <h3>Text with icons </h3>
       <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
         <ChadButton startIcon={<IconHalfCookie />}>
           Start icon button
@@ -75,23 +75,54 @@ const Btn: React.FC = () => {
           Click for loading state
         </ChadButton>
       </div>
-      <h3>Colors</h3>
+      <h3>Full width buttons</h3>
       <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
-        <ChadButton color="red">Red standard button</ChadButton>
-        <ChadButton color="red" variant="filled">
-          Red filled button
+        <ChadButton width="full">Standard button</ChadButton>
+        <ChadButton width="full" variant="filled">
+          Filled button
         </ChadButton>
-        <ChadButton color="red" variant="outline" disabled>
-          Red disabled button
+        <ChadButton width="full" variant="ghost">
+          Ghost button
         </ChadButton>
-        <ChadButton color="red" variant="filled" disabled>
-          Red filled disabled button
-        </ChadButton>
-        <ChadButton use="round" color="red" variant="filled">
-          Red round filled button
+        <ChadButton width="full" variant="outline" disabled>
+          Disabled button
         </ChadButton>
       </div>
-      <div className="mb-8 flex flex-wrap gap-2">
+      <h3>Colors</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+        <div className="flex flex-wrap gap-2">
+          <ChadButton color="red">Red standard button</ChadButton>
+          <ChadButton color="red" variant="filled">
+            Red filled button
+          </ChadButton>
+          <ChadButton color="red" variant="outline" disabled>
+            Red disabled button
+          </ChadButton>
+          <ChadButton color="red" variant="filled" disabled>
+            Red filled disabled button
+          </ChadButton>
+          <ChadButton round color="red" variant="filled">
+            Red round filled button
+          </ChadButton>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <ChadButton color="green">Red standard button</ChadButton>
+          <ChadButton color="green" variant="filled">
+            Green filled button
+          </ChadButton>
+          <ChadButton color="green" variant="outline" disabled>
+            Green disabled button
+          </ChadButton>
+          <ChadButton color="green" variant="filled" disabled>
+            Green filled disabled button
+          </ChadButton>
+          <ChadButton round color="green" variant="filled">
+            Green round filled button
+          </ChadButton>
+        </div>
+      </div>
+      <h3>Icon buttons</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
         <ChadIconButton icon={<IconHalfCookie />} />
         <ChadIconButton variant="filled" icon={<IconHalfCookie />} />
         <ChadIconButton variant="ghost" icon={<IconHalfCookie />} />
@@ -108,11 +139,27 @@ const Btn: React.FC = () => {
           icon={<IconTrash />}
         />
       </div>
-      <div className="mb-8 flex flex-wrap gap-2">
+      <h3>Icon button sizes</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
         <ChadIconButton size="sm" icon={<IconHalfCookie />} />
         <ChadIconButton size="md" icon={<IconHalfCookie />} />
         <ChadIconButton size="lg" icon={<IconHalfCookie />} />
         <ChadIconButton size="xl" icon={<IconHalfCookie />} />
+      </div>
+      <h3>Icon button colors</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+        <ChadIconButton
+          color="red"
+          variant="filled"
+          icon={<IconHalfCookie />}
+        />
+        <ChadIconButton color="red" icon={<IconHalfCookie />} />
+        <ChadIconButton
+          color="green"
+          variant="filled"
+          icon={<IconHalfCookie />}
+        />
+        <ChadIconButton color="green" icon={<IconHalfCookie />} />
       </div>
       <div className="mb-8 flex flex-wrap gap-2">
         <Button red>Red button</Button>
