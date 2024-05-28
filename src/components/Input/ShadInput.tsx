@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
-//import { Tooltip } from 'react-tooltip';
+// import { Tooltip } from 'react-tooltip';
 
 const inputVariants = cva(
   [
@@ -34,36 +34,95 @@ const inputVariants = cva(
   },
 );
 
-const invalidClass = [
-  'text-red-7000',
-  'ring-1',
-  'ring-red-600',
-  'hover:ring-red-800',
-  'focus:outline-red-600',
-];
+const inputClasses = {
+  invalid: [
+    'text-red-7000',
+    'ring-1',
+    'ring-red-600',
+    'hover:ring-red-800',
+    'focus:outline-red-600',
+  ],
+  startAdornment: ['pl-10'],
+  endAdornment: ['pr-10'],
+};
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof inputVariants> {
   invalid?: boolean;
   placeholder?: string;
+  startAdornment?: React.ReactNode;
+  endAdornment?: React.ReactNode;
 }
 
 const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, variant, invalid, placeholder, ...props }, ref) => {
-    console.log(invalid);
+  (
+    {
+      className,
+      type,
+      variant,
+      invalid,
+      placeholder,
+      startAdornment,
+      endAdornment,
+      ...props
+    },
+    ref,
+  ) => {
     return (
-      <input
-        type={type}
-        className={cn(
-          inputVariants({ variant }),
-          invalid && invalidClass,
-          className,
-        )}
-        ref={ref}
-        placeholder={placeholder}
-        {...props}
-      />
+      <div className="group relative grow">
+        <div className="relative grow rounded-md shadow-sm">
+          {startAdornment && (
+            <div
+              className={cn([
+                'pointer-events-none',
+                'absolute',
+                'inset-y-0',
+                'left-0',
+                'flex',
+                'items-center',
+                'pl-3',
+                'text-secondary-500',
+                'group-focus-within:text-text-7000',
+                'group-hover:text-primary-700',
+              ])}
+            >
+              {startAdornment}
+            </div>
+          )}
+          <input
+            type={type}
+            className={cn(
+              inputVariants({ variant }),
+              invalid && inputClasses.invalid,
+              startAdornment && inputClasses.startAdornment,
+              endAdornment && inputClasses.endAdornment,
+              className,
+            )}
+            ref={ref}
+            placeholder={placeholder}
+            {...props}
+          />
+          {endAdornment && (
+            <div
+              className={cn([
+                'pointer-events-none',
+                'absolute',
+                'inset-y-0',
+                'right-0',
+                'flex',
+                'items-center',
+                'pr-3',
+                'text-secondary-500',
+                'group-focus-within:text-text-7000',
+                'group-hover:text-primary-700',
+              ])}
+            >
+              {endAdornment}
+            </div>
+          )}
+        </div>
+      </div>
     );
   },
 );

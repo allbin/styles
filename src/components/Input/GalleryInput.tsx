@@ -9,11 +9,13 @@ const GalleryInput: React.FC = () => {
   const [value, setValue] = React.useState('');
   return (
     <div>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
         <ShadInput />
         <ShadInput disabled />
         <ShadInput invalid />
         <ShadInput placeholder="This is a placeholder" />
+        <ShadInput startAdornment={<FaceSmileIcon className="size-5" />} />
+        <ShadInput endAdornment={<FaceSmileIcon className="size-5" />} />
       </div>
       <Input id="input-1" />
       <Input id="input-2" label="Input Label" />
