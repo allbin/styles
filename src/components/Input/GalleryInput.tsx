@@ -36,9 +36,14 @@ const GalleryInput: React.FC = () => {
           startAdornment={<FaceSmileIcon className="size-5" />}
           endAdornment={<TrashIcon className="size-5" />}
         />
+        <ShadInput id="shad-7" type="email" />
+      </div>
+      <h3>Labels</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
+        <ShadInput id="shad-8" label="This is a label" />
       </div>
       <Input id="input-1" />
-      <Input id="input-2" label="Input Label" />
+      <Input id="input-2" label="This is a label" />
       <Input
         id="input-3"
         value={value}

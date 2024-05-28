@@ -38,7 +38,7 @@ const inputVariants = cva(
 
 const inputClasses = {
   error: [
-    'text-red-7000',
+    'text-red-700',
     'ring-1',
     'ring-red-600',
     'hover:ring-red-800',
@@ -52,7 +52,9 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof inputVariants> {
   id: string;
+  type?: 'text' | 'email' | 'number' | 'tel';
   error?: string;
+  label?: string;
   placeholder?: string;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
@@ -67,6 +69,7 @@ const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
       type,
       variant,
       error,
+      label,
       placeholder,
       startAdornment,
       endAdornment,
@@ -75,8 +78,6 @@ const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
-    console.log('error: ', id, error);
-
     return (
       <div
         className="group relative grow"
@@ -85,6 +86,14 @@ const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
         data-tooltip-variant={error ? 'error' : 'dark'}
       >
         {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
+        {label && (
+          <label
+            htmlFor={id}
+            className="absolute  left-0 top-[-24px] mb-1 block text-sm font-medium leading-6 text-primary-900"
+          >
+            {label}
+          </label>
+        )}
         <div className="relative grow rounded-md shadow-sm">
           {startAdornment && (
             <div
