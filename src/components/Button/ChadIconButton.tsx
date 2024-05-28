@@ -30,13 +30,13 @@ const ChadIconButton: React.FC<IconButtonProps> = ({
 
   return (
     <ChadButton
-      use="icon"
       size={size}
       variant={variant}
       onClick={onClick}
       disabled={disabled}
       className={className}
       color={color}
+      icon
     >
       {loading && <Spinner className={`${sizeClass}`} />}
       {!loading && icon && <span className={sizeClass}>{icon}</span>}

@@ -56,11 +56,6 @@ const buttonVariants = cva(
         red: [],
         green: [],
       },
-      use: {
-        base: ['px-5', 'py-1', 'rounded-md'],
-        // round: ['rounded-full', 'px-5', 'py-1'],
-        icon: ['px-0', 'py-0', 'aspect-square', 'rounded-full'], // TODO: remove px-0 py-0, run boolean
-      },
     },
     compoundVariants: [
       {
@@ -117,7 +112,6 @@ const buttonVariants = cva(
       },
     ],
     defaultVariants: {
-      use: 'base',
       variant: 'outline',
       size: 'md',
       color: 'base',
@@ -140,6 +134,7 @@ interface ButtonProps
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   round?: boolean;
+  icon?: boolean;
   loading?: boolean;
 }
 
@@ -147,11 +142,11 @@ const ChadButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
-      use,
       variant,
       size,
       width,
       color,
+      icon,
       startIcon,
       endIcon,
       loading = false,
@@ -165,13 +160,17 @@ const ChadButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const buttonSize = (size && iconSizes[size]) || iconSizes.md;
 
-    const rounded = round ? 'rounded-full' : 'rounded-md';
+    const roundClasses = round ? 'rounded-full' : 'rounded-md';
+    const iconClasses = icon
+      ? ['aspect-square', 'rounded-full', 'p-0']
+      : ['px-5', 'py-1', 'rounded-md'];
 
     return (
       <Comp
         className={cn(
-          buttonVariants({ variant, size, use, width, color, className }),
-          rounded,
+          buttonVariants({ variant, size, width, color, className }),
+          roundClasses,
+          iconClasses,
         )}
         ref={ref}
         {...props}
