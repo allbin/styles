@@ -129,7 +129,6 @@ interface ButtonProps
   endIcon?: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
   round?: boolean;
-  full?: boolean;
   icon?: boolean;
   loading?: boolean;
 }
@@ -144,7 +143,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       icon,
       startIcon,
       endIcon,
-      full,
       type = 'button',
       loading = false,
       round,
@@ -161,7 +159,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const iconClasses = icon
       ? ['aspect-square', 'rounded-full', 'p-0']
       : ['px-5', 'py-1'];
-    const fullWidthClasses = full ? 'w-full' : '';
 
     return (
       <Comp
@@ -169,7 +166,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           buttonVariants({ variant, size, color, className }),
           roundClasses,
           iconClasses,
-          fullWidthClasses,
         )}
         ref={ref}
         type={type}
