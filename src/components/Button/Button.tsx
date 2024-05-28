@@ -127,6 +127,7 @@ interface ButtonProps
   asChild?: boolean;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
+  type?: 'button' | 'submit' | 'reset';
   round?: boolean;
   full?: boolean;
   icon?: boolean;
@@ -159,7 +160,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const roundClasses = round ? 'rounded-full' : 'rounded-md';
     const iconClasses = icon
       ? ['aspect-square', 'rounded-full', 'p-0']
-      : ['px-5', 'py-1', 'rounded-md'];
+      : ['px-5', 'py-1'];
     const fullWidthClasses = full ? 'w-full' : '';
 
     return (
