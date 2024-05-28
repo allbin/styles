@@ -2,10 +2,16 @@ import React from 'react';
 import Input from './Input';
 import { FaceSmileIcon } from '@heroicons/react/24/solid';
 
+// For testing
+import { ShadInput } from './ShadInput';
+
 const GalleryInput: React.FC = () => {
   const [value, setValue] = React.useState('');
   return (
     <div>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+        <ShadInput variant="outline" />
+      </div>
       <Input id="input-1" />
       <Input id="input-2" label="Input Label" />
       <Input
