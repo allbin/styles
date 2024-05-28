@@ -5,7 +5,7 @@ import { IconProfileCircle } from '@allbin/icons';
 const Profile: React.FC = () => {
   return (
     <div>
-      <Button filled>
+      <Button variant="filled">
         <IconProfileCircle className="size-6" />
       </Button>
     </div>
