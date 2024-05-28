@@ -10,7 +10,10 @@ const GalleryInput: React.FC = () => {
   return (
     <div>
       <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
-        <ShadInput variant="outline" />
+        <ShadInput />
+        <ShadInput disabled />
+        <ShadInput invalid />
+        <ShadInput placeholder="This is a placeholder" />
       </div>
       <Input id="input-1" />
       <Input id="input-2" label="Input Label" />
