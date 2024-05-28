@@ -34,6 +34,14 @@ const inputVariants = cva(
   },
 );
 
+const invalidClass = [
+  'text-red-7000',
+  'ring-1',
+  'ring-red-600',
+  'hover:ring-red-800',
+  'focus:outline-red-600',
+];
+
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof inputVariants> {
@@ -43,20 +51,15 @@ export interface InputProps
 
 const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, variant, invalid, placeholder, ...props }, ref) => {
-    const invalidClass = invalid
-      ? [
-          'text-red-7000',
-          'ring-1',
-          'ring-red-600',
-          'hover:ring-red-800',
-          'focus:outline-red-600',
-        ]
-      : '';
     console.log(invalid);
     return (
       <input
         type={type}
-        className={cn(inputVariants({ variant }), invalidClass, className)}
+        className={cn(
+          inputVariants({ variant }),
+          invalid && invalidClass,
+          className,
+        )}
         ref={ref}
         placeholder={placeholder}
         {...props}
