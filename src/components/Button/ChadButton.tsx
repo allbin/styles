@@ -174,7 +174,7 @@ const ChadButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading && <Spinner className={buttonSize} />}
         {!loading && startIcon && (
-          <span className={`${buttonSize}`}>{startIcon}</span>
+          <span className={buttonSize}>{startIcon}</span>
         )}
         {props.children}
         {!loading && endIcon && <span className={buttonSize}>{endIcon}</span>}
