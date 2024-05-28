@@ -77,14 +77,14 @@ const Btn: React.FC = () => {
       </div>
       <h3>Full width buttons</h3>
       <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
-        <ChadButton width="full">Standard button</ChadButton>
-        <ChadButton width="full" variant="filled">
+        <ChadButton full>Standard button</ChadButton>
+        <ChadButton full variant="filled">
           Filled button
         </ChadButton>
-        <ChadButton width="full" variant="ghost">
+        <ChadButton full variant="ghost">
           Ghost button
         </ChadButton>
-        <ChadButton width="full" variant="outline" disabled>
+        <ChadButton full variant="outline" disabled>
           Disabled button
         </ChadButton>
       </div>

@@ -46,11 +46,6 @@ const buttonVariants = cva(
         lg: ['h-[48px]', 'text-lg'],
         xl: ['h-[60px]', 'text-xl'],
       },
-      width: {
-        // TODO: run boolean instead
-        base: [],
-        full: ['w-full'],
-      },
       color: {
         base: [],
         red: [],
@@ -115,7 +110,6 @@ const buttonVariants = cva(
       variant: 'outline',
       size: 'md',
       color: 'base',
-      width: 'base',
     },
   },
 );
@@ -134,6 +128,7 @@ interface ButtonProps
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   round?: boolean;
+  full?: boolean;
   icon?: boolean;
   loading?: boolean;
 }
@@ -144,11 +139,11 @@ const ChadButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       variant,
       size,
-      width,
       color,
       icon,
       startIcon,
       endIcon,
+      full,
       loading = false,
       round,
       asChild = false,
@@ -164,13 +159,15 @@ const ChadButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const iconClasses = icon
       ? ['aspect-square', 'rounded-full', 'p-0']
       : ['px-5', 'py-1', 'rounded-md'];
+    const fullWidthClasses = full ? 'w-full' : '';
 
     return (
       <Comp
         className={cn(
-          buttonVariants({ variant, size, width, color, className }),
+          buttonVariants({ variant, size, color, className }),
           roundClasses,
           iconClasses,
+          fullWidthClasses,
         )}
         ref={ref}
         {...props}
