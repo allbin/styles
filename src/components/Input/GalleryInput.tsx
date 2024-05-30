@@ -12,27 +12,36 @@ const GalleryInput: React.FC = () => {
       <h2 className="mb-4">Inputs</h2>
       <h3>Input fields</h3>
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
-        <ShadInput id="shad-1" />
-        <ShadInput id="shad-2" disabled />
-        <ShadInput id="shad-3" error="This is an error message" />
+        <ShadInput min={10} max={100} id="shad-1" />
+        <ShadInput type="text" id="shad-1" />
+        <ShadInput type="text" id="shad-2" disabled />
+        <ShadInput type="text" id="shad-3" error="This is an error message" />
         <ShadInput
+          type="text"
           id="shad-3-1"
           placeholder="Type error to see error message"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           error={value === 'error' ? 'input error' : undefined}
         />
-        <ShadInput id="shad-4" placeholder="This is a placeholder" />
+        <ShadInput
+          type="text"
+          id="shad-4"
+          placeholder="This is a placeholder"
+        />
         <ShadInput
           id="shad-5"
+          type="text"
           startAdornment={<FaceSmileIcon className="size-5" />}
         />
         <ShadInput
           id="shad-6"
+          type="text"
           endAdornment={<FaceSmileIcon className="size-5" />}
         />
         <ShadInput
           id="shad-6"
+          type="text"
           startAdornment={<FaceSmileIcon className="size-5" />}
           endAdornment={<TrashIcon className="size-5" />}
         />
@@ -40,7 +49,11 @@ const GalleryInput: React.FC = () => {
       </div>
       <h3>Labels</h3>
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
-        <ShadInput id="shad-8" label="This is a label" />
+        <ShadInput type="text" id="shad-8" label="This is a label" />
+      </div>
+      <h3>Helper Text</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
+        <ShadInput type="text" id="shad-8" helperText="This is a helper text" />
       </div>
       <Input id="input-1" />
       <Input id="input-2" label="This is a label" />

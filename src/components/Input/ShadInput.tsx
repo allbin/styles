@@ -48,29 +48,44 @@ const inputClasses = {
   endAdornment: ['pr-10'],
 };
 
-export interface InputProps
+export interface BaseInputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof inputVariants> {
   id: string;
-  type?: 'text' | 'email' | 'number' | 'tel';
   error?: string;
   label?: string;
   placeholder?: string;
+  helperText?: string;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
+
+type InputTypes =
+  | {
+      type?: 'text' | 'email' | 'tel';
+      value?: string;
+      min?: never;
+      max?: never;
+    }
+  | { type?: 'number'; value?: number; min?: number; max?: number };
+
+type InputProps = BaseInputProps & InputTypes;
 
 const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       id,
       className,
-      type,
+      type = 'text',
+      value,
+      min,
+      max,
       variant,
       error,
       label,
       placeholder,
+      helperText,
       startAdornment,
       endAdornment,
       onChange,
@@ -89,10 +104,15 @@ const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={id}
-            className="absolute  left-0 top-[-24px] mb-1 block text-sm font-medium leading-6 text-primary-900"
+            className="absolute left-0 top-[-24px] mb-1 block text-sm font-medium leading-6 text-primary-900"
           >
             {label}
           </label>
+        )}
+        {helperText && (
+          <span className="absolute bottom-[-24px] mt-1 text-sm text-text-700">
+            {helperText}
+          </span>
         )}
         <div className="relative grow rounded-md shadow-sm">
           {startAdornment && (
@@ -115,6 +135,7 @@ const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
           )}
           <input
             type={type}
+            value={value}
             className={cn(
               inputVariants({ variant }),
               error && inputClasses.error,
@@ -125,6 +146,8 @@ const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             placeholder={placeholder}
             onChange={onChange}
+            min={min}
+            max={max}
             {...props}
           />
           {endAdornment && (
