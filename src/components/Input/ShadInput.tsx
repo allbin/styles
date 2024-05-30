@@ -56,6 +56,7 @@ export interface BaseInputProps
   label?: string;
   placeholder?: string;
   helperText?: string;
+  toolTip?: string;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -68,7 +69,7 @@ type InputTypes =
       min?: never;
       max?: never;
     }
-  | { type?: 'number'; value?: number; min?: number; max?: number };
+  | { type: 'number'; value?: number; min?: number; max?: number };
 
 type InputProps = BaseInputProps & InputTypes;
 
@@ -82,6 +83,7 @@ const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
       min,
       max,
       variant,
+      toolTip,
       error,
       label,
       placeholder,
@@ -97,7 +99,7 @@ const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
       <div
         className="group relative grow"
         data-tooltip-id={id}
-        data-tooltip-content={error}
+        data-tooltip-content={error ? error : toolTip}
         data-tooltip-variant={error ? 'error' : 'dark'}
       >
         {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
@@ -137,7 +139,7 @@ const ShadInput = React.forwardRef<HTMLInputElement, InputProps>(
             type={type}
             value={value}
             className={cn(
-              inputVariants({ variant }),
+              inputVariants({ variant, className }),
               error && inputClasses.error,
               startAdornment && inputClasses.startAdornment,
               endAdornment && inputClasses.endAdornment,
