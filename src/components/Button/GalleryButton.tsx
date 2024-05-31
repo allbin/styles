@@ -22,8 +22,9 @@ const Btn: React.FC = () => {
         <Button onClick={() => console.log('click')}>Standard button</Button>
         <Button variant="filled">Filled button</Button>
         <Button variant="ghost">Ghost button</Button>
-        <Button variant="outline" disabled>
-          Disabled button
+        <Button disabled>Standard disabled button</Button>
+        <Button variant="filled" disabled>
+          Filled disabled button
         </Button>
       </div>
       <h3>Rounded</h3>
