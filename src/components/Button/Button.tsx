@@ -7,40 +7,25 @@ import { Spinner } from '../spinner';
 const buttonVariants = cva(
   [
     'flex',
-    'relative',
     'font-medium',
     'items-center',
     'justify-center',
     'gap-2',
     'border',
+    'border-primary-600',
     'transition-colors',
     'rounded-md',
-    'disabled:border-gray-400',
-    'disabled:bg-primary-300',
-    'disabled:text-primary-600',
     'disabled:active:opacity-100',
     'disabled:pointer-events-none',
     'active:opacity-80',
-    'after:content-[""]',
-    'after:absolute',
-    'after:top-0',
-    'after:left-0',
-    'after:w-full',
-    'after:h-full',
-    'after:rounded-md',
-    'after:bg-primary-700',
-    'after:opacity-0',
-    'hover:after:opacity-10',
-    'active:after:opacity-30',
-    'disabled:after:opacity-50',
-    'disabled:after:mix-blend-saturation',
+    'hover:bg-primary-200',
   ],
   {
     variants: {
       variant: {
-        filled: ['border-primary-500', 'bg-primary-500', 'text-text-50'],
-        outline: ['border-primary-600', 'bg-transparent'],
-        ghost: ['border-none', 'bg-transparent', 'hover:after:opacity-0'],
+        filled: ['text-text-50', 'border-primary-500'],
+        outline: ['disabled:border-gray-400', 'disabled:text-gray-400'],
+        ghost: ['border-none', 'bg-transparent', 'hover:bg-transparent'],
       },
       size: {
         sm: ['h-[24px]', 'text-sm'],
@@ -50,23 +35,15 @@ const buttonVariants = cva(
       },
       color: {
         base: [],
-        red: [
-          'hover:after:bg-red-600',
-          'disabled:bg-red-900/60',
-          'disabled:text-red-900',
-        ],
-        green: [
-          'hover:after:bg-green-600',
-          'disabled:bg-green-900/60',
-          'disabled:text-green-900',
-        ],
+        red: ['border-red-700', 'hover:bg-red-200'],
+        green: ['border-green-700', 'hover:bg-green-200'],
       },
       icon: {
         true: ['aspect-square', 'p-0'],
         false: ['px-5', 'py-1'],
       },
       round: {
-        true: ['rounded-full', 'after:rounded-full'],
+        true: ['rounded-full'],
         false: [],
       },
       hasStartEndIcon: {
@@ -74,15 +51,22 @@ const buttonVariants = cva(
         false: [],
       },
       hasColor: {
-        true: [
-          'after:bg-opacity-0',
-          'text-text-50',
-          'disabled:after:bg-transparent',
-        ],
+        true: ['text-text-50'],
         false: [],
       },
     },
     compoundVariants: [
+      {
+        color: 'base',
+        variant: 'filled',
+        class: [
+          'bg-primary-500',
+          'hover:bg-primary-700',
+          'disabled:bg-primary-300',
+          'disabled:text-text-700',
+          'disabled:border-none',
+        ],
+      },
       {
         color: 'red',
         variant: 'outline',
@@ -91,7 +75,12 @@ const buttonVariants = cva(
       {
         color: 'red',
         variant: 'filled',
-        class: ['bg-red-700', 'hover:bg-red-600'],
+        class: [
+          'bg-red-700',
+          'hover:bg-red-600',
+          'disabled:bg-red-900/60',
+          'disabled:text-red-900',
+        ],
       },
       {
         color: 'green',
@@ -101,7 +90,12 @@ const buttonVariants = cva(
       {
         color: 'green',
         variant: 'filled',
-        class: ['bg-green-700', 'hover:bg-green-600'],
+        class: [
+          'bg-green-700',
+          'hover:bg-green-600',
+          'disabled:bg-green-900/60',
+          'disabled:text-green-900',
+        ],
       },
       {
         size: 'sm',
@@ -186,8 +180,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const Comp = asChild ? Slot : 'button';
-    const hasStartEndIcon = !!startIcon || !!endIcon;
-    const hasColor = !!color;
 
     return (
       <Comp
@@ -199,8 +191,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className,
             icon,
             round,
-            hasStartEndIcon,
-            hasColor,
+            hasStartEndIcon: !!startIcon || !!endIcon,
+            hasColor: !!color,
           }),
         )}
         ref={ref}
