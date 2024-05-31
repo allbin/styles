@@ -28,19 +28,19 @@ const buttonVariants = cva(
     'after:w-full',
     'after:h-full',
     'after:rounded-md',
-    'after:bg-black',
+    'after:bg-primary-700',
     'after:opacity-0',
     'hover:after:opacity-10',
     'active:after:opacity-30',
     'disabled:after:opacity-50',
-    'disabled:after:mix-blend-difference',
+    'disabled:after:mix-blend-saturation',
   ],
   {
     variants: {
       variant: {
         filled: ['border-primary-500', 'bg-primary-500', 'text-text-50'],
         outline: ['border-primary-600', 'bg-transparent'],
-        ghost: ['border-none', 'bg-transparent'],
+        ghost: ['border-none', 'bg-transparent', 'hover:after:opacity-0'],
       },
       size: {
         sm: ['h-[24px]', 'text-sm'],
@@ -50,11 +50,19 @@ const buttonVariants = cva(
       },
       color: {
         base: [],
-        red: ['border-red-700', 'text-red-700'],
-        green: ['border-green-700', 'text-green-700'],
+        red: [
+          'hover:after:bg-red-600',
+          'disabled:bg-red-900/60',
+          'disabled:text-red-900',
+        ],
+        green: [
+          'hover:after:bg-green-600',
+          'disabled:bg-green-900/60',
+          'disabled:text-green-900',
+        ],
       },
       icon: {
-        true: ['aspect-square', 'rounded-full', 'after:rounded-full', 'p-0'],
+        true: ['aspect-square', 'p-0'],
         false: ['px-5', 'py-1'],
       },
       round: {
@@ -63,6 +71,14 @@ const buttonVariants = cva(
       },
       hasStartEndIcon: {
         true: [],
+        false: [],
+      },
+      hasColor: {
+        true: [
+          'after:bg-opacity-0',
+          'text-text-50',
+          'disabled:after:bg-transparent',
+        ],
         false: [],
       },
     },
@@ -75,7 +91,7 @@ const buttonVariants = cva(
       {
         color: 'red',
         variant: 'filled',
-        class: ['bg-red-700', 'text-text-50'],
+        class: ['bg-red-700', 'hover:bg-red-600'],
       },
       {
         color: 'green',
@@ -85,7 +101,7 @@ const buttonVariants = cva(
       {
         color: 'green',
         variant: 'filled',
-        class: ['bg-green-700', 'text-text-50'],
+        class: ['bg-green-700', 'hover:bg-green-600'],
       },
       {
         size: 'sm',
@@ -120,12 +136,12 @@ const buttonVariants = cva(
       {
         size: 'lg',
         icon: true,
-        class: ['[&>*:first-child]:size-6'],
+        class: ['[&>*:first-child]:size-7'],
       },
       {
         size: 'xl',
         icon: true,
-        class: ['[&>*:first-child]:size-8'],
+        class: ['[&>*:first-child]:size-9'],
       },
     ],
     defaultVariants: {
@@ -171,6 +187,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : 'button';
     const hasStartEndIcon = !!startIcon || !!endIcon;
+    const hasColor = !!color;
 
     return (
       <Comp
@@ -183,6 +200,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             icon,
             round,
             hasStartEndIcon,
+            hasColor,
           }),
         )}
         ref={ref}
