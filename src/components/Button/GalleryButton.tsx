@@ -53,6 +53,13 @@ const Btn: React.FC = () => {
         <Button startIcon={<IconHalfCookie />} endIcon={<IconTrash />}>
           Start and End icon button
         </Button>
+        <Button
+          size="xl"
+          startIcon={<IconHalfCookie />}
+          endIcon={<IconTrash />}
+        >
+          Extra large start icon button
+        </Button>
       </div>
       <h3>Loading</h3>
       <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
