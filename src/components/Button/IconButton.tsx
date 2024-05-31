@@ -9,6 +9,7 @@ interface IconButtonProps {
   icon: React.ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'xl' | null;
   variant?: 'outline' | 'filled' | 'ghost' | null;
+  round?: boolean;
   loading?: boolean;
   disabled?: boolean;
   color?: 'red' | 'green';
@@ -20,6 +21,7 @@ const IconButton: React.FC<IconButtonProps> = ({
   icon,
   size,
   variant,
+  round = false,
   loading,
   disabled,
   onClick,
@@ -35,6 +37,7 @@ const IconButton: React.FC<IconButtonProps> = ({
       className={className}
       color={color}
       icon={true}
+      round={round}
     >
       {loading && <Spinner />}
       {!loading && icon && <span>{icon}</span>}
