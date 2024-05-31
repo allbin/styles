@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { iconSizes } from './Button';
+// import { iconSizes } from './Button';
 import { Spinner } from '../spinner';
 import Button from './Button';
 
@@ -24,7 +24,7 @@ const IconButton: React.FC<IconButtonProps> = ({
   disabled,
   onClick,
 }) => {
-  const sizeClass = size ? iconSizes[size] : 'size-5';
+  // const sizeClass = size ? iconSizes[size] : 'size-5';
 
   return (
     <Button
@@ -34,10 +34,10 @@ const IconButton: React.FC<IconButtonProps> = ({
       disabled={disabled}
       className={className}
       color={color}
-      icon
+      icon={true}
     >
-      {loading && <Spinner className={`${sizeClass}`} />}
-      {!loading && icon && <span className={sizeClass}>{icon}</span>}
+      {loading && <Spinner />}
+      {!loading && icon && <span>{icon}</span>}
     </Button>
   );
 };
