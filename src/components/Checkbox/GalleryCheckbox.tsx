@@ -14,10 +14,14 @@ const GalleryCheckbox: React.FC = () => {
 
   return (
     <div>
-      <div className="flex flex-col gap-2">
+      <div className="mb-7 flex flex-col gap-2">
         Gallery view
-        <ShadCheckbox label="testar" />
-        <ShadCheckbox />
+        <ShadCheckbox id="checkbox-1" label="Checkbox Label" />
+        <ShadCheckbox
+          id="checkbox-2"
+          label="Checkbox with description"
+          description="This is a description for the checkbox"
+        />
       </div>
       Checkbox with no props
       <Checkbox id="checkbox-1" className="mb-4" />

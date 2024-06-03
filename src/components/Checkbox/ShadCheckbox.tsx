@@ -39,29 +39,44 @@ const checkBoxVariants = cva([
 interface ShadCheckboxProps
   extends VariantProps<typeof checkBoxVariants>,
     React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
+  id: string;
   label?: string;
+  description?: string;
 }
 
 const ShadCheckbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   ShadCheckboxProps
->(({ className, label, ...props }, ref) => {
-  console.log(label);
-
+>(({ className, id, label, description, ...props }, ref) => {
   return (
-    <CheckboxPrimitive.Root
-      ref={ref}
-      className={cn(checkBoxVariants({}), className)}
-      {...props}
-    >
-      <CheckboxPrimitive.Indicator
-        className={cn(
-          ' flex h-full w-full items-center justify-center border-0 bg-primary-500 hover:bg-primary-600',
-        )}
+    <div className="flex w-full items-center">
+      <CheckboxPrimitive.Root
+        ref={ref}
+        className={cn(checkBoxVariants({}), className)}
+        {...props}
       >
-        <IconCheck className="size-4 text-white" />
-      </CheckboxPrimitive.Indicator>
-    </CheckboxPrimitive.Root>
+        <CheckboxPrimitive.Indicator
+          className={cn(
+            'flex h-full w-full items-center justify-center border-0 bg-primary-500',
+          )}
+        >
+          <IconCheck className="size-4 text-white" />
+        </CheckboxPrimitive.Indicator>
+        <div className="absolute inset-x-8  top-0 flex size-max flex-col items-start">
+          {label && (
+            <label
+              className={cn('text-text cursor-pointer text-sm font-medium')}
+              htmlFor={id}
+            >
+              {label}
+            </label>
+          )}
+          {description && (
+            <span className="text-sm text-text-700">{description}</span>
+          )}
+        </div>
+      </CheckboxPrimitive.Root>
+    </div>
   );
 });
 ShadCheckbox.displayName = CheckboxPrimitive.Root.displayName;
