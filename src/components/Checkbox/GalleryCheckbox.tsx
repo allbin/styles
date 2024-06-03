@@ -14,9 +14,10 @@ const GalleryCheckbox: React.FC = () => {
 
   return (
     <div>
-      <div>
+      <div className="flex flex-col gap-2">
         Gallery view
         <ShadCheckbox label="testar" />
+        <ShadCheckbox />
       </div>
       Checkbox with no props
       <Checkbox id="checkbox-1" className="mb-4" />
