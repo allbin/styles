@@ -1,5 +1,8 @@
 import React, { useCallback } from 'react';
 import Checkbox from './Checkbox';
+import ShadCheckbox from './ShadCheckbox';
+
+// import { IconCheck } from '@allbin/icons';
 
 const GalleryCheckbox: React.FC = () => {
   const [checked, setChecked] = React.useState(false);
@@ -11,6 +14,10 @@ const GalleryCheckbox: React.FC = () => {
 
   return (
     <div>
+      <div>
+        Gallery view
+        <ShadCheckbox label="testar" />
+      </div>
       Checkbox with no props
       <Checkbox id="checkbox-1" className="mb-4" />
       Checkbox with label
