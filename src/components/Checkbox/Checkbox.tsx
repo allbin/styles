@@ -1,89 +1,99 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms')({strategy: 'class'}),
-    ],
-  }
-  ```
-*/
 import React from 'react';
-import { Tooltip } from 'react-tooltip';
+import * as CheckboxPrimitives from '@radix-ui/react-checkbox';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
+import { IconCheck } from '@allbin/icons';
 
-interface CheckboxProps {
+const checkBoxVariants = cva([
+  'relative',
+  'inline-flex',
+  'size-5',
+  'shrink-0',
+  'appearance-none',
+  'items-center',
+  'justify-center',
+  'rounded',
+  'border',
+  'shadow-sm',
+  'outline-none',
+  'transition',
+  'duration-100',
+  'enabled:cursor-pointer',
+  'hover:bg-primary-300',
+  'text-white',
+  'bg-white',
+  'border',
+  'border-primary-400',
+  'data-[disabled]:border-gray-300 data-[disabled]:bg-gray-100 data-[disabled]:text-white',
+  'data-[disabled]:bg-gray-300 ',
+  'enabled:data-[state=checked]:border-0 enabled:data-[state=checked]:border-transparent enabled:data-[state=checked]:bg-primary-600',
+  'enabled:hover:data-[state=checked]:bg-primary-700',
+  'focus-visible:ring-offset-2',
+  'focus:ring-primary-600',
+  'focus:ring-2',
+  'focus:ring-offset-2',
+]);
+
+interface CheckboxBaseProps
+  extends VariantProps<typeof checkBoxVariants>,
+    React.ComponentPropsWithoutRef<typeof CheckboxPrimitives.Root> {
   id: string;
-  value?: boolean;
-  label?: string;
-  description?: string;
-  tooltip?: string;
+  checked?: boolean;
   disabled?: boolean;
-  className?: string;
-  onChange?: (checked: boolean) => void;
+  onClick?: () => void;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({
-  id,
-  value,
-  label,
-  description,
-  tooltip,
-  disabled,
-  className,
-  onChange,
-}) => {
-  return (
-    <>
-      <Tooltip place="top" id="checkbox-tooltip" delayShow={500} />
-      <div
-        data-tooltip-id="checkbox-tooltip"
-        data-tooltip-content={tooltip}
-        className={cn(
-          'group relative flex w-fit cursor-pointer items-start',
-          disabled && 'cursor-default',
-          className,
-        )}
-      >
-        <div className="flex h-6 items-center">
-          <input
-            disabled={disabled}
-            checked={value}
-            onChange={() => onChange && onChange(!value)}
-            id={id}
-            name={id}
-            type="checkbox"
-            className={cn(
-              'form-checkbox size-5 cursor-pointer rounded border-primary-300 bg-background-50 text-primary-600 checked:bg-primary-500 focus:ring-primary-600 group-hover:bg-primary-300 checked:group-hover:bg-primary-700',
-              disabled &&
-                'cursor-default border-gray-300 bg-gray-300 text-gray-500 checked:bg-gray-300 group-hover:bg-gray-300 checked:group-hover:bg-gray-300',
-              disabled &&
-                'dark:border-gray-800 dark:bg-gray-800 dark:hover:border-gray-800 dark:group-hover:bg-gray-800 dark:checked:group-hover:bg-gray-800',
-            )}
-          />
-        </div>
-        {(label || description) && (
-          <div className="ml-3 text-sm leading-6">
-            <label
-              htmlFor={id}
-              className={cn(
-                'cursor-pointer font-medium text-text-900 group-hover:text-primary-700',
-                disabled &&
-                  'cursor-default text-text-700 group-hover:text-text-700',
-              )}
-            >
-              {label ?? <span>&nbsp;</span>}
-            </label>
-            {description && <p className="text-text-700">{description}</p>}
-          </div>
-        )}
-      </div>
-    </>
-  );
-};
+interface CheckboxWithLabelProps extends CheckboxBaseProps {
+  label: string;
+  description?: string;
+}
 
-export default Checkbox;
+interface CheckboxWithoutLabelProps extends CheckboxBaseProps {
+  label?: never;
+  description?: never;
+}
+
+type CheckboxProps = CheckboxWithLabelProps | CheckboxWithoutLabelProps;
+
+const CheckBox = React.forwardRef<
+  React.ElementRef<typeof CheckboxPrimitives.Root>,
+  CheckboxProps
+>(({ className, checked, disabled, id, label, description, ...props }, ref) => {
+  return (
+    <div className={cn('flex items-start gap-2')}>
+      <CheckboxPrimitives.Root
+        id={id}
+        ref={ref}
+        {...props}
+        checked={checked}
+        disabled={disabled}
+        className={cn(checkBoxVariants({}), className)}
+      >
+        <CheckboxPrimitives.Indicator className="flex size-full items-center justify-center">
+          <IconCheck className="size-4" />
+        </CheckboxPrimitives.Indicator>
+      </CheckboxPrimitives.Root>
+      {label && (
+        <div className="flex flex-col gap-1">
+          <label
+            className={cn(
+              !disabled
+                ? 'hover:cursor-pointer hover:text-primary-700'
+                : 'cursor-default, text-gray-400',
+              'text-sm font-medium',
+            )}
+            htmlFor={id}
+          >
+            {label}
+          </label>
+          {description && (
+            <span className="text-sm text-gray-500">{description}</span>
+          )}
+        </div>
+      )}
+    </div>
+  );
+});
+CheckBox.displayName = 'CheckBox';
+
+export default CheckBox;
