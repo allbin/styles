@@ -50,9 +50,7 @@ const inputVariants = cva(
 export interface BaseInputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof inputVariants> {
-  id: string;
   error?: string;
-  label?: string;
   placeholder?: string;
   helperText?: string;
   toolTip?: string;
@@ -70,7 +68,11 @@ type InputTypes =
     }
   | { type: 'number'; value?: number; min?: number; max?: number };
 
-type InputProps = BaseInputProps & InputTypes;
+type InputIdLabelProps =
+  | { id?: never; label?: never }
+  | { id?: string; label: string };
+
+type InputProps = BaseInputProps & InputTypes & InputIdLabelProps;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
@@ -119,15 +121,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {startAdornment && (
             <div
               className={cn([
-                'pointer-events-none',
                 'absolute',
                 'inset-y-0',
                 'left-0',
                 'flex',
                 'items-center',
                 'pl-3',
-                'text-secondary-500',
-                'group-focus-within:text-text-7000',
+                'text-primary-500',
+                'group-focus-within:text-text-700',
                 'group-hover:text-primary-700',
               ])}
             >
@@ -154,15 +155,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {endAdornment && (
             <div
               className={cn([
-                'pointer-events-none',
                 'absolute',
                 'inset-y-0',
                 'right-0',
                 'flex',
                 'items-center',
                 'pr-3',
-                'text-secondary-500',
-                'group-focus-within:text-text-7000',
+                'text-primary-500',
+                'group-focus-within:text-text-700',
                 'group-hover:text-primary-700',
               ])}
             >
