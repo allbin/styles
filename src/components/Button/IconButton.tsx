@@ -1,16 +1,49 @@
-import React from 'react';
-import Button, { ButtonProps } from './Button';
+import * as React from 'react';
+// import { iconSizes } from './Button';
+import { Spinner } from '../spinner';
+import Button from './Button';
 
-const IconButton: React.FC<ButtonProps> = ({
-  children,
-  round = true,
-  ...props
+interface IconButtonProps {
+  onClick?: () => void;
+  className?: string;
+  icon: React.ReactNode;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | null;
+  variant?: 'outline' | 'filled' | 'ghost' | null;
+  round?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
+  color?: 'red' | 'green';
+}
+
+const IconButton: React.FC<IconButtonProps> = ({
+  className,
+  color,
+  icon,
+  size,
+  variant,
+  round = false,
+  loading,
+  disabled,
+  onClick,
 }) => {
+  // const sizeClass = size ? iconSizes[size] : 'size-5';
+
   return (
-    <Button {...props} round={round} className="min-h-9 min-w-9 p-2">
-      {children}
+    <Button
+      size={size}
+      variant={variant}
+      onClick={onClick}
+      disabled={disabled}
+      className={className}
+      color={color}
+      icon={true}
+      round={round}
+    >
+      {loading && <Spinner />}
+      {!loading && icon && <span>{icon}</span>}
     </Button>
   );
 };
 
+IconButton.displayName = 'IconButton';
 export default IconButton;
