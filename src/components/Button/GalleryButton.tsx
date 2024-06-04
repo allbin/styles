@@ -22,8 +22,9 @@ const Btn: React.FC = () => {
         <Button onClick={() => console.log('click')}>Standard button</Button>
         <Button variant="filled">Filled button</Button>
         <Button variant="ghost">Ghost button</Button>
-        <Button variant="outline" disabled>
-          Disabled button
+        <Button disabled>Standard disabled button</Button>
+        <Button variant="filled" disabled>
+          Filled disabled button
         </Button>
       </div>
       <h3>Rounded</h3>
@@ -52,6 +53,13 @@ const Btn: React.FC = () => {
         </Button>
         <Button startIcon={<IconHalfCookie />} endIcon={<IconTrash />}>
           Start and End icon button
+        </Button>
+        <Button
+          size="xl"
+          startIcon={<IconHalfCookie />}
+          endIcon={<IconTrash />}
+        >
+          Extra large start icon button
         </Button>
       </div>
       <h3>Loading</h3>
@@ -113,7 +121,7 @@ const Btn: React.FC = () => {
           </Button>
         </div>
       </div>
-      <h3>Icon buttons</h3>
+      <h3>Standard icon buttons</h3>
       <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
         <IconButton icon={<IconHalfCookie />} />
         <IconButton variant="filled" icon={<IconHalfCookie />} />
@@ -122,6 +130,25 @@ const Btn: React.FC = () => {
         <IconButton loading={true} icon={<IconHalfCookie />} />
         <IconButton disabled icon={<IconHalfCookie />} />
         <IconButton
+          icon={<IconTrash />}
+          onClick={() => console.log('Delete')}
+        />
+        <IconButton
+          variant="ghost"
+          className="opacity-50 hover:text-red-400 hover:opacity-100"
+          icon={<IconTrash />}
+        />
+      </div>
+      <h3>Round icon buttons</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+        <IconButton round icon={<IconHalfCookie />} />
+        <IconButton round variant="filled" icon={<IconHalfCookie />} />
+        <IconButton round variant="ghost" icon={<IconHalfCookie />} />
+        <IconButton round variant="outline" icon={<IconHalfCookie />} />
+        <IconButton round loading={true} icon={<IconHalfCookie />} />
+        <IconButton round disabled icon={<IconHalfCookie />} />
+        <IconButton
+          round
           icon={<IconTrash />}
           onClick={() => console.log('Delete')}
         />

@@ -12,33 +12,20 @@ const buttonVariants = cva(
     'justify-center',
     'gap-2',
     'border',
+    'border-primary-600',
     'transition-colors',
-    'disabled:border-gray-400',
-    'disabled:bg-transparent',
-    'disabled:text-gray-400',
+    'rounded-md',
     'disabled:active:opacity-100',
+    'disabled:pointer-events-none',
+    'active:opacity-80',
+    'hover:bg-primary-200',
   ],
   {
     variants: {
       variant: {
-        filled: [
-          'border-primary-500',
-          'bg-primary-500',
-          'text-text-50',
-          'hover:border-primary-500',
-          'hover:bg-primary-700',
-          'disabled:border-primary-300',
-          'disabled:bg-primary-300',
-          'disabled:text-text-700',
-          'disabled:hover:border-primary-300',
-          'disabled:hover:bg-primary-300',
-        ],
-        outline: [
-          'border-primary-600',
-          'hover:bg-primary-200',
-          'active:opacity-80',
-        ],
-        ghost: ['border-none', 'bg-transparent', 'hover:bg-primary-100'],
+        filled: ['text-text-50', 'border-primary-500'],
+        outline: ['disabled:border-gray-400', 'disabled:text-gray-400'],
+        ghost: ['border-none', 'bg-transparent', 'hover:bg-transparent'],
       },
       size: {
         sm: ['h-[24px]', 'text-sm'],
@@ -48,78 +35,119 @@ const buttonVariants = cva(
       },
       color: {
         base: [],
-        red: [],
-        green: [],
+        red: ['border-red-700', 'hover:bg-red-200'],
+        green: ['border-green-700', 'hover:bg-green-200'],
+      },
+      icon: {
+        true: ['aspect-square', 'p-0'],
+        false: ['px-5', 'py-1'],
+      },
+      round: {
+        true: ['rounded-full'],
+        false: [],
+      },
+      hasStartEndIcon: {
+        true: [],
+        false: [],
+      },
+      hasColor: {
+        true: ['text-text-50'],
+        false: [],
       },
     },
     compoundVariants: [
       {
+        color: 'base',
+        variant: 'filled',
+        class: [
+          'bg-primary-500',
+          'hover:bg-primary-700',
+          'disabled:bg-primary-300',
+          'disabled:text-text-700',
+          'disabled:border-none',
+        ],
+      },
+      {
         color: 'red',
         variant: 'outline',
-        class: [
-          'border-red-700',
-          'text-red-700',
-          'hover:bg-red-200',
-          'hover:text-red-600',
-        ],
+        class: ['border-red-700', 'text-red-700'],
       },
       {
         color: 'red',
         variant: 'filled',
         class: [
           'bg-red-700',
-          'text-text-50',
-          'hover:border-red-800',
           'hover:bg-red-600',
-          'hover:text-red-50',
-          'disabled:border-red-900/80',
           'disabled:bg-red-900/60',
           'disabled:text-red-900',
-          'disabled:hover:border-red-900/80',
-          'disabled:hover:bg-red-900/60',
         ],
       },
       {
         color: 'green',
         variant: 'outline',
-        class: [
-          'border-green-700',
-          'text-green-700',
-          'hover:bg-green-200',
-          'hover:text-green-600',
-        ],
+        class: ['border-green-700', 'text-green-700'],
       },
       {
         color: 'green',
         variant: 'filled',
         class: [
           'bg-green-700',
-          'text-text-50',
-          'hover:border-green-800',
           'hover:bg-green-600',
-          'hover:text-green-50',
-          'disabled:border-green-900/80',
           'disabled:bg-green-900/60',
           'disabled:text-green-900',
-          'disabled:hover:border-green-900/80',
-          'disabled:hover:bg-green-900/60',
         ],
+      },
+      {
+        size: 'sm',
+        hasStartEndIcon: true,
+        class: ['[&>*:first-child]:size-3'],
+      },
+      {
+        size: 'md',
+        hasStartEndIcon: true,
+        class: ['[&>*:first-child]:size-5'],
+      },
+      {
+        size: 'lg',
+        hasStartEndIcon: true,
+        class: ['[&>*:first-child]:size-6'],
+      },
+      {
+        size: 'xl',
+        hasStartEndIcon: true,
+        class: ['[&>*:first-child]:size-7'],
+      },
+      {
+        size: 'sm',
+        icon: true,
+        class: ['[&>*:first-child]:size-3'],
+      },
+      {
+        size: 'md',
+        icon: true,
+        class: ['[&>*:first-child]:size-5'],
+      },
+      {
+        size: 'lg',
+        icon: true,
+        class: ['[&>*:first-child]:size-7'],
+      },
+      {
+        size: 'xl',
+        icon: true,
+        class: ['[&>*:first-child]:size-9'],
       },
     ],
     defaultVariants: {
       variant: 'outline',
       size: 'md',
       color: 'base',
+      round: false,
+      icon: false,
+      hasStartEndIcon: false,
     },
   },
 );
-
-export const iconSizes = {
-  sm: 'size-3',
-  md: 'size-5',
-  lg: 'size-6',
-  xl: 'size-7',
-};
 
 interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'>,
@@ -177,6 +205,53 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {props.children}
         {!loading && endIcon && <span className={buttonSize}>{endIcon}</span>}
+      </Comp>
+    );
+  },
+);
+Button.displayName = 'Button';
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      className,
+      variant,
+      size = 'md',
+      color,
+      icon = false,
+      startIcon,
+      endIcon,
+      type = 'button',
+      loading = false,
+      round = false,
+      asChild = false,
+      ...props
+    },
+    ref,
+  ) => {
+    const Comp = asChild ? Slot : 'button';
+
+    return (
+      <Comp
+        className={cn(
+          buttonVariants({
+            variant,
+            size,
+            color,
+            className,
+            icon,
+            round,
+            hasStartEndIcon: !!startIcon || !!endIcon,
+            hasColor: !!color,
+          }),
+        )}
+        ref={ref}
+        type={type}
+        {...props}
+      >
+        {loading && <Spinner />}
+        {!loading && startIcon && <span>{startIcon}</span>}
+        {props.children}
+        {!loading && endIcon && <span>{endIcon}</span>}
       </Comp>
     );
   },
