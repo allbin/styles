@@ -166,55 +166,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     {
       className,
       variant,
-      size,
-      color,
-      icon,
-      startIcon,
-      endIcon,
-      type = 'button',
-      loading = false,
-      round,
-      asChild = false,
-      ...props
-    },
-    ref,
-  ) => {
-    const Comp = asChild ? Slot : 'button';
-
-    const buttonSize = (size && iconSizes[size]) || iconSizes.md;
-
-    const roundClasses = round ? 'rounded-full' : 'rounded-md';
-    const iconClasses = icon
-      ? ['aspect-square', 'rounded-full', 'p-0']
-      : ['px-5', 'py-1'];
-
-    return (
-      <Comp
-        className={cn(
-          buttonVariants({ variant, size, color, className }),
-          roundClasses,
-          iconClasses,
-        )}
-        ref={ref}
-        type={type}
-        {...props}
-      >
-        {loading && <Spinner className={buttonSize} />}
-        {!loading && startIcon && (
-          <span className={buttonSize}>{startIcon}</span>
-        )}
-        {props.children}
-        {!loading && endIcon && <span className={buttonSize}>{endIcon}</span>}
-      </Comp>
-    );
-  },
-);
-Button.displayName = 'Button';
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      variant,
       size = 'md',
       color,
       icon = false,
