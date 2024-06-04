@@ -57,7 +57,7 @@ const Slider: React.FC<SliderProps> = ({
       >
         <Track
           className={cn(
-            'relative h-2 w-full grow overflow-hidden rounded-full bg-primary-300 group-hover:bg-primary-400 ',
+            'relative h-2 w-full grow overflow-hidden rounded-full bg-primary-300 group-hover:bg-primary-400',
             disabled && '!bg-gray-300',
           )}
         >

@@ -13,6 +13,7 @@ module.exports = {
     '.eslintrc.cjs',
     'postcss.config.cjs',
     'prettier.config.cjs',
+    'vitest.setup.ts',
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['prettier', 'react-refresh'],
