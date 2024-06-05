@@ -3,18 +3,25 @@ import { RouterProvider } from '@tanstack/react-router';
 import { ThemeCtx } from './contexts/ThemeContext';
 import { cn } from './helpers/classnames';
 import { router } from './router';
+import Toast from './components/Toast/Toast';
+
+// needed to make toast work
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const App: React.FC = () => {
   const [theme] = useContext(ThemeCtx);
 
   return (
-    <div
-      className={cn(theme, 'relative min-h-full w-full font-sans font-light')}
-    >
-      <div className="relative h-screen w-full overflow-x-hidden bg-background-50 text-text-900">
-        <RouterProvider router={router} />
+    <>
+      <div
+        className={cn(theme, 'relative min-h-full w-full font-sans font-light')}
+      >
+        <div className="relative h-screen w-full overflow-x-hidden bg-background-50 text-text-900">
+          <RouterProvider router={router} />
+        </div>
+        <Toast />
       </div>
-    </div>
+    </>
   );
 };
 
