@@ -59,7 +59,7 @@ export interface BaseInputProps
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-type InputTypes =
+type InputTypesProps =
   | {
       type?: 'text' | 'email' | 'tel';
       value?: string;
@@ -72,7 +72,7 @@ type InputIdLabelProps =
   | { id?: string; label?: never }
   | { id: string; label: string };
 
-type InputProps = BaseInputProps & InputTypes & InputIdLabelProps;
+type InputProps = BaseInputProps & InputTypesProps & InputIdLabelProps;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
