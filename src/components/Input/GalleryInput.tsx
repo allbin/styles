@@ -13,8 +13,9 @@ const GalleryInput: React.FC = () => {
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
         <Input />
         <Input disabled />
-        <Input error="This is an error message" />
+        <Input id="error-1" error="This is an error message" />
         <Input
+          id="error-2"
           placeholder="Type error to see error message"
           value={textValue}
           onChange={(e) => setTextValue(e.target.value)}
@@ -34,6 +35,7 @@ const GalleryInput: React.FC = () => {
           onChange={(e) => setNumberValue(Number(e.target.value))}
         />
         <Input
+          id="tooltip-1"
           toolTip="This is a tool tip"
           placeholder="Hover to see tooltip"
         />
