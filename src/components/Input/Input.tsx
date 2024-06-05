@@ -51,25 +51,41 @@ export interface BaseInputProps
   placeholder?: string;
   helperText?: string;
   toolTip?: string;
-  resize?: boolean;
-  rows?: number;
   disabled?: boolean;
-  startAdornment?: React.ReactNode;
-  endAdornment?: React.ReactNode;
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
-// Resize should only work if the type is multiline
-// rows should only work if the type is multiline
-
 type InputTypesProps =
   | {
-      type?: 'text' | 'email' | 'tel' | 'multiline';
+      type?: 'text' | 'email' | 'tel';
       value?: string;
       min?: never;
       max?: never;
+      resize?: never;
+      rows?: never;
+      startAdornment?: React.ReactNode;
+      endAdornment?: React.ReactNode;
     }
-  | { type: 'number'; value?: number; min?: number; max?: number };
+  | {
+      type: 'number';
+      value?: number;
+      min?: number;
+      max?: number;
+      resize?: never;
+      rows?: never;
+      startAdornment?: React.ReactNode;
+      endAdornment?: React.ReactNode;
+    }
+  | {
+      type: 'multiline';
+      value?: string;
+      min?: never;
+      max?: never;
+      resize?: boolean;
+      rows?: number;
+      startAdornment?: never;
+      endAdornment?: never;
+    };
 
 type InputIdLabelProps =
   | { id?: string; label?: never }
