@@ -1,10 +1,12 @@
-import { FaceSmileIcon } from '@heroicons/react/24/solid';
+import { FaceSmileIcon, HandThumbUpIcon } from '@heroicons/react/24/solid';
 import Button from '../Button/Button';
 import { toast } from './useToast';
+import { CloudArrowUpIcon } from '@heroicons/react/24/outline';
+import { IconEmojiTalkingAngry } from '@allbin/icons';
 
 const GalleryToast = () => {
   return (
-    <div className="flex gap-2 text-nowrap">
+    <div className="flex flex-wrap gap-2 text-nowrap">
       <Button onClick={() => toast({ title: 'Toast!!' })}>Normal toast</Button>
       <Button onClick={() => toast.success({ title: 'Toast success!!' })}>
         Success toast
@@ -20,7 +22,7 @@ const GalleryToast = () => {
           })
         }
       >
-        Info toast with custom icon
+        Info toast with BIG custom icon
       </Button>
       <Button
         onClick={() =>
@@ -51,6 +53,20 @@ const GalleryToast = () => {
       <Button
         onClick={() => {
           const resolveAfter3Sec = new Promise((resolve) =>
+            setTimeout(resolve, 999999),
+          );
+          toast.promise(resolveAfter3Sec, {
+            pending: { title: 'Pending promise...' },
+            success: { title: 'Promise resolved successfully!' },
+            error: { title: 'Promise failed to resolve!' },
+          });
+        }}
+      >
+        Very Very long promise toast (resolves in 999999ms)
+      </Button>
+      <Button
+        onClick={() => {
+          const resolveAfter3Sec = new Promise((resolve) =>
             setTimeout(resolve, 3000),
           );
           toast.promise(resolveAfter3Sec, {
@@ -61,6 +77,52 @@ const GalleryToast = () => {
         }}
       >
         Promise toast
+      </Button>
+      <Button
+        onClick={() => {
+          const resolveAfter3Sec = new Promise((resolve) =>
+            setTimeout(resolve, 3000),
+          );
+          toast.promise(resolveAfter3Sec, {
+            pending: {
+              title: 'Pending promise...',
+              icon: <CloudArrowUpIcon className="size-7" />,
+            },
+            success: {
+              title: 'Promise resolved successfully!',
+              icon: <HandThumbUpIcon className="size-7" />,
+            },
+            error: {
+              title: 'Promise failed to resolve!',
+              icon: <IconEmojiTalkingAngry className="size-7" />,
+            },
+          });
+        }}
+      >
+        Promise toast with custom icons
+      </Button>
+      <Button
+        onClick={() => {
+          const resolveAfter3Sec = new Promise((_, reject) =>
+            setTimeout(reject, 3000),
+          );
+          toast.promise(resolveAfter3Sec, {
+            pending: {
+              title: 'Pending promise...',
+              icon: <CloudArrowUpIcon className="size-7" />,
+            },
+            success: {
+              title: 'Promise resolved successfully!',
+              icon: <HandThumbUpIcon className="size-7" />,
+            },
+            error: {
+              title: 'Promise failed to resolve!',
+              icon: <IconEmojiTalkingAngry className="size-7" />,
+            },
+          });
+        }}
+      >
+        Promise toast with custom icons (Failing promise)
       </Button>
     </div>
   );

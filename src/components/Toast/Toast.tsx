@@ -30,9 +30,7 @@ const contextClass = {
 const Toast: React.FC<ToastContainerProps> = (props) => {
   return (
     <ToastContainer
-      // icon={({ type }) =>
-      //   icons[type] && <div className="flex size-fit grow">{icons[type]}</div>
-      // }
+      // limit={12}
       icon={false}
       hideProgressBar
       newestOnTop
@@ -48,7 +46,7 @@ const Toast: React.FC<ToastContainerProps> = (props) => {
       toastClassName={(context) =>
         cn(
           contextClass[context?.type || 'default'],
-          'flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer',
+          'flex p-1 min-h-12 rounded-md justify-between overflow-hidden cursor-pointer',
         )
       }
       {...props}

@@ -9,11 +9,11 @@ import {
 import { Spinner } from '../spinner';
 
 const icons = {
-  success: <CheckCircleIcon className="size-6" />,
-  error: <XCircleIcon className="size-6" />,
-  info: <InformationCircleIcon className="size-6" />,
-  warning: <ExclamationTriangleIcon className="size-6" />,
-  default: <Spinner className="m-1 size-5" />,
+  success: <CheckCircleIcon className="size-7" />,
+  error: <XCircleIcon className="size-7" />,
+  info: <InformationCircleIcon className="size-7" />,
+  warning: <ExclamationTriangleIcon className="size-7" />,
+  default: <Spinner className="mx-1 my-0.5 size-6" />,
 };
 const defaultToast = (props: ToastMsgProps, options?: ToastOptions): Id =>
   t(<ToastMsg {...props} icon={props.icon ? props.icon : icons.default} />, {
