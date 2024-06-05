@@ -37,10 +37,6 @@ const inputVariants = cva(
           'focus:outline-red-600',
         ],
       },
-      adornment: {
-        start: ['pl-10'],
-        end: ['pr-10'],
-      },
     },
     defaultVariants: {
       variant: 'outline',
@@ -55,14 +51,20 @@ export interface BaseInputProps
   placeholder?: string;
   helperText?: string;
   toolTip?: string;
+  resize?: boolean;
+  rows?: number;
+  disabled?: boolean;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
+
+// Resize should only work if the type is multiline
+// rows should only work if the type is multiline
 
 type InputTypesProps =
   | {
-      type?: 'text' | 'email' | 'tel';
+      type?: 'text' | 'email' | 'tel' | 'multiline';
       value?: string;
       min?: never;
       max?: never;
@@ -75,17 +77,23 @@ type InputIdLabelProps =
 
 type InputProps = BaseInputProps & InputTypesProps & InputIdLabelProps;
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+const Input = React.forwardRef<
+  HTMLInputElement | HTMLTextAreaElement,
+  InputProps
+>(
   (
     {
       id,
       className,
       type = 'text',
+      disabled = false,
       value,
       min,
       max,
       variant,
       toolTip,
+      resize = false,
+      rows,
       error,
       label,
       placeholder,
@@ -136,24 +144,46 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               {startAdornment}
             </div>
           )}
-          <input
-            type={type}
-            value={value}
-            className={cn(
-              inputVariants({
-                variant: error ? 'error' : variant,
-              }),
-              className,
-              startAdornment && 'pl-10',
-              endAdornment && 'pr-10',
-            )}
-            ref={ref}
-            placeholder={placeholder}
-            onChange={onChange}
-            min={min}
-            max={max}
-            {...props}
-          />
+          {['text', 'email', 'tel', 'number'].includes(type) && (
+            <input
+              className={cn(
+                inputVariants({
+                  variant: error ? 'error' : variant,
+                }),
+                className,
+                startAdornment && 'pl-10',
+                endAdornment && 'pr-10',
+              )}
+              type={type}
+              disabled={disabled}
+              value={value}
+              ref={ref as React.Ref<HTMLInputElement>}
+              placeholder={placeholder}
+              onChange={onChange}
+              min={min}
+              max={max}
+              {...props}
+            />
+          )}
+          {['multiline'].includes(type) && (
+            <textarea
+              className={cn(
+                inputVariants({
+                  variant: error ? 'error' : variant,
+                }),
+                className,
+                resize ? 'resize-y' : 'resize-none',
+              )}
+              placeholder={placeholder}
+              disabled={disabled}
+              value={value}
+              ref={ref as React.Ref<HTMLTextAreaElement>}
+              rows={rows ? rows : 2}
+              onChange={onChange}
+            >
+              {value}
+            </textarea>
+          )}
           {endAdornment && (
             <div
               className={cn([
