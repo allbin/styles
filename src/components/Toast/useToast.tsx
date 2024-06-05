@@ -6,15 +6,14 @@ import {
   InformationCircleIcon,
   XCircleIcon,
 } from '@heroicons/react/24/outline';
-
-type PromiseToast = typeof t.promise;
+import { Spinner } from '../spinner';
 
 const icons = {
   success: <CheckCircleIcon className="size-6" />,
   error: <XCircleIcon className="size-6" />,
   info: <InformationCircleIcon className="size-6" />,
   warning: <ExclamationTriangleIcon className="size-6" />,
-  default: undefined,
+  default: <Spinner className="size-6" />,
 };
 const defaultToast = (props: ToastMsgProps, options?: ToastOptions): Id =>
   t(<ToastMsg {...props} icon={props.icon ? props.icon : icons.default} />, {
