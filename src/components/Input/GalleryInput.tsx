@@ -40,31 +40,6 @@ const GalleryInput: React.FC = () => {
           placeholder="Hover to see tooltip"
         />
       </div>
-      <h3>Input multiline text field</h3>
-      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
-        <Input type="multiline" />
-        <Input type="multiline" placeholder="This is a placeholder" />
-        <Input
-          type="multiline"
-          value={textValue}
-          onChange={(e) => setTextValue(e.target.value)}
-        />
-        <Input type="multiline" placeholder="This is a placeholder" disabled />
-        <Input
-          id="error-3"
-          type="multiline"
-          placeholder="This is a placeholder"
-          error="This is an error message"
-        />
-        <Input type="multiline" placeholder="Resizeable textarea" resize />
-        <Input type="multiline" rows={4} placeholder="4 rows textarea" />
-        <Input
-          id="tooltip-2"
-          type="multiline"
-          toolTip="This is a tooltip"
-          placeholder="Tooltip"
-        />
-      </div>
       <h3>Labels</h3>
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pt-10">
         <Input id="id-1" label="This is a label with absolute position" />
@@ -82,6 +57,46 @@ const GalleryInput: React.FC = () => {
           helperText="Enter your first and last name"
         />
         <Button variant="filled">Add</Button>
+      </div>
+      <h3>Input multiline text field</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
+        <Input type="multiline" />
+        <Input type="multiline" placeholder="This is a placeholder" />
+        <Input
+          type="multiline"
+          value={textValue}
+          onChange={(e) => setTextValue(e.target.value)}
+        />
+        <Input type="multiline" placeholder="This is a placeholder" disabled />
+        <Input
+          id="error-3"
+          type="multiline"
+          placeholder="Error"
+          error="This is an error message"
+        />
+        <Input type="multiline" placeholder="Resizeable textarea" resize />
+        <Input type="multiline" rows={4} placeholder="4 rows textarea" />
+        <Input
+          id="tooltip-2"
+          type="multiline"
+          toolTip="This is a tooltip"
+          placeholder="Tooltip"
+        />
+      </div>
+      <h3>Labels multiline</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pt-10">
+        <Input
+          id="id-3"
+          type="multiline"
+          label="This is a label with absolute position"
+        />
+      </div>
+      <h3>Helper Text</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pb-10">
+        <Input
+          type="multiline"
+          helperText="This is a helper text with absolute position"
+        />
       </div>
     </div>
   );
