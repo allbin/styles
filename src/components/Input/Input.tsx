@@ -12,20 +12,21 @@ const inputVariants = cva(
     'px-2',
     'py-1.5',
     'focus:ring-0',
+    'focus:outline-primary-500',
     'disabled:bg-background-300/50',
     'disabled:text-text-700/50',
     'disabled:ring-primary-300',
+    'bg-background-50',
   ],
   {
     variants: {
       variant: {
         outline: [
           'border-secondary-500',
-          'bg-background-50',
           'ring-1',
           'ring-inset',
           'ring-secondary-300',
-          'placeholder:text-text-700',
+          'placeholder:text-text-300',
           'hover:ring-primary-600',
         ],
         error: [
@@ -141,9 +142,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className={cn(
               inputVariants({
                 variant: error ? 'error' : variant,
-                adornment: startAdornment ? 'start' : 'end',
               }),
               className,
+              startAdornment && 'pl-10',
+              endAdornment && 'pr-10',
             )}
             ref={ref}
             placeholder={placeholder}
