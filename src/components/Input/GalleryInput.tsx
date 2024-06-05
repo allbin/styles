@@ -12,7 +12,7 @@ const GalleryInput: React.FC = () => {
       <h3>Input fields</h3>
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
         <Input />
-        <Input disabled />
+        <Input disabled value={'Disabled'} />
         <Input id="error-1" error="This is an error message" />
         <Input
           id="error-2"
