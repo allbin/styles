@@ -69,8 +69,8 @@ type InputTypes =
   | { type: 'number'; value?: number; min?: number; max?: number };
 
 type InputIdLabelProps =
-  | { id?: never; label?: never }
-  | { id?: string; label: string };
+  | { id?: string; label?: never }
+  | { id: string; label: string };
 
 type InputProps = BaseInputProps & InputTypes & InputIdLabelProps;
 
