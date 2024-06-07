@@ -36,7 +36,6 @@ const contextClass = {
 const Toast: React.FC<ToastContainerProps> = (props) => {
   return (
     <ToastContainer
-      // limit={12}
       icon={false}
       hideProgressBar
       newestOnTop
@@ -45,7 +44,7 @@ const Toast: React.FC<ToastContainerProps> = (props) => {
       className={cn('flex flex-col gap-2')}
       bodyClassName={cn('flex')}
       closeButton={({ closeToast }) => (
-        <button onClick={closeToast} className="size-fit pr-2 pt-2">
+        <button onClick={closeToast} className="size-fit min-h-10 pr-2.5">
           <XMarkIcon className="size-5" />
         </button>
       )}

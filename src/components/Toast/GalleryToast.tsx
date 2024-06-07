@@ -13,10 +13,13 @@ const GalleryToast = () => {
       </Button>
       <Button
         onClick={() =>
-          toast.success({ title: 'Toast success!!' }, { autoClose: 30000 })
+          toast.success(
+            { title: 'Success 999999ms autoClose!' },
+            { autoClose: 999999 },
+          )
         }
       >
-        Success toast (custom autoClose 30000ms)
+        Success toast (autoClose 999999ms)
       </Button>
       <Button onClick={() => toast.info({ title: 'Toast info!!' })}>
         Info toast
@@ -59,10 +62,24 @@ const GalleryToast = () => {
           toast.error({ title: 'Toast error!!' }, { autoClose: 500 })
         }
       >
-        Error toast (custom autoClose time 500ms)
+        Error toast (autoClose time 500ms)
       </Button>
       <Button onClick={() => toast.error({ title: 'Toast error!!' })}>
         Error toast
+      </Button>
+      <Button
+        onClick={() =>
+          toast.info(
+            {
+              title: 'Title',
+              description:
+                'This is a description for the toast that wont disappear for a while!',
+            },
+            { autoClose: 999999 },
+          )
+        }
+      >
+        Info Toast with description (autoClose time 999999ms)
       </Button>
       <Button
         onClick={() =>
