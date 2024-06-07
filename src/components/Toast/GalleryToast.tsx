@@ -59,6 +59,16 @@ const GalleryToast = () => {
       </Button>
       <Button
         onClick={() =>
+          toast.error(
+            { title: 'Toast error with long autoClose time!' },
+            { autoClose: 999999 },
+          )
+        }
+      >
+        Error toast (autoClose time 999999ms)
+      </Button>
+      <Button
+        onClick={() =>
           toast.error({ title: 'Toast error!!' }, { autoClose: 500 })
         }
       >
@@ -71,7 +81,7 @@ const GalleryToast = () => {
         onClick={() =>
           toast.info(
             {
-              title: 'Title',
+              title: 'Info toast with a long auto close',
               description:
                 'This is a description for the toast that wont disappear for a while!',
             },
