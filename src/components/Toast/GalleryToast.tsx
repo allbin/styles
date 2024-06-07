@@ -6,7 +6,7 @@ import { IconEmojiTalkingAngry } from '@allbin/icons';
 
 const GalleryToast = () => {
   return (
-    <div className="flex flex-wrap gap-2 text-nowrap">
+    <div className="grid grid-cols-2 gap-2">
       <Button onClick={() => toast({ title: 'Toast!!' })}>Normal toast</Button>
       <Button onClick={() => toast.success({ title: 'Toast success!!' })}>
         Success toast
@@ -36,6 +36,16 @@ const GalleryToast = () => {
       </Button>
       <Button onClick={() => toast.warning({ title: 'Toast warning!!' })}>
         Warning toast
+      </Button>
+      <Button
+        onClick={() =>
+          toast.warning(
+            { title: 'Toast warning!! (Click me anywhere to close me)' },
+            { closeButton: false, closeOnClick: true },
+          )
+        }
+      >
+        Warning toast (no close button, close on click anywhere in toast)
       </Button>
       <Button onClick={() => toast.error({ title: 'Toast error!!' })}>
         Error toast

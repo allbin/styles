@@ -43,10 +43,10 @@ const Toast: React.FC<ToastContainerProps> = (props) => {
       autoClose={100000}
       position="bottom-right"
       className={cn('flex flex-col gap-2')}
-      bodyClassName={cn('flex items-start')}
+      bodyClassName={cn('flex')}
       closeButton={({ closeToast }) => (
         <button onClick={closeToast} className="size-fit pr-2 pt-2">
-          <XMarkIcon className="size-5 font-bold" />
+          <XMarkIcon className="size-5" />
         </button>
       )}
       toastClassName={(context) =>
@@ -72,10 +72,10 @@ export const ToastMsg: React.FC<ToastMsgProps> = ({
   icon,
 }) => {
   return (
-    <div className="flex gap-1">
+    <div className="flex items-start gap-1">
       <span className="flex size-fit">{icon}</span>
-      <span className="flex flex-col gap-1">
-        <p className="">{title}</p>
+      <span className="flex flex-col">
+        <p className="leading-relaxed">{title}</p>
         <p className="text-sm">{description}</p>
       </span>
     </div>
