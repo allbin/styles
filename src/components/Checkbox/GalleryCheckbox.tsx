@@ -1,85 +1,43 @@
 import React, { useCallback } from 'react';
-import Checkbox from './Checkbox';
+import CheckBox from './Checkbox';
 
 const GalleryCheckbox: React.FC = () => {
-  const [checked, setChecked] = React.useState(false);
+  const [checkValue, setCheckValue] = React.useState<boolean>(false);
 
   const handleChange = useCallback((checked: boolean) => {
     console.log('Checkbox checked:', checked);
-    setChecked(checked);
+    setCheckValue(checked);
   }, []);
 
   return (
     <div>
-      Checkbox with no props
-      <Checkbox id="checkbox-1" className="mb-4" />
-      Checkbox with label
-      <Checkbox id="checkbox-2" className="mb-4" label="Checkbox Label" />
-      Checkbox with only description (with external state)
-      <Checkbox
-        id="checkbox-3"
-        value={checked}
-        onChange={handleChange}
-        className="mb-4"
-        description="Description"
-      />
-      Checkbox with label and description
-      <Checkbox
-        id="checkbox-4"
-        className="mb-4"
-        label="Checkbox Label"
-        description="This is a description for the checkbox"
-      />
-      Checkbox with tooltip (with external state)
-      <Checkbox
-        id="checkbox-5"
-        value={checked}
-        onChange={handleChange}
-        className="mb-4"
-        label="Checkbox Label"
-        description="This is a description for the checkbox"
-        tooltip="This is a tooltip for the checkbox"
-      />
-      Another checkbox with tooltip (with external state)
-      <Checkbox
-        id="checkbox-6"
-        value={checked}
-        onChange={handleChange}
-        className="mb-4"
-        label="Checkbox Label"
-        description="This is a description for the checkbox"
-        tooltip="This is a tooltip for the checkbox"
-      />
-      Disabled checkbox
-      <Checkbox
-        id="checkbox-7"
-        className="mb-4"
-        label="Checkbox Label"
-        description="This is a description for the checkbox"
-        tooltip="This is a tooltip for the checkbox"
-        disabled
-      />
-      Disabled checked checkbox
-      <Checkbox
-        id="checkbox-8"
-        className="mb-4"
-        label="Checkbox Label"
-        description="This is a description for the checkbox"
-        tooltip="This is a tooltip for the checkbox"
-        disabled
-        value={true}
-      />
-      Disabled checked checkbox (with external state)
-      <Checkbox
-        id="checkbox-9"
-        value={checked}
-        onChange={handleChange}
-        className="mb-4"
-        label="Checkbox Label"
-        description="This is a description for the checkbox"
-        tooltip="This is a tooltip for the checkbox"
-        disabled
-      />
+      <h2 className="mb-4">Checkbox</h2>
+      <h3>Variants</h3>
+      <div className="mb-8 flex flex-col flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+        <CheckBox id="checkbox-1" />
+        <CheckBox id="checkbox-2" label="Checkbox Label" />
+        <CheckBox
+          id="Checkbox-3"
+          label="With description"
+          description="This is a description for the checkbox"
+        />
+        <CheckBox
+          id="Checkbox-4"
+          label="OnClick event"
+          onClick={() => handleChange(!checkValue)}
+          checked={checkValue}
+        />
+      </div>
+      <h3>Disabled</h3>
+      <div className="mb-8 flex flex-col flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+        <CheckBox id="Checkbox-4" label="Disabled" disabled />
+        <CheckBox
+          id="checkbox-5"
+          label="Disabled and checked"
+          checked
+          disabled
+        />
+      </div>
     </div>
   );
 };
