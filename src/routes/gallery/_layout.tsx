@@ -16,6 +16,7 @@ function Root() {
         <NavElement to="/gallery/input">Input</NavElement>
         <NavElement to="/gallery/checkbox">Checkbox</NavElement>
         <NavElement to="/gallery/slider">Slider</NavElement>
+        <NavElement to="/gallery/dropdown">Dropdown</NavElement>
         <NavElement to="/gallery/textarea">Textarea</NavElement>
         <NavElement to="/gallery/positionpad">PositionPad</NavElement>
         <NavElement to="/gallery/togglebutton">ToggleButton</NavElement>
