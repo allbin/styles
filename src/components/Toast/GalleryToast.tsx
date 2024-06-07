@@ -11,6 +11,13 @@ const GalleryToast = () => {
       <Button onClick={() => toast.success({ title: 'Toast success!!' })}>
         Success toast
       </Button>
+      <Button
+        onClick={() =>
+          toast.success({ title: 'Toast success!!' }, { autoClose: 30000 })
+        }
+      >
+        Success toast (custom autoClose 30000ms)
+      </Button>
       <Button onClick={() => toast.info({ title: 'Toast info!!' })}>
         Info toast
       </Button>
@@ -41,11 +48,18 @@ const GalleryToast = () => {
         onClick={() =>
           toast.warning(
             { title: 'Toast warning!! (Click me anywhere to close me)' },
-            { closeButton: false, closeOnClick: true },
+            { closeButton: false, closeOnClick: true, autoClose: 10000 },
           )
         }
       >
         Warning toast (no close button, close on click anywhere in toast)
+      </Button>
+      <Button
+        onClick={() =>
+          toast.error({ title: 'Toast error!!' }, { autoClose: 500 })
+        }
+      >
+        Error toast (custom autoClose time 500ms)
       </Button>
       <Button onClick={() => toast.error({ title: 'Toast error!!' })}>
         Error toast

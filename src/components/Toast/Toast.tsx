@@ -40,7 +40,7 @@ const Toast: React.FC<ToastContainerProps> = (props) => {
       icon={false}
       hideProgressBar
       newestOnTop
-      autoClose={100000}
+      autoClose={3000}
       position="bottom-right"
       className={cn('flex flex-col gap-2')}
       bodyClassName={cn('flex')}
