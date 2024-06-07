@@ -13,7 +13,7 @@ const icons = {
   error: <XCircleIcon className="size-7" />,
   info: <InformationCircleIcon className="size-7" />,
   warning: <ExclamationTriangleIcon className="size-7" />,
-  default: <Spinner className="mx-1 my-0.5 size-6" />,
+  default: <Spinner className="mx-0.5 mt-0.5 size-6" />,
 };
 const defaultToast = (props: ToastMsgProps, options?: ToastOptions): Id =>
   t(<ToastMsg {...props} icon={props.icon ? props.icon : icons.default} />, {
