@@ -2,6 +2,7 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 import { Tooltip } from 'react-tooltip';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const inputVariants = cva(
   [
@@ -52,7 +53,10 @@ export interface BaseInputProps
   helperText?: string;
   toolTip?: string;
   disabled?: boolean;
-  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    value?: number,
+  ) => void; //React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 type InputTypesProps =
@@ -63,6 +67,8 @@ type InputTypesProps =
       max?: never;
       resize?: never;
       rows?: never;
+      maxRows?: never;
+      minRows?: never;
       startAdornment?: React.ReactNode;
       endAdornment?: React.ReactNode;
     }
@@ -73,6 +79,8 @@ type InputTypesProps =
       max?: number;
       resize?: never;
       rows?: never;
+      maxRows?: never;
+      minRows?: never;
       startAdornment?: React.ReactNode;
       endAdornment?: React.ReactNode;
     }
@@ -83,6 +91,8 @@ type InputTypesProps =
       max?: never;
       resize?: boolean;
       rows?: number;
+      maxRows?: number;
+      minRows?: number;
       startAdornment?: never;
       endAdornment?: never;
     };
@@ -110,6 +120,8 @@ const Input = React.forwardRef<
       toolTip,
       resize = false,
       rows,
+      maxRows,
+      minRows,
       error,
       label,
       placeholder,
@@ -121,6 +133,16 @@ const Input = React.forwardRef<
     },
     ref,
   ) => {
+    const handleChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+      if (type === 'number' && onChange) {
+        onChange(e, e.target.value ? Number(e.target.value) : 0);
+      } else if (onChange) {
+        onChange(e);
+      }
+    };
+
     return (
       <div
         className="group relative grow"
@@ -132,13 +154,13 @@ const Input = React.forwardRef<
         {label && (
           <label
             htmlFor={id}
-            className="absolute left-0 top-[-24px] mb-1 block text-sm font-medium leading-6 text-primary-900"
+            className="absolute left-0 top-[-24px] mb-1 ml-[7px] block text-sm font-medium leading-6 text-primary-900"
           >
             {label}
           </label>
         )}
         {helperText && (
-          <span className="absolute bottom-[-24px] mt-1 text-sm text-text-700">
+          <span className="absolute bottom-[-24px] ml-[7px] mt-1 text-sm text-text-700">
             {helperText}
           </span>
         )}
@@ -175,30 +197,34 @@ const Input = React.forwardRef<
               value={value}
               ref={ref as React.Ref<HTMLInputElement>}
               placeholder={placeholder}
-              onChange={onChange}
+              onChange={handleChange}
               min={min}
               max={max}
               {...props}
             />
           )}
           {['multiline'].includes(type) && (
-            <textarea
+            <TextareaAutosize
               className={cn(
                 inputVariants({
                   variant: error ? 'error' : variant,
                 }),
                 className,
                 resize ? 'resize-y' : 'resize-none',
+                'min-h-[36px]',
               )}
               placeholder={placeholder}
               disabled={disabled}
               value={value}
               ref={ref as React.Ref<HTMLTextAreaElement>}
-              rows={rows ? rows : 2}
+              maxRows={rows ? rows : maxRows ? maxRows : undefined}
+              minRows={rows ? rows : minRows ? minRows : undefined}
               onChange={onChange}
-            >
-              {value}
-            </textarea>
+              {...(props as Omit<
+                React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+                'style'
+              >)}
+            />
           )}
           {endAdornment && (
             <div
