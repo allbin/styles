@@ -6,6 +6,7 @@ import Button from '../Button/Button';
 const GalleryInput: React.FC = () => {
   const [textValue, setTextValue] = React.useState('This contains a value');
   const [numberValue, setNumberValue] = React.useState(100);
+
   return (
     <div>
       <h2 className="mb-4">Inputs</h2>
@@ -18,7 +19,11 @@ const GalleryInput: React.FC = () => {
           id="error-2"
           placeholder="Type error to see error message"
           value={textValue}
-          onChange={(e) => setTextValue(e.target.value)}
+          onChange={(e) => {
+            console.log(typeof e.target.value);
+            console.log(e.target.value);
+            setTextValue(e.target.value);
+          }}
           error={textValue === 'error' ? 'input error' : undefined}
         />
         <Input placeholder="This is a placeholder" />
@@ -32,7 +37,11 @@ const GalleryInput: React.FC = () => {
           type="number"
           placeholder="Type error to see error message"
           value={numberValue}
-          onChange={(e) => setNumberValue(Number(e.target.value))}
+          onChange={(e, value) => {
+            console.log(e.target.value);
+            console.log(typeof value, value);
+            setNumberValue(value ?? 0);
+          }}
         />
         <Input
           id="tooltip-1"
@@ -83,19 +92,15 @@ const GalleryInput: React.FC = () => {
           placeholder="Tooltip"
         />
       </div>
-      <h3>Labels multiline</h3>
-      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pt-10">
-        <Input
-          id="id-3"
-          type="multiline"
-          label="This is a label with absolute position"
-        />
-      </div>
-      <h3>Helper Text</h3>
-      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pb-10">
+      <h3>Min and Max multiline rows</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 ">
+        <Input type="multiline" maxRows={4} placeholder="max 4 rows" />
+        <Input type="multiline" minRows={2} placeholder="min 2 rows" />
         <Input
           type="multiline"
-          helperText="This is a helper text with absolute position"
+          maxRows={4}
+          minRows={2}
+          placeholder="min 2 and max 4 rows"
         />
       </div>
     </div>
