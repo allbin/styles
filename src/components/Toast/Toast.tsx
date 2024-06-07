@@ -3,16 +3,22 @@
 /* import 'react-toastify/dist/ReactToastify.min.css'; */
 // Import and use toast() from ./useToast.ts to use toast.
 /* import { toast } from './useToast'; */
-/* function App() {
-  const notify = () => toast('Wow so easy !');
+/* 
+const App: React.FC = () => {
+  const [theme] = useContext(ThemeCtx);
 
   return (
-    <div>
-      <button onClick={notify}>Notify !</button>
+    <div
+      className={cn(theme, 'relative min-h-full w-full font-sans font-light')}
+    >
+      <div className="relative h-screen w-full overflow-x-hidden bg-background-50 text-text-900">
+        <RouterProvider router={router} />
+      </div>
       <Toast />
     </div>
   );
-}*/
+};
+*/
 
 import React from 'react';
 import { ToastContainer, ToastContainerProps } from 'react-toastify';
