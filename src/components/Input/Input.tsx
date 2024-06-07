@@ -133,15 +133,16 @@ const Input = React.forwardRef<
     },
     ref,
   ) => {
-    const handleChange = (
-      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) => {
-      if (type === 'number' && onChange) {
-        onChange(e, e.target.value ? Number(e.target.value) : 0);
-      } else if (onChange) {
-        onChange(e);
-      }
-    };
+    const handleChange = React.useCallback(
+      (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        if (type === 'number' && onChange) {
+          onChange(e, e.target.value ? Number(e.target.value) : 0);
+        } else if (onChange) {
+          onChange(e);
+        }
+      },
+      [onChange, type],
+    );
 
     return (
       <div
@@ -249,5 +250,4 @@ const Input = React.forwardRef<
   },
 );
 Input.displayName = 'Input';
-
 export default Input;
