@@ -1,8 +1,8 @@
 // Place <Toast/> component in App.tsx
-// Also import CSS in App.tsx needed to make toast work
-// import 'react-toastify/dist/ReactToastify.min.css';
+// Also import CSS in App.tsx (needed to make toast work)
+/* import 'react-toastify/dist/ReactToastify.min.css'; */
 // Import and use toast() from ./useToast.ts to use toast.
-// import { toast } from './useToast';
+/* import { toast } from './useToast'; */
 /* function App() {
   const notify = () => toast('Wow so easy !');
 
@@ -46,7 +46,7 @@ const Toast: React.FC<ToastContainerProps> = (props) => {
       toastClassName={(context) =>
         cn(
           contextClass[context?.type || 'default'],
-          'flex p-1 min-h-12 rounded-md justify-between overflow-hidden cursor-pointer',
+          'flex p-1 min-h-11 rounded-md justify-between overflow-hidden cursor-pointer',
         )
       }
       {...props}
