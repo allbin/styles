@@ -5,7 +5,7 @@ import {
   ChevronUpIcon,
   CheckIcon,
 } from '@heroicons/react/24/solid';
-
+import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 
 const Dropdown = SelectPrimitive.Root;
