@@ -8,6 +8,67 @@ import {
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 
+const dropDownTriggerVariants = cva(
+  [
+    'flex',
+    'font-medium',
+    'items-center',
+    'justify-between',
+    'h-[36px]',
+    'px-2',
+    'border',
+    'border-primary-600',
+    'transition-colors',
+    'rounded-md',
+    'disabled:active:opacity-100',
+    'disabled:pointer-events-none',
+    'active:opacity-80',
+    'hover:bg-primary-200',
+  ],
+  {
+    variants: {
+      variant: {
+        default: '',
+        error: '',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+);
+
+const dropDownContentVariants = cva(
+  [
+    'flex',
+    'text-primary-600',
+    'bg-background-100',
+    'border',
+    'border-primary-200',
+    'rounded-md',
+    'mt-1',
+  ],
+  {
+    variants: {
+      variant: {
+        default: '',
+        error: '',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+);
+
+interface DropdownTriggerProps
+  extends SelectPrimitive.SelectTriggerProps,
+    VariantProps<typeof dropDownTriggerVariants> {}
+
+interface DropdownContentProps
+  extends SelectPrimitive.SelectContentProps,
+    VariantProps<typeof dropDownContentVariants> {}
+
 const Dropdown = SelectPrimitive.Root;
 
 const DropdownGroup = SelectPrimitive.Group;
@@ -16,12 +77,15 @@ const DropdownValue = SelectPrimitive.Value;
 
 const DropdownTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
+  DropdownTriggerProps
+  // React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:ring-ring flex h-10 w-full items-center justify-between rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+      dropDownTriggerVariants({
+        variant: 'default',
+      }),
       className,
     )}
     {...props}
@@ -71,17 +135,19 @@ DropdownScrollDownButton.displayName =
 
 const DropdownContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
+  DropdownContentProps
+  // React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
 >(({ className, children, position = 'popper', ...props }, ref) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        'bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border shadow-md',
-        position === 'popper' &&
-          'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
+        dropDownContentVariants({
+          variant: 'default',
+        }),
         className,
       )}
+      {...props}
       position={position}
       {...props}
     >
@@ -120,7 +186,7 @@ const DropdownItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'focus:bg-accent focus:text-accent-foreground relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'focus:bg-accent focus:text-accent-foreground relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-background-200 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className,
     )}
     {...props}
