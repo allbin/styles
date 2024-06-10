@@ -4,12 +4,13 @@ import { FaceSmileIcon, TrashIcon } from '@heroicons/react/24/solid';
 import Button from '../Button/Button';
 
 const GalleryInput: React.FC = () => {
-  const [textValue, setTextValue] = React.useState('');
+  const [textValue, setTextValue] = React.useState('This contains a value');
   const [numberValue, setNumberValue] = React.useState(100);
+
   return (
     <div>
       <h2 className="mb-4">Inputs</h2>
-      <h3>Input fields</h3>
+      <h3>Input default text field</h3>
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
         <Input />
         <Input disabled value={'Disabled'} />
@@ -18,7 +19,11 @@ const GalleryInput: React.FC = () => {
           id="error-2"
           placeholder="Type error to see error message"
           value={textValue}
-          onChange={(e) => setTextValue(e.target.value)}
+          onChange={(e) => {
+            console.log(typeof e.target.value);
+            console.log(e.target.value);
+            setTextValue(e.target.value);
+          }}
           error={textValue === 'error' ? 'input error' : undefined}
         />
         <Input placeholder="This is a placeholder" />
@@ -32,7 +37,9 @@ const GalleryInput: React.FC = () => {
           type="number"
           placeholder="Type error to see error message"
           value={numberValue}
-          onChange={(e) => setNumberValue(Number(e.target.value))}
+          onChange={(e) => {
+            setNumberValue(Number(e.target.value));
+          }}
         />
         <Input
           id="tooltip-1"
@@ -57,6 +64,42 @@ const GalleryInput: React.FC = () => {
           helperText="Enter your first and last name"
         />
         <Button variant="filled">Add</Button>
+      </div>
+      <h3>Input multiline text field</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
+        <Input type="multiline" />
+        <Input type="multiline" placeholder="This is a placeholder" />
+        <Input
+          type="multiline"
+          value={textValue}
+          onChange={(e) => setTextValue(e.target.value)}
+        />
+        <Input type="multiline" placeholder="This is a placeholder" disabled />
+        <Input
+          id="error-3"
+          type="multiline"
+          placeholder="Error"
+          error="This is an error message"
+        />
+        <Input type="multiline" placeholder="Resizeable textarea" resize />
+        <Input type="multiline" rows={4} placeholder="4 rows textarea" />
+        <Input
+          id="tooltip-2"
+          type="multiline"
+          toolTip="This is a tooltip"
+          placeholder="Tooltip"
+        />
+      </div>
+      <h3>Min and Max multiline rows</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 ">
+        <Input type="multiline" maxRows={4} placeholder="max 4 rows" />
+        <Input type="multiline" minRows={2} placeholder="min 2 rows" />
+        <Input
+          type="multiline"
+          maxRows={4}
+          minRows={2}
+          placeholder="min 2 and max 4 rows"
+        />
       </div>
     </div>
   );
