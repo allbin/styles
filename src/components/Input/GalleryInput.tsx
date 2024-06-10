@@ -37,10 +37,8 @@ const GalleryInput: React.FC = () => {
           type="number"
           placeholder="Type error to see error message"
           value={numberValue}
-          onChange={(e, value) => {
-            console.log(e.target.value);
-            console.log(typeof value, value);
-            setNumberValue(value ?? 0);
+          onChange={(e) => {
+            setNumberValue(Number(e.target.value));
           }}
         />
         <Input

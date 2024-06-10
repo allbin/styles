@@ -55,8 +55,7 @@ export interface BaseInputProps
   disabled?: boolean;
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    value?: number,
-  ) => void; //React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  ) => void;
 }
 
 type InputTypesProps =
@@ -133,17 +132,6 @@ const Input = React.forwardRef<
     },
     ref,
   ) => {
-    const handleChange = React.useCallback(
-      (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        if (type === 'number' && onChange) {
-          onChange(e, e.target.value ? Number(e.target.value) : 0);
-        } else if (onChange) {
-          onChange(e);
-        }
-      },
-      [onChange, type],
-    );
-
     return (
       <div
         className="group relative grow"
@@ -198,7 +186,7 @@ const Input = React.forwardRef<
               value={value}
               ref={ref as React.Ref<HTMLInputElement>}
               placeholder={placeholder}
-              onChange={handleChange}
+              onChange={onChange}
               min={min}
               max={max}
               {...props}
