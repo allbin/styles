@@ -6,16 +6,15 @@ const GalleryDropdown: React.FC = () => {
   const dropdownData: OptionsProps[] = [
     { id: '1', label: 'Apple' },
     { id: '2', label: 'Orange', color: 'green' },
-    { id: '3', type: 'category', label: 'Drinks' },
+    { category: 'Drinks' },
     { id: '4', label: 'Cola' },
-    { id: '5', label: 'Fanta' },
-    { id: '6', type: 'category', label: 'Admin' },
+    { id: '5', label: 'Cola' },
+    { category: 'Admin' },
     { id: '7', label: 'Remove', color: 'red' },
   ];
 
   const selectedValue: OptionsType = {
     id: '1',
-    type: 'option',
     label: 'Apple',
   };
 
