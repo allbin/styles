@@ -1,228 +1,258 @@
 import * as React from 'react';
-import * as SelectPrimitive from '@radix-ui/react-select';
+import { useState, useMemo } from 'react';
 import {
   ChevronDownIcon,
-  ChevronUpIcon,
+  // ChevronUpIcon,
   CheckIcon,
 } from '@heroicons/react/24/solid';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
+import { Slot } from '@radix-ui/react-slot';
+import { Tooltip } from 'react-tooltip';
 
-const dropDownTriggerVariants = cva(
+const dropdownVariants = cva(
   [
     'flex',
+    'relative',
     'font-medium',
     'items-center',
     'justify-between',
     'h-[36px]',
     'px-2',
     'border',
-    'border-primary-600',
     'transition-colors',
     'rounded-md',
-    'disabled:active:opacity-100',
-    'disabled:pointer-events-none',
     'active:opacity-80',
-    'hover:bg-primary-200',
+    'cursor-pointer',
   ],
   {
     variants: {
       variant: {
-        default: '',
-        error: '',
+        default: ['border-primary-600', 'hover:bg-primary-200'],
+        outline: '',
+      },
+      disabled: {
+        true: '',
+        false: '',
+      },
+      error: {
+        true: '',
+        false: '',
       },
     },
-    defaultVariants: {
-      variant: 'default',
-    },
-  },
-);
-
-const dropDownContentVariants = cva(
-  [
-    'flex',
-    'text-primary-600',
-    'bg-background-100',
-    'border',
-    'border-primary-200',
-    'rounded-md',
-    'mt-1',
-  ],
-  {
-    variants: {
-      variant: {
-        default: '',
-        error: '',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  },
-);
-
-interface DropdownTriggerProps
-  extends SelectPrimitive.SelectTriggerProps,
-    VariantProps<typeof dropDownTriggerVariants> {}
-
-interface DropdownContentProps
-  extends SelectPrimitive.SelectContentProps,
-    VariantProps<typeof dropDownContentVariants> {}
-
-const Dropdown = SelectPrimitive.Root;
-
-const DropdownGroup = SelectPrimitive.Group;
-
-const DropdownValue = SelectPrimitive.Value;
-
-const DropdownTrigger = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Trigger>,
-  DropdownTriggerProps
-  // React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Trigger
-    ref={ref}
-    className={cn(
-      dropDownTriggerVariants({
+    compoundVariants: [
+      {
         variant: 'default',
-      }),
-      className,
-    )}
-    {...props}
-  >
-    {children}
-    <SelectPrimitive.Icon asChild>
-      <ChevronDownIcon className="size-4 opacity-50" />
-    </SelectPrimitive.Icon>
-  </SelectPrimitive.Trigger>
-));
-DropdownTrigger.displayName = SelectPrimitive.Trigger.displayName;
+        disabled: true,
+        className: [
+          'border-gray-400',
+          'text-gray-400',
+          'active:opacity-100',
+          'disabled:pointer-events-none',
+          'hover:bg-transparent',
+          'cursor-default',
+        ],
+      },
+      {
+        variant: 'default',
+        error: true,
+        className: [
+          'text-red-700',
+          'ring-1',
+          'ring-red-600',
+          'hover:ring-red-800',
+          'focus:outline-red-600',
+        ],
+      },
+    ],
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+);
 
-const DropdownScrollUpButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
->(({ className, ...props }, ref) => (
-  <SelectPrimitive.ScrollUpButton
-    ref={ref}
-    className={cn(
-      'flex cursor-default items-center justify-center py-1',
-      className,
-    )}
-    {...props}
-  >
-    <ChevronUpIcon className="size-4" />
-  </SelectPrimitive.ScrollUpButton>
-));
-DropdownScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
-
-const DropdownScrollDownButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
->(({ className, ...props }, ref) => (
-  <SelectPrimitive.ScrollDownButton
-    ref={ref}
-    className={cn(
-      'flex cursor-default items-center justify-center py-1',
-      className,
-    )}
-    {...props}
-  >
-    <ChevronDownIcon className="size-4" />
-  </SelectPrimitive.ScrollDownButton>
-));
-DropdownScrollDownButton.displayName =
-  SelectPrimitive.ScrollDownButton.displayName;
-
-const DropdownContent = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Content>,
-  DropdownContentProps
-  // React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = 'popper', ...props }, ref) => (
-  <SelectPrimitive.Portal>
-    <SelectPrimitive.Content
-      ref={ref}
-      className={cn(
-        dropDownContentVariants({
-          variant: 'default',
-        }),
-        className,
-      )}
-      {...props}
-      position={position}
-      {...props}
-    >
-      <DropdownScrollUpButton />
-      <SelectPrimitive.Viewport
-        className={cn(
-          'p-1',
-          position === 'popper' &&
-            'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]',
-        )}
-      >
-        {children}
-      </SelectPrimitive.Viewport>
-      <DropdownScrollDownButton />
-    </SelectPrimitive.Content>
-  </SelectPrimitive.Portal>
-));
-DropdownContent.displayName = SelectPrimitive.Content.displayName;
-
-const DropdownLabel = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Label>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
->(({ className, ...props }, ref) => (
-  <SelectPrimitive.Label
-    ref={ref}
-    className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)}
-    {...props}
-  />
-));
-DropdownLabel.displayName = SelectPrimitive.Label.displayName;
-
-const DropdownItem = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Item
-    ref={ref}
-    className={cn(
-      'focus:bg-accent focus:text-accent-foreground relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-background-200 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-      className,
-    )}
-    {...props}
-  >
-    <span className="absolute left-2 flex size-3.5 items-center justify-center">
-      <SelectPrimitive.ItemIndicator>
-        <CheckIcon className="size-4" />
-      </SelectPrimitive.ItemIndicator>
-    </span>
-
-    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-  </SelectPrimitive.Item>
-));
-DropdownItem.displayName = SelectPrimitive.Item.displayName;
-
-const DropdownSeparator = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Separator>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
->(({ className, ...props }, ref) => (
-  <SelectPrimitive.Separator
-    ref={ref}
-    className={cn('bg-muted -mx-1 my-1 h-px', className)}
-    {...props}
-  />
-));
-DropdownSeparator.displayName = SelectPrimitive.Separator.displayName;
-
-export {
-  Dropdown,
-  DropdownGroup,
-  DropdownValue,
-  DropdownTrigger,
-  DropdownContent,
-  DropdownLabel,
-  DropdownItem,
-  DropdownSeparator,
-  DropdownScrollUpButton,
-  DropdownScrollDownButton,
+const optionsColor = {
+  default: 'text-primary-500',
+  red: 'text-red-500',
+  green: 'text-green-500',
 };
+
+interface OptionsBaseProps {
+  id: string;
+  label: React.ReactNode;
+  color?: 'red' | 'green' | 'default';
+}
+
+export interface OptionsType extends OptionsBaseProps {
+  description?: React.ReactNode;
+  disabled?: boolean;
+  type?: 'option';
+}
+
+interface CategoryOptionType extends OptionsBaseProps {
+  description?: never;
+  disabled?: never;
+  type: 'category';
+}
+
+export type OptionsProps =
+  | (OptionsType & { type?: 'option' })
+  | CategoryOptionType;
+
+interface DropdownProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof dropdownVariants> {
+  asChild?: boolean;
+  id: string;
+  placeholder: string;
+  disabled?: boolean;
+  value?: OptionsType;
+  options: OptionsProps[];
+  label?: string;
+  helperText?: string;
+  error?: boolean;
+  errorMessage?: string;
+  onValueChange?: (value: OptionsType) => void;
+}
+
+const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
+  (
+    {
+      className,
+      variant,
+      id,
+      placeholder,
+      options,
+      onChange,
+      value,
+      label,
+      errorMessage,
+      error = false,
+      helperText,
+      disabled = false,
+      asChild = false,
+      ...props
+    },
+    ref,
+  ) => {
+    const Comp = asChild ? Slot : 'div';
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedId, setSelectedId] = useState<string>();
+    const [selectedValue, setSelectedValue] = useState<OptionsType>();
+
+    useMemo(() => {
+      if (value) {
+        setSelectedValue(value);
+        setSelectedId(value.id);
+      }
+    }, [value]);
+
+    const handleChange = (value: OptionsType) => {
+      if (selectedId === value.id) {
+        setSelectedId(undefined);
+        setSelectedValue(undefined);
+      } else {
+        setSelectedId(value.id);
+        setSelectedValue(value);
+      }
+      // setSelectedId(value.id);
+      setIsOpen(false);
+      console.log('From component: ', value);
+    };
+
+    return (
+      <div className="relative">
+        {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
+        {label && (
+          <label
+            htmlFor={id}
+            className="absolute left-0 top-[-24px] mb-1 block pl-2 text-sm font-medium leading-6 text-primary-900"
+          >
+            {label}
+          </label>
+        )}
+        <Comp
+          data-tooltip-id={id}
+          data-tooltip-content={
+            error && errorMessage ? errorMessage : undefined
+          }
+          data-tooltip-variant={'error'}
+          className={cn(
+            dropdownVariants({ variant, disabled, error }),
+            className,
+          )}
+          ref={ref}
+          onClick={() => {
+            !disabled && setIsOpen(!isOpen);
+          }}
+          onChange={onChange}
+          {...props}
+        >
+          {selectedValue ? (
+            selectedValue.label
+          ) : (
+            <span className="italic">{placeholder}</span>
+          )}
+          <ChevronDownIcon className="size-4" />
+        </Comp>
+        {helperText && (
+          <span className="absolute bottom-[-24px] mt-1 pl-2 text-sm text-text-700">
+            {helperText}
+          </span>
+        )}
+        {isOpen && (
+          <div
+            ref={ref}
+            className={cn(
+              [
+                'absolute',
+                'top-10',
+                'z-50',
+                'flex',
+                'w-[200px]',
+                'cursor-pointer',
+                'flex-col',
+                'gap-2',
+                'rounded-md',
+                'border',
+                'border-primary-600',
+                'bg-primary-100',
+                'p-2',
+              ],
+              className,
+            )}
+          >
+            {/* {props.children} */}
+            {options &&
+              options.map((opt) => (
+                <div
+                  onClick={() =>
+                    opt.type === 'category'
+                      ? null
+                      : handleChange(opt as OptionsType)
+                  }
+                  className={cn(
+                    selectedId && selectedId === opt.id ? 'bg-primary-200' : '',
+                    'flex items-center rounded-md p-2 hover:bg-primary-300',
+                    opt.type === 'category' &&
+                      'text-sm font-semibold hover:bg-transparent',
+                    opt.color === 'red' && optionsColor.red,
+                    opt.color === 'green' && optionsColor.green,
+                  )}
+                  key={opt.id}
+                >
+                  {selectedId && selectedId === opt.id && (
+                    <CheckIcon className="mr-2 size-4" />
+                  )}
+                  {opt.label}
+                </div>
+              ))}
+          </div>
+        )}
+      </div>
+    );
+  },
+);
+
+export { Dropdown };

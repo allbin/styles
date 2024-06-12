@@ -1,34 +1,100 @@
 import React from 'react';
-import {
-  Dropdown,
-  DropdownContent,
-  DropdownItem,
-  DropdownLabel,
-  DropdownGroup,
-  DropdownTrigger,
-  DropdownValue,
-} from './Dropdown';
+import Button from '../Button/Button';
+import { Dropdown, OptionsType, OptionsProps } from './Dropdown';
 
 const GalleryDropdown: React.FC = () => {
+  const dropdownData: OptionsProps[] = [
+    { id: '1', label: 'Apple' },
+    { id: '2', label: 'Orange', color: 'green' },
+    { id: '3', type: 'category', label: 'Drinks' },
+    { id: '4', label: 'Cola' },
+    { id: '5', label: 'Fanta' },
+    { id: '6', type: 'category', label: 'Admin' },
+    { id: '7', label: 'Remove', color: 'red' },
+  ];
+
+  const selectedValue: OptionsType = {
+    id: '1',
+    type: 'option',
+    label: 'Apple',
+  };
+
   return (
     <div>
       <h2 className="mb-4">Dropdown</h2>
       <h3>Dropdown</h3>
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
-        <Dropdown>
-          <DropdownGroup>
-            <DropdownTrigger className="w-[180px]">
-              <DropdownValue placeholder="Theme" />
-            </DropdownTrigger>
-            <DropdownContent className="w-[180px]">
-              <DropdownLabel>Dropdown label A</DropdownLabel>
-              <DropdownItem value="light">Light</DropdownItem>
-              <DropdownItem value="dark">Dark</DropdownItem>
-              <DropdownLabel>Dropdown label B</DropdownLabel>
-              <DropdownItem value="system">System</DropdownItem>
-            </DropdownContent>
-          </DropdownGroup>
-        </Dropdown>
+        <Dropdown
+          id="dropdown-1"
+          className="w-[320px]"
+          placeholder="Default dropdown with onChange"
+          onChange={(value) => {
+            console.log('From list: ', value);
+          }}
+          options={dropdownData}
+        />
+        <Dropdown
+          id="dropdown-2"
+          className="w-[320px]"
+          placeholder="This one is disabled"
+          onChange={(value) => {
+            console.log('From list: ', value);
+          }}
+          disabled
+          options={dropdownData}
+        />
+        <Dropdown
+          id="dropdown-3"
+          className="w-[320px]"
+          placeholder="Selected value"
+          value={selectedValue}
+          onChange={(value) => {
+            console.log('Selected: ', value);
+          }}
+          options={dropdownData}
+        />
+        <Dropdown
+          id="dropdown-3"
+          className="w-[320px]"
+          placeholder="Error"
+          error
+          errorMessage="This is an error"
+          options={dropdownData}
+        />
+      </div>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pt-8">
+        <Dropdown
+          id="dropdown-4"
+          className="w-[320px]"
+          placeholder="With label"
+          label="This is a label with absolute position"
+          options={dropdownData}
+        />
+      </div>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pb-8">
+        <Dropdown
+          id="dropdown-5"
+          className="w-[320px]"
+          placeholder="With helper text"
+          helperText="This is a helper text with absolute position"
+          options={dropdownData}
+        />
+      </div>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 py-8">
+        <div className="mb-8 flex flex-row gap-2 rounded-md border border-gray-300 p-4 py-10">
+          <Dropdown
+            id="dropdown-6"
+            className="w-[320px]"
+            placeholder="Choose an option"
+            label="Exemple with button"
+            helperText="This is a helper text with absolute position"
+            options={dropdownData}
+            onChange={(value) => {
+              console.log('Selected: ', value);
+            }}
+          />
+          <Button variant="filled">Next step</Button>
+        </div>
       </div>
     </div>
   );
