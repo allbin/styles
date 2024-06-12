@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { useState, useMemo } from 'react';
-import {
-  ChevronDownIcon,
-  // ChevronUpIcon,
-  CheckIcon,
-} from '@heroicons/react/24/solid';
+import { ChevronDownIcon, CheckIcon } from '@heroicons/react/24/solid';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 import { Slot } from '@radix-ui/react-slot';
 import { Tooltip } from 'react-tooltip';
+import useOnClickOutside from 'react-cool-onclickoutside';
 
 const dropdownVariants = cva(
   [
@@ -38,6 +35,11 @@ const dropdownVariants = cva(
       error: {
         true: '',
         false: '',
+      },
+      color: {
+        default: '',
+        red: '',
+        green: '',
       },
     },
     compoundVariants: [
@@ -90,9 +92,6 @@ export interface OptionsType extends OptionsBaseProps {
 }
 
 interface CategoryOptionType extends OptionsBaseProps {
-  /* description?: never;
-  disabled?: never;
-  type: 'category'; */
   id?: never;
   label?: never;
   category: string;
@@ -100,9 +99,7 @@ interface CategoryOptionType extends OptionsBaseProps {
   description?: never;
 }
 
-export type OptionsProps =
-  /* | (OptionsType & { type?: 'option' }) */
-  OptionsType | CategoryOptionType;
+export type OptionsProps = OptionsType | CategoryOptionType;
 
 interface DropdownProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -154,17 +151,16 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     }, [value]);
 
     const handleChange = (value: OptionsType) => {
-      if (selectedId === value.id) {
-        setSelectedId(undefined);
-        setSelectedValue(undefined);
-      } else {
-        setSelectedId(value.id);
-        setSelectedValue(value);
-      }
-      // setSelectedId(value.id);
+      const isSelected = selectedId === value.id;
+      setSelectedId(isSelected ? undefined : value.id);
+      setSelectedValue(isSelected ? undefined : value);
       setIsOpen(false);
       console.log('From component: ', value);
     };
+
+    const optionsRef = useOnClickOutside(() => {
+      setIsOpen(false);
+    });
 
     return (
       <div className="relative">
@@ -208,7 +204,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         )}
         {isOpen && (
           <div
-            ref={ref}
+            ref={optionsRef}
             className={cn(
               [
                 'absolute',
