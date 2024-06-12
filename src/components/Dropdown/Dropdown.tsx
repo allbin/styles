@@ -72,32 +72,37 @@ const dropdownVariants = cva(
 );
 
 const optionsColor = {
-  default: 'text-primary-500',
-  red: 'text-red-500',
-  green: 'text-green-500',
+  default: 'text-primary-500 hover:text-primary-800',
+  red: 'text-red-500 hover:text-red-900',
+  green: 'text-green-500 hover:text-green-800',
 };
 
 interface OptionsBaseProps {
-  id: string;
-  label: React.ReactNode;
   color?: 'red' | 'green' | 'default';
 }
 
 export interface OptionsType extends OptionsBaseProps {
+  id: string;
+  label: React.ReactNode;
   description?: React.ReactNode;
   disabled?: boolean;
-  type?: 'option';
+  category?: never;
 }
 
 interface CategoryOptionType extends OptionsBaseProps {
-  description?: never;
+  /* description?: never;
   disabled?: never;
-  type: 'category';
+  type: 'category'; */
+  id?: never;
+  label?: never;
+  category: string;
+  disabled?: never;
+  description?: never;
 }
 
 export type OptionsProps =
-  | (OptionsType & { type?: 'option' })
-  | CategoryOptionType;
+  /* | (OptionsType & { type?: 'option' }) */
+  OptionsType | CategoryOptionType;
 
 interface DropdownProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -223,20 +228,17 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
               className,
             )}
           >
-            {/* {props.children} */}
             {options &&
               options.map((opt) => (
                 <div
                   onClick={() =>
-                    opt.type === 'category'
-                      ? null
-                      : handleChange(opt as OptionsType)
+                    opt.category ? null : handleChange(opt as OptionsType)
                   }
                   className={cn(
                     selectedId && selectedId === opt.id ? 'bg-primary-200' : '',
-                    'flex items-center rounded-md p-2 hover:bg-primary-300',
-                    opt.type === 'category' &&
-                      'text-sm font-semibold hover:bg-transparent',
+                    'flex items-center rounded-md p-2 hover:bg-primary-200',
+                    opt.category &&
+                      'mt-2 border-b text-sm font-semibold hover:bg-transparent',
                     opt.color === 'red' && optionsColor.red,
                     opt.color === 'green' && optionsColor.green,
                   )}
@@ -245,7 +247,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   {selectedId && selectedId === opt.id && (
                     <CheckIcon className="mr-2 size-4" />
                   )}
-                  {opt.label}
+                  {opt.label || opt.category}
                 </div>
               ))}
           </div>
