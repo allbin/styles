@@ -36,11 +36,6 @@ const dropdownVariants = cva(
         true: '',
         false: '',
       },
-      color: {
-        default: '',
-        red: '',
-        green: '',
-      },
     },
     compoundVariants: [
       {
@@ -158,12 +153,18 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       console.log('From component: ', value);
     };
 
-    const optionsRef = useOnClickOutside(() => {
+    const dropdownRef = useOnClickOutside(() => {
       setIsOpen(false);
     });
 
+    const handleDropdownClick = () => {
+      if (!disabled) {
+        setIsOpen((prev) => !prev);
+      }
+    };
+
     return (
-      <div className="relative">
+      <div className="relative" ref={dropdownRef}>
         {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
         {label && (
           <label
@@ -184,9 +185,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             className,
           )}
           ref={ref}
-          onClick={() => {
-            !disabled && setIsOpen(!isOpen);
-          }}
+          onClick={handleDropdownClick}
           onChange={onChange}
           {...props}
         >
@@ -204,7 +203,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         )}
         {isOpen && (
           <div
-            ref={optionsRef}
             className={cn(
               [
                 'absolute',
@@ -217,35 +215,34 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 'gap-2',
                 'rounded-md',
                 'border',
-                'border-primary-600',
+                'border-primary-300',
                 'bg-primary-100',
                 'p-2',
               ],
               className,
             )}
           >
-            {options &&
-              options.map((opt) => (
-                <div
-                  onClick={() =>
-                    opt.category ? null : handleChange(opt as OptionsType)
-                  }
-                  className={cn(
-                    selectedId && selectedId === opt.id ? 'bg-primary-200' : '',
-                    'flex items-center rounded-md p-2 hover:bg-primary-200',
-                    opt.category &&
-                      'mt-2 border-b text-sm font-semibold hover:bg-transparent',
-                    opt.color === 'red' && optionsColor.red,
-                    opt.color === 'green' && optionsColor.green,
-                  )}
-                  key={opt.id}
-                >
-                  {selectedId && selectedId === opt.id && (
-                    <CheckIcon className="mr-2 size-4" />
-                  )}
-                  {opt.label || opt.category}
-                </div>
-              ))}
+            {options.map((opt) => (
+              <div
+                onClick={() =>
+                  !opt.category && handleChange(opt as OptionsType)
+                }
+                className={cn(
+                  selectedId && selectedId === opt.id ? 'bg-primary-200' : '',
+                  'flex items-center rounded-md p-2 hover:bg-primary-200',
+                  opt.category &&
+                    'mt-2 border-b text-sm font-semibold hover:bg-transparent',
+                  opt.color === 'red' && optionsColor.red,
+                  opt.color === 'green' && optionsColor.green,
+                )}
+                key={opt.id || opt.category}
+              >
+                {selectedId && selectedId === opt.id && (
+                  <CheckIcon className="mr-2 size-4" />
+                )}
+                {opt.label || opt.category}
+              </div>
+            ))}
           </div>
         )}
       </div>
