@@ -183,10 +183,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       }
     };
 
-    /*     const checkOptionFocus = () => {
-      console.log('Check option focus');
-    }; */
-
     const handleKeyDownUpOptions = (
       event: React.KeyboardEvent<HTMLDivElement>,
       option: OptionsType,
@@ -229,8 +225,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       };
     }, []);
 
-    console.log('selectedValue', selectedValue);
-
     useEffect(() => {
       const checkFocus = () => {
         const selectedOptionsIndex = options.findIndex(
@@ -239,9 +233,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         const selectedElement = document.querySelector(
           `[data-index="${tabIndexNumber + selectedOptionsIndex}"]`,
         );
-        console.log('selectedElement', selectedElement);
         if (selectedElement) {
-          console.log('selectedElement is Open: ', selectedElement);
           (selectedElement as HTMLDivElement).focus();
         }
       };
@@ -323,7 +315,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   opt.color === 'red' && optionsColor.red,
                   opt.color === 'green' && optionsColor.green,
                 )}
-                tabIndex={tabIndexNumber + index}
+                tabIndex={opt.category ? undefined : tabIndexNumber + index}
                 onKeyDown={(e) =>
                   handleKeyDownUpOptions(
                     e,
