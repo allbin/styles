@@ -139,6 +139,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     const [selectedValue, setSelectedValue] = useState<OptionsType | undefined>(
       undefined,
     );
+    const tabIndexNumber = Math.floor(Math.random() * 1000);
 
     useMemo(() => {
       if (value) {
@@ -173,16 +174,36 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       }
     };
 
+    /*     const checkOptionFocus = () => {
+      console.log('Check option focus');
+    }; */
+
     const handleKeyDownOptions = (
       event: React.KeyboardEvent<HTMLDivElement>,
       option: OptionsType,
+      index: number,
     ) => {
       if (event.key === ' ' || event.key === 'Enter') {
         event.preventDefault();
         handleChange(option);
       }
       if (event.key === 'ArrowDown') {
-        console.log('ArrowDown');
+        event.preventDefault();
+        const nextElement = document.querySelector(
+          `[data-index="${index + 1}"]`,
+        );
+        if (nextElement) {
+          (nextElement as HTMLDivElement).focus();
+        }
+      }
+      if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        const previousElement = document.querySelector(
+          `[data-index="${index - 1}"]`,
+        );
+        if (previousElement) {
+          (previousElement as HTMLDivElement).focus();
+        }
       }
     };
 
@@ -226,7 +247,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           onClick={handleDropdownClick}
           onKeyDown={handleKeyDownOpenClose}
           onChange={onChange}
-          tabIndex={0}
+          tabIndex={tabIndexNumber}
           {...props}
         >
           {selectedValue ? (
@@ -274,8 +295,15 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   opt.color === 'red' && optionsColor.red,
                   opt.color === 'green' && optionsColor.green,
                 )}
-                tabIndex={index + 123}
-                onKeyDown={(e) => handleKeyDownOptions(e, opt as OptionsType)}
+                tabIndex={tabIndexNumber + index}
+                onKeyDown={(e) =>
+                  handleKeyDownOptions(
+                    e,
+                    opt as OptionsType,
+                    tabIndexNumber + index,
+                  )
+                }
+                data-index={tabIndexNumber + index}
                 key={opt.id || opt.category}
               >
                 {selectedId && selectedId === opt.id && (
