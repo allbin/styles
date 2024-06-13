@@ -91,7 +91,7 @@ const GalleryInput: React.FC = () => {
         />
       </div>
       <h3>Min and Max multiline rows</h3>
-      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 ">
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
         <Input type="multiline" maxRows={4} placeholder="max 4 rows" />
         <Input type="multiline" minRows={2} placeholder="min 2 rows" />
         <Input
