@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { ChevronDownIcon, CheckIcon } from '@heroicons/react/24/solid';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
@@ -136,7 +136,9 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedId, setSelectedId] = useState<string>();
-    const [selectedValue, setSelectedValue] = useState<OptionsType>();
+    const [selectedValue, setSelectedValue] = useState<OptionsType | undefined>(
+      undefined,
+    );
 
     useMemo(() => {
       if (value) {
@@ -150,7 +152,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       setSelectedId(isSelected ? undefined : value.id);
       setSelectedValue(isSelected ? undefined : value);
       setIsOpen(false);
-      console.log('From component: ', value);
     };
 
     const dropdownRef = useClickOutside(() => {
@@ -162,6 +163,43 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         setIsOpen((prev) => !prev);
       }
     };
+
+    const handleKeyDownOpenClose = (
+      event: React.KeyboardEvent<HTMLDivElement>,
+    ) => {
+      if (event.key === ' ' || event.key === 'Enter') {
+        event.preventDefault();
+        handleDropdownClick();
+      }
+    };
+
+    const handleKeyDownOptions = (
+      event: React.KeyboardEvent<HTMLDivElement>,
+      option: OptionsType,
+    ) => {
+      if (event.key === ' ' || event.key === 'Enter') {
+        event.preventDefault();
+        handleChange(option);
+      }
+      if (event.key === 'ArrowDown') {
+        console.log('ArrowDown');
+      }
+    };
+
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          setIsOpen(false);
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, []);
+
+    console.log('selectedValue', selectedValue);
 
     return (
       <div className="relative" ref={dropdownRef}>
@@ -186,7 +224,9 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           )}
           ref={ref}
           onClick={handleDropdownClick}
+          onKeyDown={handleKeyDownOpenClose}
           onChange={onChange}
+          tabIndex={0}
           {...props}
         >
           {selectedValue ? (
@@ -212,7 +252,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 'w-[200px]',
                 'cursor-pointer',
                 'flex-col',
-                'gap-2',
                 'rounded-md',
                 'border',
                 'border-primary-300',
@@ -222,7 +261,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
               className,
             )}
           >
-            {options.map((opt) => (
+            {options.map((opt, index) => (
               <div
                 onClick={() =>
                   opt.category ? null : handleChange(opt as OptionsType)
@@ -235,6 +274,8 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   opt.color === 'red' && optionsColor.red,
                   opt.color === 'green' && optionsColor.green,
                 )}
+                tabIndex={index + 123}
+                onKeyDown={(e) => handleKeyDownOptions(e, opt as OptionsType)}
                 key={opt.id || opt.category}
               >
                 {selectedId && selectedId === opt.id && (
