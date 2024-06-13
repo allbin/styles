@@ -320,10 +320,10 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                       selectableOptions.findIndex((os) => os.id === opt.id),
                   )
                 }
-                // data-index={!opt.category ? tabIndexNumber + index : undefined}
                 data-index={
+                  !opt.category &&
                   tabIndexNumber +
-                  selectableOptions.findIndex((os) => os.id === opt.id)
+                    selectableOptions.findIndex((os) => os.id === opt.id)
                 }
                 key={opt.id || opt.category}
               >
