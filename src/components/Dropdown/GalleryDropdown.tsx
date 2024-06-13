@@ -8,9 +8,9 @@ const GalleryDropdown: React.FC = () => {
     { id: '2', label: 'Orange', color: 'green' },
     { category: 'Drinks' },
     { id: '4', label: 'Cola' },
-    { id: '5', label: 'Cola' },
+    { id: '5', label: 'Fanta' },
     { category: 'Admin' },
-    { id: '7', label: 'Remove', color: 'red' },
+    { id: '7', label: 'Remove all items', color: 'red' },
   ];
 
   const selectedValue: OptionsType = {

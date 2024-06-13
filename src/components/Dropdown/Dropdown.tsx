@@ -238,7 +238,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                     selectedId && selectedId === opt.id ? 'bg-primary-200' : '',
                     'flex items-center rounded-md p-2 hover:bg-primary-200',
                     opt.category &&
-                      'mt-2 border-b text-sm font-semibold hover:bg-transparent',
+                      'mt-2 cursor-default border-b text-sm font-semibold hover:bg-transparent',
                     opt.color === 'red' && optionsColor.red,
                     opt.color === 'green' && optionsColor.green,
                   )}
