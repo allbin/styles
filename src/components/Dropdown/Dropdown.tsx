@@ -296,7 +296,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 'rounded-md',
                 'border',
                 'border-primary-300',
-                'bg-primary-100',
+                'bg-background-50',
                 'p-2',
               ],
               className,
@@ -308,7 +308,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   opt.category ? null : handleChange(opt as OptionsType)
                 }
                 className={cn(
-                  selectedId && selectedId === opt.id ? 'bg-primary-200' : '',
+                  selectedId && selectedId === opt.id ? 'bg-primary-100' : '',
                   'flex items-center rounded-md p-2 hover:bg-primary-200',
                   opt.category &&
                     'mt-2  text-sm font-semibold hover:bg-transparent',
