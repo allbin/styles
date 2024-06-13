@@ -17,28 +17,26 @@ const icons = {
   default: undefined,
 };
 const defaultToast = (props: ToastMsgProps, options?: ToastOptions): Id =>
-  t(<ToastMsg {...props} icon={props.icon ? props.icon : icons.default} />, {
+  t(<ToastMsg {...props} icon={props.icon ?? icons.default} />, {
     ...options,
   });
 const successToast = (props: ToastMsgProps, options?: ToastOptions): Id =>
-  t.success(
-    <ToastMsg {...props} icon={props.icon ? props.icon : icons.success} />,
-    { ...options },
-  );
+  t.success(<ToastMsg {...props} icon={props.icon ?? icons.success} />, {
+    ...options,
+  });
 const infoToast = (props: ToastMsgProps, options?: ToastOptions): Id =>
-  t.info(<ToastMsg {...props} icon={props.icon ? props.icon : icons.info} />, {
+  t.info(<ToastMsg {...props} icon={props.icon ?? icons.info} />, {
     ...options,
   });
 const warningToast = (props: ToastMsgProps, options?: ToastOptions): Id =>
-  t.warning(
-    <ToastMsg {...props} icon={props.icon ? props.icon : icons.warning} />,
-    { ...options },
-  );
+  t.warning(<ToastMsg {...props} icon={props.icon ?? icons.warning} />, {
+    ...options,
+  });
 const errorToast = (props: ToastMsgProps, options?: ToastOptions): Id =>
-  t.error(
-    <ToastMsg {...props} icon={props.icon ? props.icon : icons.error} />,
-    { ...options, autoClose: false },
-  );
+  t.error(<ToastMsg {...props} icon={props.icon ?? icons.error} />, {
+    ...options,
+    autoClose: false,
+  });
 const promiseToast = <TData = unknown,>(
   promise: Promise<TData>,
   props: {
@@ -56,7 +54,7 @@ const promiseToast = <TData = unknown,>(
           return (
             <ToastMsg
               {...props.pending}
-              icon={props.pending.icon ? props.pending.icon : icons.pending}
+              icon={props.pending.icon ?? icons.pending}
             />
           );
         },
@@ -66,7 +64,7 @@ const promiseToast = <TData = unknown,>(
           return (
             <ToastMsg
               {...props.success}
-              icon={props.success.icon ? props.success.icon : icons.success}
+              icon={props.success.icon ?? icons.success}
             />
           );
         },
@@ -74,10 +72,7 @@ const promiseToast = <TData = unknown,>(
       error: {
         render() {
           return (
-            <ToastMsg
-              {...props.error}
-              icon={props.error.icon ? props.error.icon : icons.error}
-            />
+            <ToastMsg {...props.error} icon={props.error.icon ?? icons.error} />
           );
         },
       },
