@@ -42,15 +42,22 @@ const Toast: React.FC<ToastContainerProps> = (props) => {
       position="bottom-right"
       className={cn('flex flex-col gap-2')}
       bodyClassName={cn('flex')}
-      closeButton={({ closeToast }) => (
-        <button onClick={closeToast} className="size-fit min-h-9 pr-2.5">
-          <XMarkIcon className="size-5" />
+      closeButton={({ closeToast, type }) => (
+        <button onClick={closeToast} className="size-fit min-h-9 pr-1.5">
+          <div
+            className={cn(
+              'flex size-fit items-center justify-center rounded-full p-1 transition-colors hover:bg-white/30',
+              type === 'default' && 'hover:bg-background-950/20',
+            )}
+          >
+            <XMarkIcon className="size-5" />
+          </div>
         </button>
       )}
       toastClassName={(context) =>
         cn(
           contextClass[context?.type || 'default'],
-          'flex p-1 min-h-11 rounded-md justify-between overflow-hidden cursor-pointer',
+          'flex p-1 min-h-11 rounded-md justify-between overflow-hidden',
         )
       }
       {...props}

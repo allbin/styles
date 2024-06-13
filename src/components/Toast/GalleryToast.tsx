@@ -51,7 +51,12 @@ const GalleryToast = () => {
         onClick={() =>
           toast.warning(
             { title: 'Toast warning!! (Click me anywhere to close me)' },
-            { closeButton: false, closeOnClick: true, autoClose: 10000 },
+            {
+              closeButton: false,
+              closeOnClick: true,
+              autoClose: 10000,
+              bodyClassName: 'cursor-pointer',
+            },
           )
         }
       >
