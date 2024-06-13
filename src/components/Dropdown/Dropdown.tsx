@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 import { Slot } from '@radix-ui/react-slot';
 import { Tooltip } from 'react-tooltip';
-import useOnClickOutside from 'react-cool-onclickoutside';
+import useClickOutside from '../../hooks/useClickOutside';
 
 const dropdownVariants = cva(
   [
@@ -153,7 +153,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       console.log('From component: ', value);
     };
 
-    const dropdownRef = useOnClickOutside(() => {
+    const dropdownRef = useClickOutside(() => {
       setIsOpen(false);
     });
 
@@ -235,7 +235,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   opt.color === 'red' && optionsColor.red,
                   opt.color === 'green' && optionsColor.green,
                 )}
-                key={opt.id}
+                key={opt.id || opt.category}
               >
                 {selectedId && selectedId === opt.id && (
                   <CheckIcon className="mr-2 size-4" />
