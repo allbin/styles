@@ -1,9 +1,9 @@
+/* INFO:
 // Place <Toast/> component in App.tsx
 // Also import CSS in App.tsx (needed to make toast work)
-/* import 'react-toastify/dist/ReactToastify.min.css'; */
+import 'react-toastify/dist/ReactToastify.min.css';
 // Import and use toast() from ./useToast.ts to use toast.
-/* import { toast } from './useToast'; */
-/* 
+import { toast } from './useToast';
 const App: React.FC = () => {
   const [theme] = useContext(ThemeCtx);
 
@@ -17,8 +17,7 @@ const App: React.FC = () => {
       <Toast />
     </div>
   );
-};
-*/
+};*/
 
 import React from 'react';
 import { ToastContainer, ToastContainerProps } from 'react-toastify';
