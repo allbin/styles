@@ -143,12 +143,8 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     const [selectedValue, setSelectedValue] = useState<OptionsType | undefined>(
       undefined,
     );
-    // const [tabIndexNumber, setTabIndexNumber] = useState<number | null>(null);
     const tabIndexNumber = Math.floor(Math.random() * 1000);
-
-    /* useMemo(() => {
-      setTabIndexNumber(Math.floor(Math.random() * 1000));
-    }, []); */
+    const selectableOptions = options.filter((opt) => !opt.category);
 
     useMemo(() => {
       if (value) {
@@ -227,18 +223,18 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
     useEffect(() => {
       const checkFocus = () => {
-        const selectedOptionsIndex = options.findIndex(
-          (option) => option.id === selectedId,
-        );
+        const currentIndex =
+          selectableOptions.findIndex((opt) => opt.id === selectedValue?.id) +
+          tabIndexNumber;
         const selectedElement = document.querySelector(
-          `[data-index="${tabIndexNumber + selectedOptionsIndex}"]`,
+          `[data-index="${currentIndex}"]`,
         );
         if (selectedElement) {
           (selectedElement as HTMLDivElement).focus();
         }
       };
       checkFocus();
-    }, [isOpen, options, selectedId, tabIndexNumber]);
+    }, [isOpen, selectableOptions, selectedValue, tabIndexNumber]);
 
     return (
       <div className="relative" data-focus={tabIndexNumber} ref={dropdownRef}>
@@ -267,7 +263,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           }}
           onKeyDown={handleKeyDownOpenClose}
           onChange={onChange}
-          tabIndex={tabIndexNumber}
+          tabIndex={0}
           {...props}
         >
           {selectedValue ? (
@@ -302,7 +298,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
               className,
             )}
           >
-            {options.map((opt, index) => (
+            {options.map((opt) => (
               <div
                 onClick={() =>
                   opt.category ? null : handleChange(opt as OptionsType)
@@ -311,19 +307,24 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   selectedId && selectedId === opt.id ? 'bg-primary-100' : '',
                   'flex items-center rounded-md p-2 hover:bg-primary-200',
                   opt.category &&
-                    'mt-2  text-sm font-semibold hover:bg-transparent',
+                    'mt-2 cursor-default text-sm font-semibold hover:bg-transparent',
                   opt.color === 'red' && optionsColor.red,
                   opt.color === 'green' && optionsColor.green,
                 )}
-                tabIndex={opt.category ? undefined : tabIndexNumber + index}
+                tabIndex={!opt.category ? 0 : -1}
                 onKeyDown={(e) =>
                   handleKeyDownUpOptions(
                     e,
                     opt as OptionsType,
-                    tabIndexNumber + index,
+                    tabIndexNumber +
+                      selectableOptions.findIndex((os) => os.id === opt.id),
                   )
                 }
-                data-index={tabIndexNumber + index}
+                // data-index={!opt.category ? tabIndexNumber + index : undefined}
+                data-index={
+                  tabIndexNumber +
+                  selectableOptions.findIndex((os) => os.id === opt.id)
+                }
                 key={opt.id || opt.category}
               >
                 {selectedId && selectedId === opt.id && (
