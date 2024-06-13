@@ -20,6 +20,10 @@ const dropdownVariants = cva(
     'transition-colors',
     'rounded-md',
     'active:opacity-80',
+    'focus-visible:ring-offset-2',
+    'focus:ring-primary-600',
+    'focus:ring-2',
+    'focus:ring-offset-2',
     'cursor-pointer',
   ],
   {
@@ -139,7 +143,12 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     const [selectedValue, setSelectedValue] = useState<OptionsType | undefined>(
       undefined,
     );
+    // const [tabIndexNumber, setTabIndexNumber] = useState<number | null>(null);
     const tabIndexNumber = Math.floor(Math.random() * 1000);
+
+    /* useMemo(() => {
+      setTabIndexNumber(Math.floor(Math.random() * 1000));
+    }, []); */
 
     useMemo(() => {
       if (value) {
@@ -178,7 +187,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       console.log('Check option focus');
     }; */
 
-    const handleKeyDownOptions = (
+    const handleKeyDownUpOptions = (
       event: React.KeyboardEvent<HTMLDivElement>,
       option: OptionsType,
       index: number,
@@ -222,8 +231,25 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
     console.log('selectedValue', selectedValue);
 
+    useEffect(() => {
+      const checkFocus = () => {
+        const selectedOptionsIndex = options.findIndex(
+          (option) => option.id === selectedId,
+        );
+        const selectedElement = document.querySelector(
+          `[data-index="${tabIndexNumber + selectedOptionsIndex}"]`,
+        );
+        console.log('selectedElement', selectedElement);
+        if (selectedElement) {
+          console.log('selectedElement is Open: ', selectedElement);
+          (selectedElement as HTMLDivElement).focus();
+        }
+      };
+      checkFocus();
+    }, [isOpen, options, selectedId, tabIndexNumber]);
+
     return (
-      <div className="relative" ref={dropdownRef}>
+      <div className="relative" data-focus={tabIndexNumber} ref={dropdownRef}>
         {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
         {label && (
           <label
@@ -244,7 +270,9 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             className,
           )}
           ref={ref}
-          onClick={handleDropdownClick}
+          onClick={() => {
+            handleDropdownClick();
+          }}
           onKeyDown={handleKeyDownOpenClose}
           onChange={onChange}
           tabIndex={tabIndexNumber}
@@ -291,13 +319,13 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   selectedId && selectedId === opt.id ? 'bg-primary-200' : '',
                   'flex items-center rounded-md p-2 hover:bg-primary-200',
                   opt.category &&
-                    'mt-2 border-b text-sm font-semibold hover:bg-transparent',
+                    'mt-2  text-sm font-semibold hover:bg-transparent',
                   opt.color === 'red' && optionsColor.red,
                   opt.color === 'green' && optionsColor.green,
                 )}
                 tabIndex={tabIndexNumber + index}
                 onKeyDown={(e) =>
-                  handleKeyDownOptions(
+                  handleKeyDownUpOptions(
                     e,
                     opt as OptionsType,
                     tabIndexNumber + index,
