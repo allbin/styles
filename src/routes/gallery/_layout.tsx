@@ -19,6 +19,7 @@ function Root() {
         <NavElement to="/gallery/textarea">Textarea</NavElement>
         <NavElement to="/gallery/positionpad">PositionPad</NavElement>
         <NavElement to="/gallery/togglebutton">ToggleButton</NavElement>
+        <NavElement to="/gallery/toast">Toast</NavElement>
         <NavElement to="/gallery/togglebuttongroup">
           ToggleButtonGroup
         </NavElement>
