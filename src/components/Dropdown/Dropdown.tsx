@@ -113,6 +113,7 @@ interface DropdownProps
   helperText?: string;
   error?: boolean;
   errorMessage?: string;
+  optionsContainerHeight?: string;
   onValueChange?: (value: OptionsType) => void;
 }
 
@@ -130,6 +131,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       errorMessage,
       error = false,
       helperText,
+      optionsContainerHeight,
       disabled = false,
       asChild = false,
       ...props
@@ -236,6 +238,8 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       checkFocus();
     }, [isOpen, selectableOptions, selectedValue, tabIndexNumber]);
 
+    console.log(optionsContainerHeight);
+
     return (
       <div className="relative" data-focus={tabIndexNumber} ref={dropdownRef}>
         {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
@@ -294,6 +298,8 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 'border-primary-300',
                 'bg-background-50',
                 'p-2',
+                optionsContainerHeight &&
+                  `h-[${optionsContainerHeight}] overflow-y-auto`,
               ],
               className,
             )}
@@ -305,7 +311,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 }
                 className={cn(
                   selectedId && selectedId === opt.id ? 'bg-primary-100' : '',
-                  'flex items-center rounded-md p-2 hover:bg-primary-200',
+                  'flex items-center rounded-md p-2 hover:bg-primary-100',
                   opt.category &&
                     'mt-2 cursor-default text-sm font-semibold hover:bg-transparent',
                   opt.color === 'red' && optionsColor.red,

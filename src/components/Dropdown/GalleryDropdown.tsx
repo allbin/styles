@@ -79,21 +79,28 @@ const GalleryDropdown: React.FC = () => {
           options={dropdownData}
         />
       </div>
-      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 py-8">
-        <div className="mb-8 flex flex-row gap-2 rounded-md border border-gray-300 p-4 py-10">
-          <Dropdown
-            id="dropdown-6"
-            className="w-[320px]"
-            placeholder="Choose an option"
-            label="Exemple with button"
-            helperText="This is a helper text with absolute position"
-            options={dropdownData}
-            onChange={(value) => {
-              console.log('Selected: ', value);
-            }}
-          />
-          <Button variant="filled">Next step</Button>
-        </div>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pb-8">
+        <Dropdown
+          id="dropdown-7"
+          className="w-[320px]"
+          placeholder="Defined hight on option box"
+          optionsContainerHeight={'200px'}
+          options={dropdownData}
+        />
+      </div>
+      <div className="mb-8 flex flex-row gap-2 rounded-md border border-gray-300 p-4 py-10">
+        <Dropdown
+          id="dropdown-6"
+          className="w-[320px]"
+          placeholder="Choose an option"
+          label="Exemple with button"
+          helperText="This is a helper text with absolute position"
+          options={dropdownData}
+          onChange={(value) => {
+            console.log('Selected: ', value);
+          }}
+        />
+        <Button variant="filled">Next step</Button>
       </div>
     </div>
   );
