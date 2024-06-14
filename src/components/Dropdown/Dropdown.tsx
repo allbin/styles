@@ -16,6 +16,7 @@ const dropdownVariants = cva(
     'justify-between',
     'h-[36px]',
     'px-2',
+    'w-full',
     'border',
     'transition-colors',
     'rounded-md',
@@ -114,6 +115,7 @@ interface DropdownProps
   error?: boolean;
   errorMessage?: string;
   optionsContainerHeight?: string;
+  dropDownWidth?: string;
   onValueChange?: (value: OptionsType) => void;
 }
 
@@ -132,6 +134,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       error = false,
       helperText,
       optionsContainerHeight,
+      dropDownWidth,
       disabled = false,
       asChild = false,
       ...props
@@ -145,7 +148,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     const [selectedValue, setSelectedValue] = useState<OptionsType | undefined>(
       undefined,
     );
-    const tabIndexNumber = Math.floor(Math.random() * 1000);
     const selectableOptions = options.filter((opt) => !opt.category);
 
     useMemo(() => {
@@ -217,31 +219,40 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         }
       };
 
-      document.addEventListener('keydown', handleKeyDown);
+      const dropdownElement = dropdownRef.current;
+      if (dropdownElement) {
+        dropdownElement.addEventListener('keydown', handleKeyDown);
+      }
+
       return () => {
-        document.removeEventListener('keydown', handleKeyDown);
+        if (dropdownElement) {
+          dropdownElement.removeEventListener('keydown', handleKeyDown);
+        }
       };
-    }, []);
+    }, [dropdownRef]);
 
     useEffect(() => {
-      const checkFocus = () => {
-        const currentIndex =
-          selectableOptions.findIndex((opt) => opt.id === selectedValue?.id) +
-          tabIndexNumber;
+      const currentIndex = selectableOptions.findIndex(
+        (op) => op.id === selectedValue?.id,
+      );
+      if (currentIndex !== -1) {
         const selectedElement = document.querySelector(
           `[data-index="${currentIndex}"]`,
         );
         if (selectedElement) {
           (selectedElement as HTMLDivElement).focus();
         }
-      };
-      checkFocus();
-    }, [isOpen, selectableOptions, selectedValue, tabIndexNumber]);
-
-    console.log(optionsContainerHeight);
+      }
+    }, [selectableOptions, selectedValue]);
 
     return (
-      <div className="relative" data-focus={tabIndexNumber} ref={dropdownRef}>
+      <div
+        className={cn(
+          'relative flex w-full',
+          dropDownWidth && `w-[${dropDownWidth}]`,
+        )}
+        ref={dropdownRef}
+      >
         {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
         {label && (
           <label
@@ -259,6 +270,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           data-tooltip-variant={'error'}
           className={cn(
             dropdownVariants({ variant, disabled, error }),
+            dropDownWidth && `w-[${dropDownWidth}]`,
             className,
           )}
           ref={ref}
@@ -290,7 +302,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 'top-10',
                 'z-50',
                 'flex',
-                'w-[200px]',
+                'w-full',
                 'cursor-pointer',
                 'flex-col',
                 'rounded-md',
@@ -304,39 +316,38 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
               className,
             )}
           >
-            {options.map((opt) => (
+            {options.map((op) => (
               <div
                 onClick={() =>
-                  opt.category ? null : handleChange(opt as OptionsType)
+                  op.category ? null : handleChange(op as OptionsType)
                 }
                 className={cn(
-                  selectedId && selectedId === opt.id ? 'bg-primary-100' : '',
+                  selectedId && selectedId === op.id ? 'bg-primary-100' : '',
                   'flex items-center rounded-md p-2 hover:bg-primary-100',
-                  opt.category &&
+                  op.category &&
                     'mt-2 cursor-default text-sm font-semibold hover:bg-transparent',
-                  opt.color === 'red' && optionsColor.red,
-                  opt.color === 'green' && optionsColor.green,
+                  op.color === 'red' && optionsColor.red,
+                  op.color === 'green' && optionsColor.green,
                 )}
-                tabIndex={!opt.category ? 0 : -1}
+                tabIndex={!op.category ? 0 : -1}
                 onKeyDown={(e) =>
                   handleKeyDownUpOptions(
                     e,
-                    opt as OptionsType,
-                    tabIndexNumber +
-                      selectableOptions.findIndex((os) => os.id === opt.id),
+                    op as OptionsType,
+                    selectableOptions.findIndex((os) => os.id === op.id),
                   )
                 }
                 data-index={
-                  !opt.category &&
-                  tabIndexNumber +
-                    selectableOptions.findIndex((os) => os.id === opt.id)
+                  !op.category &&
+                  selectableOptions.findIndex((so) => so.id === op.id)
                 }
-                key={opt.id || opt.category}
+                key={op.id || op.category}
+                data-type={!op.category ? ['option'] : undefined}
               >
-                {selectedId && selectedId === opt.id && (
+                {selectedId && selectedId === op.id && (
                   <CheckIcon className="mr-2 size-4" />
                 )}
-                {opt.label || opt.category}
+                {op.label || op.category}
               </div>
             ))}
           </div>
