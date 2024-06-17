@@ -8,11 +8,11 @@ export const Route = createRootRouteWithContext()({
 
 function Root() {
   return (
-    <div>
-      <div className="h-12">
+    <div className="h-full">
+      <div className="h-14">
         <TopBar />
       </div>
-      <div className="flex h-full">
+      <div className="flex">
         <div className="w-[300px] shrink-0">
           <LeftPanel />
         </div>
