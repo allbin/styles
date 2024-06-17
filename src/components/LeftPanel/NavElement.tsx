@@ -15,7 +15,7 @@ const NavElement: React.FC<PropsWithChildren<NavElementProps>> = ({
     <Link
       to={to}
       className={cn(
-        'font-work group relative flex h-8 items-center pl-2 font-medium',
+        'font-work group relative flex h-10 items-center pl-4 font-medium',
       )}
     >
       {({ isActive }) => (
@@ -28,7 +28,7 @@ const NavElement: React.FC<PropsWithChildren<NavElementProps>> = ({
           />
           <div
             className={cn(
-              'relative flex items-center gap-1 text-text-800',
+              'relative flex items-center gap-2 text-text-800',
               isActive && 'text-text-50',
             )}
           >
