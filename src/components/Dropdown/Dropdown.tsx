@@ -1,10 +1,16 @@
-import React, { useCallback, useState, useMemo, useEffect } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useMemo,
+  useEffect,
+  useRef,
+} from 'react';
 import { ChevronDownIcon, CheckIcon } from '@heroicons/react/24/solid';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 import { Slot } from '@radix-ui/react-slot';
 import { Tooltip } from 'react-tooltip';
-import useClickOutside from '../../hooks/useClickOutside';
+import useClickOutside from '@/hooks/useClickOutside';
 
 const dropdownVariants = cva(
   [
@@ -142,7 +148,10 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
   ) => {
     const Comp = asChild ? Slot : 'div';
 
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
     const [isOpen, setIsOpen] = useState(false);
+    const [clickEnabled, setClickEnabled] = useState(true);
     const [selectedId, setSelectedId] = useState<string>();
     const [selectedValue, setSelectedValue] = useState<OptionsType | undefined>(
       undefined,
@@ -152,19 +161,26 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       return options.filter((opt) => !opt.category);
     }, [options]);
 
+    const switchDropDownOpenState = useCallback(() => {
+      setIsOpen(false);
+      setClickEnabled(true);
+    }, []);
+
     const handleChange = useCallback(
       (value: OptionsType) => {
         const isSelected = selectedId === value.id;
         setSelectedId(isSelected ? undefined : value.id);
         setSelectedValue(isSelected ? undefined : value);
-        setIsOpen(false);
+        switchDropDownOpenState();
       },
 
-      [selectedId],
+      [selectedId, switchDropDownOpenState],
     );
 
-    const dropdownRef = useClickOutside(() => {
-      setIsOpen(false);
+    useClickOutside(dropdownRef, clickEnabled, () => {
+      if (isOpen) {
+        switchDropDownOpenState();
+      }
     });
 
     const checkCurrentIndex = useCallback(() => {
@@ -184,7 +200,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     const handleEscape = useCallback(() => {
       const escapeKeyDown = (event: KeyboardEvent) => {
         if (event.code === 'Escape') {
-          setIsOpen(false);
+          switchDropDownOpenState();
         }
       };
 
@@ -196,7 +212,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           dropdownElement.removeEventListener('keydown', escapeKeyDown);
         };
       }
-    }, [dropdownRef]);
+    }, [dropdownRef, switchDropDownOpenState]);
 
     const handleClickOpenClose = useCallback(() => {
       if (!disabled) {
@@ -207,6 +223,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           }
           return newState;
         });
+        setClickEnabled(false);
       }
     }, [disabled, handleEscape]);
 
@@ -214,6 +231,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.code === 'Space' || event.code === 'Enter') {
           event.preventDefault();
+          setClickEnabled(false);
           handleClickOpenClose();
         }
       },
