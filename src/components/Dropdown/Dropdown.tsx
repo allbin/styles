@@ -351,7 +351,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   !op.category &&
                   selectableOptions.findIndex((so) => so.id === op.id)
                 }
-                key={op.id || op.category}
+                key={op.id ?? op.category}
                 data-type={!op.category ? ['option'] : undefined}
               >
                 {selectedId && selectedId === op.id && (
