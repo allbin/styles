@@ -176,6 +176,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         setSelectedValue(isSelected ? undefined : value);
         setIsOpen(false);
       },
+
       [selectedId],
     );
 
@@ -193,7 +194,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     // Change 7
     const handleKeyDownOpenClose = useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (event.key === ' ' || event.key === 'Enter') {
+        if (event.code === 'Space ' || event.code === 'Enter') {
           event.preventDefault();
           handleDropdownClick();
         }
@@ -208,11 +209,12 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         option: OptionsType,
         index: number,
       ) => {
-        if (event.key === ' ' || event.key === 'Enter') {
+        // Change 9 - .code
+        if (event.code === 'Space' || event.code === 'Enter') {
           event.preventDefault();
           handleChange(option);
         }
-        if (event.key === 'ArrowDown') {
+        if (event.code === 'ArrowDown') {
           event.preventDefault();
           const nextElement = document.querySelector(
             `[data-index="${index + 1}"]`,
@@ -221,7 +223,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             (nextElement as HTMLDivElement).focus();
           }
         }
-        if (event.key === 'ArrowUp') {
+        if (event.code === 'ArrowUp') {
           event.preventDefault();
           const previousElement = document.querySelector(
             `[data-index="${index - 1}"]`,
@@ -236,7 +238,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
+        if (event.code === 'Escape') {
           setIsOpen(false);
         }
       };
@@ -296,9 +298,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             className,
           )}
           ref={ref}
-          onClick={() => {
-            handleDropdownClick();
-          }}
+          onClick={handleDropdownClick}
           onKeyDown={handleKeyDownOpenClose}
           onChange={onChange}
           tabIndex={0}
