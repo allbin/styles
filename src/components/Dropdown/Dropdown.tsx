@@ -156,7 +156,8 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
     //    const selectableOptions = options.filter((opt) => !opt.category);
 
-    useMemo(() => {
+    // Change 2
+    useEffect(() => {
       if (value) {
         setSelectedValue(value);
         setSelectedId(value.id);
