@@ -158,10 +158,13 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
     // Change 2
     useEffect(() => {
-      if (value) {
-        setSelectedValue(value);
-        setSelectedId(value.id);
+      // Change 3
+      if (!value) {
+        return;
       }
+
+      setSelectedValue(value);
+      setSelectedId(value.id);
     }, [value]);
 
     const handleChange = (value: OptionsType) => {
