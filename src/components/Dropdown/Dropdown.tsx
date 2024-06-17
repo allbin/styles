@@ -155,22 +155,10 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
     //    const selectableOptions = options.filter((opt) => !opt.category);
 
-    // Change 2
-    useEffect(() => {
-      // Change 3
-      if (!value) {
-        return;
-      }
-
-      setSelectedValue(value);
-      setSelectedId(value.id);
-    }, [value]);
-
     // Change 5
     // const handleChange = (value: OptionsType) => {
     const handleChange = useCallback(
       (value: OptionsType) => {
-        console.log('Does this run?');
         const isSelected = selectedId === value.id;
         setSelectedId(isSelected ? undefined : value.id);
         setSelectedValue(isSelected ? undefined : value);
@@ -184,22 +172,75 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       setIsOpen(false);
     });
 
-    // Change 6
-    const handleDropdownClick = useCallback(() => {
-      if (!disabled) {
-        setIsOpen((prev) => !prev);
+    /*     useEffect(() => {
+      const currentIndex = selectableOptions.findIndex(
+        (op) => op.id === selectedValue?.id,
+      );
+      if (currentIndex !== -1) {
+        const selectedElement = document.querySelector(
+          `[data-index="${currentIndex}"]`,
+        );
+        if (selectedElement) {
+          (selectedElement as HTMLDivElement).focus();
+        }
       }
-    }, [disabled]);
+    }, [selectableOptions, selectedValue]); */
+
+    // Change 10
+    const checkCurrentIndex = useCallback(() => {
+      const currentIndex = selectableOptions.findIndex(
+        (op) => op.id === selectedValue?.id,
+      );
+      if (currentIndex > -1 && isOpen) {
+        const selectedElement = document.querySelector(
+          `[data-index="${currentIndex}"]`,
+        );
+        if (selectedElement) {
+          (selectedElement as HTMLDivElement).focus();
+        }
+      }
+    }, [selectedValue, selectableOptions, isOpen]);
+
+    // Change 11
+    const handleEscape = useCallback(() => {
+      const escapeKeyDown = (event: KeyboardEvent) => {
+        if (event.code === 'Escape') {
+          setIsOpen(false);
+        }
+      };
+
+      const dropdownElement = dropdownRef.current;
+      if (dropdownElement) {
+        dropdownElement.addEventListener('keydown', escapeKeyDown);
+
+        return () => {
+          dropdownElement.removeEventListener('keydown', escapeKeyDown);
+        };
+      }
+    }, [dropdownRef]);
+
+    // Change 6
+    const handleClickOpenClose = useCallback(() => {
+      if (!disabled) {
+        setIsOpen((prev) => {
+          const newState = !prev;
+          if (newState) {
+            handleEscape();
+          }
+          return newState;
+        });
+      }
+    }, [disabled, handleEscape]);
 
     // Change 7
     const handleKeyDownOpenClose = useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (event.code === 'Space ' || event.code === 'Enter') {
+        if (event.code === 'Space' || event.code === 'Enter') {
           event.preventDefault();
-          handleDropdownClick();
+          handleClickOpenClose();
         }
       },
-      [handleDropdownClick],
+      [handleClickOpenClose],
     );
 
     // Change 8
@@ -236,7 +277,9 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       [handleChange],
     );
 
-    useEffect(() => {
+    /* useEffect(() => {
+      console.log('This is running X times');
+
       const handleKeyDown = (event: KeyboardEvent) => {
         if (event.code === 'Escape') {
           setIsOpen(false);
@@ -253,21 +296,22 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           dropdownElement.removeEventListener('keydown', handleKeyDown);
         }
       };
-    }, [dropdownRef]);
+    }, [dropdownRef]); */
 
     useEffect(() => {
-      const currentIndex = selectableOptions.findIndex(
-        (op) => op.id === selectedValue?.id,
-      );
-      if (currentIndex !== -1) {
-        const selectedElement = document.querySelector(
-          `[data-index="${currentIndex}"]`,
-        );
-        if (selectedElement) {
-          (selectedElement as HTMLDivElement).focus();
-        }
+      checkCurrentIndex();
+    }, [isOpen, checkCurrentIndex]);
+
+    // Change 2
+    useEffect(() => {
+      // Change 3
+      if (!value) {
+        return;
       }
-    }, [selectableOptions, selectedValue]);
+
+      setSelectedValue(value);
+      setSelectedId(value.id);
+    }, [value]);
 
     return (
       <div
@@ -298,7 +342,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             className,
           )}
           ref={ref}
-          onClick={handleDropdownClick}
+          onClick={handleClickOpenClose}
           onKeyDown={handleKeyDownOpenClose}
           onChange={onChange}
           tabIndex={0}
