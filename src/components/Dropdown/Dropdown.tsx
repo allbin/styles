@@ -148,7 +148,13 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     const [selectedValue, setSelectedValue] = useState<OptionsType | undefined>(
       undefined,
     );
-    const selectableOptions = options.filter((opt) => !opt.category);
+
+    // Change 1
+    const selectableOptions = useMemo(() => {
+      return options.filter((opt) => !opt.category);
+    }, [options]);
+
+    //    const selectableOptions = options.filter((opt) => !opt.category);
 
     useMemo(() => {
       if (value) {
