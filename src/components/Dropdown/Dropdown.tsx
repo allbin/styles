@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useState, useMemo, useEffect } from 'react';
+import React, { useCallback, useState, useMemo, useEffect } from 'react';
 import { ChevronDownIcon, CheckIcon } from '@heroicons/react/24/solid';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
@@ -167,60 +166,73 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       setSelectedId(value.id);
     }, [value]);
 
-    const handleChange = (value: OptionsType) => {
-      const isSelected = selectedId === value.id;
-      setSelectedId(isSelected ? undefined : value.id);
-      setSelectedValue(isSelected ? undefined : value);
-      setIsOpen(false);
-    };
+    // Change 5
+    // const handleChange = (value: OptionsType) => {
+    const handleChange = useCallback(
+      (value: OptionsType) => {
+        console.log('Does this run?');
+        const isSelected = selectedId === value.id;
+        setSelectedId(isSelected ? undefined : value.id);
+        setSelectedValue(isSelected ? undefined : value);
+        setIsOpen(false);
+      },
+      [selectedId],
+    );
 
     const dropdownRef = useClickOutside(() => {
       setIsOpen(false);
     });
 
-    const handleDropdownClick = () => {
+    // Change 6
+    const handleDropdownClick = useCallback(() => {
       if (!disabled) {
         setIsOpen((prev) => !prev);
       }
-    };
+    }, [disabled]);
 
-    const handleKeyDownOpenClose = (
-      event: React.KeyboardEvent<HTMLDivElement>,
-    ) => {
-      if (event.key === ' ' || event.key === 'Enter') {
-        event.preventDefault();
-        handleDropdownClick();
-      }
-    };
+    // Change 7
+    const handleKeyDownOpenClose = useCallback(
+      (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === ' ' || event.key === 'Enter') {
+          event.preventDefault();
+          handleDropdownClick();
+        }
+      },
+      [handleDropdownClick],
+    );
 
-    const handleKeyDownUpOptions = (
-      event: React.KeyboardEvent<HTMLDivElement>,
-      option: OptionsType,
-      index: number,
-    ) => {
-      if (event.key === ' ' || event.key === 'Enter') {
-        event.preventDefault();
-        handleChange(option);
-      }
-      if (event.key === 'ArrowDown') {
-        event.preventDefault();
-        const nextElement = document.querySelector(
-          `[data-index="${index + 1}"]`,
-        );
-        if (nextElement) {
-          (nextElement as HTMLDivElement).focus();
+    // Change 8
+    const handleKeyDownUpOptions = useCallback(
+      (
+        event: React.KeyboardEvent<HTMLDivElement>,
+        option: OptionsType,
+        index: number,
+      ) => {
+        if (event.key === ' ' || event.key === 'Enter') {
+          event.preventDefault();
+          handleChange(option);
         }
-      }
-      if (event.key === 'ArrowUp') {
-        event.preventDefault();
-        const previousElement = document.querySelector(
-          `[data-index="${index - 1}"]`,
-        );
-        if (previousElement) {
-          (previousElement as HTMLDivElement).focus();
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          const nextElement = document.querySelector(
+            `[data-index="${index + 1}"]`,
+          );
+          if (nextElement) {
+            (nextElement as HTMLDivElement).focus();
+          }
         }
-      }
-    };
+        if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          const previousElement = document.querySelector(
+            `[data-index="${index - 1}"]`,
+          );
+          if (previousElement) {
+            (previousElement as HTMLDivElement).focus();
+          }
+        }
+      },
+      [handleChange],
+    );
 
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
