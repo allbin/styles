@@ -218,16 +218,18 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     }, [dropdownRef, switchDropDownOpenState]);
 
     const handleClickOpenClose = useCallback(() => {
-      if (!disabled) {
-        setIsOpen((prev) => {
-          const newState = !prev;
-          if (newState) {
-            handleEscape();
-          }
-          return newState;
-        });
-        setClickEnabled(false);
+      if (disabled) {
+        return;
       }
+
+      setIsOpen((prev) => {
+        const newState = !prev;
+        if (newState) {
+          handleEscape();
+        }
+        return newState;
+      });
+      setClickEnabled(false);
     }, [disabled, handleEscape]);
 
     const handleKeyDownOpenClose = useCallback(
@@ -334,24 +336,14 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         {isOpen && (
           <div
             className={cn(
-              [
-                'absolute',
-                'top-10',
-                'z-50',
-                'flex',
-                'w-full',
-                'cursor-pointer',
-                'flex-col',
-                'rounded-md',
-                'border',
-                'border-primary-300',
-                'bg-background-50',
-                'p-2',
-                optionsContainerHeight &&
-                  `h-[${optionsContainerHeight}] overflow-y-auto`,
-              ],
+              'absolute top-10 z-50 flex w-full cursor-pointer flex-col rounded-md border border-primary-300 bg-background-50 p-2',
               className,
             )}
+            style={
+              optionsContainerHeight
+                ? { height: optionsContainerHeight, overflowY: 'auto' }
+                : {}
+            }
           >
             {options.map((op) => (
               <div
