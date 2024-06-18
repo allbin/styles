@@ -164,7 +164,34 @@
     --accent-950: 241 244 241;
   }
   .transport {
-    /* New colors - Based on gray, 50 light */
+
+    /* Based on slate, 50 light - Best color variant yet */
+    --text-50: 253 253 254;
+    --text-100: 238 243 247;
+    --text-200: 232 237 246;
+    --text-300: 213 223 235;
+    --text-400: 142 160 184;
+    --text-500: 100 116 139;
+    --text-600: 54 79 114;
+    --text-700: 44 65 96;
+    --text-800: 32 52 83;
+    --text-900: 15 23 42;
+    --text-950: 9 10 17;
+
+/* Based on slate, 50 light - BEST color variant yet 
+--text-50: 253 253 254;
+--text-100: 238 243 247;
+--text-200: 237 240 245;
+--text-300: 219 226 235;
+--text-400: 148 163 184;
+--text-500: 100 116 139;
+--text-600: 71 85 105;
+--text-700: 51 65 85;
+--text-800: 30 41 59;
+--text-900: 15 23 42;
+--text-950: 9 10 17;*/
+
+    /* Based on gray, 50 light 
     --text-50: 249 250 251;
     --text-100: 243 244 246;
     --text-200: 229 231 235;
@@ -176,7 +203,9 @@
     --text-800: 31 41 55;
     --text-900: 17 24 39;
     --text-950: 9 10 17;
-/* 
+    */
+
+/* Default colors from previous theme
     --text-50: 238 239 246;
     --text-100: 221 224 238;
     --text-200: 187 193 221;
@@ -252,18 +281,20 @@
   }
   .transport.dark {
     --text-50: 9 10 17;
-    --text-100: 17 20 34;
-    --text-200: 34 40 68;
-    --text-300: 51 60 102;
-    --text-400: 68 80 136;
-    --text-500: 85 99 170;
-    --text-600: 119 131 187;
-    --text-700: 153 162 204;
-    --text-800: 187 193 221;
-    --text-900: 221 224 238;
-    --text-950: 238 239 246;
+    --text-100: 15 23 42;
+    --text-200: 32 52 83;
+    --text-300: 44 65 96;
+    --text-400: 54 79 114;
+    --text-500: 100 116 139;
+    --text-600: 142 160 184;
+    /* --text-600: 119 131 187; */
+    --text-700: 213 223 235;
+    --text-800: 232 237 246;
+    --text-900: 238 243 247;
+    --text-950: 253 253 254;
 
-/*     --background-50: 2 2 3;
+/*  Default   
+    --background-50: 2 2 3;
     --background-100: 10 12 20;
     --background-200: 28 34 59;
     --background-300: 33 42 74;
@@ -275,10 +306,26 @@
     --background-900: 128 156 208;
     --background-950: 140 178 217; */
 
-    /* New colors - Based on slate, 50 dark */
+    /*  slate, 50 dark 
     --background-50: 7 11 25;
     --background-100: 15 23 42;
     --background-200: 30 41 59;
+    --background-300: 51 65 85;
+    --background-400: 71 85 105;
+    --background-500: 100 116 139;
+    --background-600: 148 163 184;
+    --background-700: 203 213 225;
+    --background-800: 226 232 240;
+    --background-900: 241 245 249;
+    --background-950: 248 250 252; 
+    */
+
+    /* New colors - Based on slate, 50 dark */
+    /* 50 lightest -> to dark */
+    --background-200: 16 21 45;
+    --background-100: 19 25 53;
+    --background-50: 25 34 69;
+    /* --background-50: 30 41 59; */
     --background-300: 51 65 85;
     --background-400: 71 85 105;
     --background-500: 100 116 139;
