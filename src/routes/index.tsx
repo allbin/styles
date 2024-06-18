@@ -12,7 +12,26 @@ function Root() {
   return (
     <div className="flex h-full w-[1024px] flex-col gap-2">
       <span className="text-sm font-bold">Level 100</span>
-      <span className="text-[32px] font-bold">Register</span>
+      <div className="size-full rounded-md bg-background-50 p-10">
+        <span className="text-sm font-bold">Level - 50</span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-600">
+          600 - Register
+        </span>
+        <p className="mb-4 font-bold text-text-600">
+          600 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 text-text-950">
+          950 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis.
+        </p>
+      </div>
       <div className="size-full">
         <div className="flex gap-2">
           <div className="flex flex-1 flex-col gap-2 rounded-md bg-background-50 p-10">
@@ -59,7 +78,150 @@ function Root() {
           </div>
         </div>
       </div>
-      <div className="size-full rounded-md bg-background-50 p-10">Text</div>
+      <div className="size-full rounded-md bg-background-50 p-10">
+        <span className="mb-4 flex text-xl font-bold text-text-700">
+          700 - Review
+        </span>
+        <p className="mb-4 font-bold text-text-950">
+          950 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 font-bold text-text-900">
+          900 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 font-bold text-text-800">
+          800 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 font-bold text-text-700">
+          700 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 font-bold text-text-600">
+          600 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 font-bold text-text-500">
+          500 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 font-bold text-text-400">
+          400 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 font-bold text-text-300">
+          300 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 font-bold text-text-200">
+          200 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 font-bold text-text-100">
+          100 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 font-bold text-text-50">
+          50 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+      </div>
+      <div className="size-full rounded-md bg-background-50 p-10">
+        <span className="mb-4 flex text-[32px] font-bold text-text-500">
+          500 - 32px font-bold
+        </span>
+        <p className="mb-4 font-bold text-text-600">
+          600 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <p className="mb-4 text-text-950">
+          950 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis.
+        </p>
+      </div>
+      <div className="size-full rounded-md bg-background-50 p-10">
+        <span className="mb-4 flex text-[32px] font-bold text-text-400">
+          400 - Introduction
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-500">
+          500 - Introduction
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-600">
+          600 - Introduction
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-700">
+          700 - Introduction
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-800">
+          800 - Introduction
+        </span>
+        <p className="mb-4 text-[24px] font-bold text-text-800">
+          800 - Sed laoreet mauris lobortis sapien feugiat pulvinar.
+        </p>
+        <p className="mb-4 text-[24px] font-bold text-text-700">
+          700 - Sed laoreet mauris lobortis sapien feugiat pulvinar.
+        </p>
+        <p className="mb-4 text-[24px] font-bold text-text-600">
+          600 - Sed laoreet mauris lobortis sapien feugiat pulvinar.
+        </p>
+        <p className="mb-4 text-[24px] font-bold text-text-500">
+          500 - Sed laoreet mauris lobortis sapien feugiat pulvinar.
+        </p>
+        <p className="mb-4 text-[24px] font-bold text-text-400">
+          400 - Sed laoreet mauris lobortis sapien feugiat pulvinar.
+        </p>
+      </div>
     </div>
   );
 }
