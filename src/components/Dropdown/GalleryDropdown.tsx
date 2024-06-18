@@ -66,7 +66,7 @@ const GalleryDropdown: React.FC = () => {
         <Dropdown
           id="dropdown-5"
           placeholder="300px width"
-          dropDownWidth={'300px'}
+          dropDownWidth="300px"
           options={dropdownData}
         />
         <Dropdown
@@ -77,7 +77,7 @@ const GalleryDropdown: React.FC = () => {
         <Dropdown
           id="dropdown-7"
           placeholder="Defined hight on option box"
-          optionsContainerHeight={'200px'}
+          optionsContainerHeight="200px"
           options={dropdownCategoryData}
         />
       </div>
