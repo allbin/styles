@@ -10,7 +10,6 @@ const useClickOutside = (
       return;
     }
     const listener = (event: MouseEvent | TouchEvent) => {
-      console.log('Testar');
       if (!ref.current || ref.current.contains(event.target as Node)) {
         return;
       }
