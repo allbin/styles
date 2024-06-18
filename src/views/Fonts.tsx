@@ -239,45 +239,84 @@ const Fonts: React.FC = () => {
           <p className="text-xl font-black">Black</p>
         </div>
       </div>
-      <p className="mt-8">
-        Example default (sans) text <br /> Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Curabitur ultricies, mauris sed faucibus
-        sollicitudin, dui lacus ornare justo, ac euismod sapien dui sed odio.
-        Pellentesque et erat risus. Quisque id diam lectus. Fusce dignissim nisi
-        quis justo eleifend iaculis. Aliquam non mi non erat vehicula semper et
-        quis eros. Sed ut nibh tincidunt, luctus ipsum ac, elementum est.
-        Vivamus bibendum purus et sem consectetur feugiat. Quisque est massa,
-        egestas a condimentum non, tristique at purus. Curabitur lobortis arcu a
-        neque blandit aliquet. Pellentesque ac turpis sit amet sem commodo
-        aliquet id eget enim. Phasellus sollicitudin velit vel iaculis maximus.
-        Duis ut posuere sem, eget congue est.
-      </p>
-      <p className="mt-8 font-serif">
-        Example serif text <br /> Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit. Curabitur ultricies, mauris sed faucibus sollicitudin,
-        dui lacus ornare justo, ac euismod sapien dui sed odio. Pellentesque et
-        erat risus. Quisque id diam lectus. Fusce dignissim nisi quis justo
-        eleifend iaculis. Aliquam non mi non erat vehicula semper et quis eros.
-        Sed ut nibh tincidunt, luctus ipsum ac, elementum est. Vivamus bibendum
-        purus et sem consectetur feugiat. Quisque est massa, egestas a
-        condimentum non, tristique at purus. Curabitur lobortis arcu a neque
-        blandit aliquet. Pellentesque ac turpis sit amet sem commodo aliquet id
-        eget enim. Phasellus sollicitudin velit vel iaculis maximus. Duis ut
-        posuere sem, eget congue est.
-      </p>
-      <p className="mt-8 font-mono">
-        Example mono text <br /> Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit. Curabitur ultricies, mauris sed faucibus sollicitudin,
-        dui lacus ornare justo, ac euismod sapien dui sed odio. Pellentesque et
-        erat risus. Quisque id diam lectus. Fusce dignissim nisi quis justo
-        eleifend iaculis. Aliquam non mi non erat vehicula semper et quis eros.
-        Sed ut nibh tincidunt, luctus ipsum ac, elementum est. Vivamus bibendum
-        purus et sem consectetur feugiat. Quisque est massa, egestas a
-        condimentum non, tristique at purus. Curabitur lobortis arcu a neque
-        blandit aliquet. Pellentesque ac turpis sit amet sem commodo aliquet id
-        eget enim. Phasellus sollicitudin velit vel iaculis maximus. Duis ut
-        posuere sem, eget congue est.
-      </p>
+      <h3 className="mt-8 text-text-500">Sans, Serif, Mono</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-background-300 p-4">
+        <p>
+          Example default (sans) text <br /> Lorem ipsum dolor sit amet,
+          consectetur adipiscing elit. Curabitur ultricies, mauris sed faucibus
+          sollicitudin, dui lacus ornare justo, ac euismod sapien dui sed odio.
+          Pellentesque et erat risus. Quisque id diam lectus. Fusce dignissim
+          nisi quis justo eleifend iaculis. Aliquam non mi non erat vehicula
+          semper et quis eros. Sed ut nibh tincidunt, luctus ipsum ac, elementum
+          est. Vivamus bibendum purus et sem consectetur feugiat. Quisque est
+          massa, egestas a condimentum non, tristique at purus. Curabitur
+          lobortis arcu a neque blandit aliquet. Pellentesque ac turpis sit amet
+          sem commodo aliquet id eget enim. Phasellus sollicitudin velit vel
+          iaculis maximus. Duis ut posuere sem, eget congue est.
+        </p>
+        <p className="mt-8 font-serif">
+          Example serif text <br /> Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Curabitur ultricies, mauris sed faucibus
+          sollicitudin, dui lacus ornare justo, ac euismod sapien dui sed odio.
+          Pellentesque et erat risus. Quisque id diam lectus. Fusce dignissim
+          nisi quis justo eleifend iaculis. Aliquam non mi non erat vehicula
+          semper et quis eros. Sed ut nibh tincidunt, luctus ipsum ac, elementum
+          est. Vivamus bibendum purus et sem consectetur feugiat. Quisque est
+          massa, egestas a condimentum non, tristique at purus. Curabitur
+          lobortis arcu a neque blandit aliquet. Pellentesque ac turpis sit amet
+          sem commodo aliquet id eget enim. Phasellus sollicitudin velit vel
+          iaculis maximus. Duis ut posuere sem, eget congue est.
+        </p>
+        <p className="mt-8 font-mono">
+          Example mono text <br /> Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Curabitur ultricies, mauris sed faucibus
+          sollicitudin, dui lacus ornare justo, ac euismod sapien dui sed odio.
+          Pellentesque et erat risus. Quisque id diam lectus. Fusce dignissim
+          nisi quis justo eleifend iaculis. Aliquam non mi non erat vehicula
+          semper et quis eros. Sed ut nibh tincidunt, luctus ipsum ac, elementum
+          est. Vivamus bibendum purus et sem consectetur feugiat. Quisque est
+          massa, egestas a condimentum non, tristique at purus. Curabitur
+          lobortis arcu a neque blandit aliquet. Pellentesque ac turpis sit amet
+          sem commodo aliquet id eget enim. Phasellus sollicitudin velit vel
+          iaculis maximus. Duis ut posuere sem, eget congue est.
+        </p>
+      </div>
+      <h3 className="mt-8 text-text-500">Text colored by shade</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-background-300 p-4">
+        <span className="mb-4 flex text-[32px] font-bold text-text-50">
+          50 - Quisque id diam lectus
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-100">
+          100 - Quisque id diam lectus
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-200">
+          200 - Quisque id diam lectus
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-300">
+          300 - Quisque id diam lectus
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-400">
+          400 - Quisque id diam lectus
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-500">
+          500 - Quisque id diam lectus
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-600">
+          600 - Quisque id diam lectus
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-700">
+          700 - Quisque id diam lectus
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-800">
+          800 - Quisque id diam lectus
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-900">
+          900 - Quisque id diam lectus
+        </span>
+        <span className="mb-4 flex text-[32px] font-bold text-text-950">
+          950 - Quisque id diam lectus
+        </span>
+      </div>
     </div>
   );
 };
