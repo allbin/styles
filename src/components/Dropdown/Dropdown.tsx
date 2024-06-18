@@ -132,7 +132,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       id,
       placeholder,
       options,
-      onChange,
+      onValueChange,
       value,
       label,
       errorMessage,
@@ -171,10 +171,13 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         const isSelected = selectedId === value.id;
         setSelectedId(isSelected ? undefined : value.id);
         setSelectedValue(isSelected ? undefined : value);
+        if (onValueChange) {
+          onValueChange(value);
+        }
         switchDropDownOpenState();
       },
 
-      [selectedId, switchDropDownOpenState],
+      [selectedId, switchDropDownOpenState, onValueChange],
     );
 
     useClickOutside(dropdownRef, clickEnabled, () => {
@@ -278,7 +281,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       if (!value) {
         return;
       }
-
       setSelectedValue(value);
       setSelectedId(value.id);
     }, [value]);
@@ -314,7 +316,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           ref={ref}
           onClick={handleClickOpenClose}
           onKeyDown={handleKeyDownOpenClose}
-          onChange={onChange}
           tabIndex={0}
           {...props}
         >
