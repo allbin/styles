@@ -34,7 +34,7 @@ const GalleryDropdown: React.FC = () => {
           id="dropdown-1"
           placeholder="Default dropdown with onChange"
           onValueChange={(value) => {
-            console.log('From list: ', value);
+            console.log('Selected: ', value);
           }}
           options={dropdownData}
         />
@@ -42,7 +42,7 @@ const GalleryDropdown: React.FC = () => {
           id="dropdown-2"
           placeholder="This one is disabled"
           onValueChange={(value) => {
-            console.log('From list: ', value);
+            console.log('Selected: ', value);
           }}
           disabled
           options={dropdownData}
