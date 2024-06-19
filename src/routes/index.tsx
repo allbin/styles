@@ -21,9 +21,7 @@ function Root() {
           700 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
           diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
           dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
-          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
-          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
-          posuere bibendum.
+          quis pulvinar felis.
         </p>
         <p className="mb-4 text-text-950">
           950 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
@@ -32,12 +30,21 @@ function Root() {
           quis pulvinar felis.
         </p>
       </div>
-      <div className="size-full">
+      <div className="flex size-full flex-col gap-2 rounded-md bg-background-50 p-10">
+        <span className="text-sm font-bold">Level - 50</span>
+        <span className="mb-10 text-xl font-bold text-text-600">
+          1. Discribe your role
+        </span>
+        <div>
+          <p className="text-text-500">Add Dropdown</p>
+        </div>
+      </div>
+      <div className="flex gap-2">
         <div className="flex gap-2">
           <div className="flex flex-1 flex-col gap-2 rounded-md bg-background-50 p-10">
             <span className="text-sm font-bold">Level - 50</span>
-            <span className="mb-10 text-xl font-bold">
-              1. Enter your information
+            <span className="mb-10 text-xl font-bold text-text-600">
+              2. Enter your information
             </span>
             <div className="flex flex-col gap-8">
               <Input id="first-name" label="First name" />
@@ -59,7 +66,9 @@ function Root() {
           <div className="flex flex-1 flex-col justify-between gap-2 rounded-md bg-background-50 p-10">
             <div className="flex flex-col gap-2">
               <span className="text-sm font-bold">Level - 50</span>
-              <span className="text-xl font-bold">2. Consent</span>
+              <span className="text-xl font-bold text-text-600">
+                3. Consent
+              </span>
             </div>
             <CheckBox
               id="consent"
@@ -77,26 +86,6 @@ function Root() {
             </Button>
           </div>
         </div>
-      </div>
-
-      <div className="size-full rounded-md bg-background-50 p-10">
-        <span className="mb-4 flex text-[32px] font-bold text-text-600">
-          600 - 32px font-bold
-        </span>
-        <p className="mb-4 font-bold text-text-700">
-          600 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
-          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
-          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
-          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
-          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
-          posuere bibendum.
-        </p>
-        <p className="mb-4 text-text-950">
-          950 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
-          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
-          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
-          quis pulvinar felis.
-        </p>
       </div>
     </div>
   );
