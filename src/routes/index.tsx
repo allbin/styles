@@ -31,13 +31,11 @@ function Root() {
         </p>
       </div>
       <div className="flex size-full flex-col gap-2 rounded-md bg-background-50 p-10">
-        <span className="text-sm font-bold">Level - 50</span>
-        <span className="mb-10 text-xl font-bold text-text-600">
+        <span className="flex text-sm font-bold">Level - 50</span>
+        <span className="text-xl font-bold text-text-600">
           1. Discribe your role
         </span>
-        <div>
-          <p className="text-text-500">Add Dropdown</p>
-        </div>
+        <p className="text-text-500">Add Dropdown</p>
       </div>
       <div className="flex gap-2">
         <div className="flex gap-2">
