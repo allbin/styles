@@ -120,6 +120,36 @@ const Btn: React.FC = () => {
             Green round filled button
           </Button>
         </div>
+        <div className="flex flex-wrap gap-2">
+          <Button color="blue">Blue standard button</Button>
+          <Button color="blue" variant="filled">
+            Blue filled button
+          </Button>
+          <Button color="blue" variant="outline" disabled>
+            Blue disabled button
+          </Button>
+          <Button color="blue" variant="filled" disabled>
+            Blue filled disabled button
+          </Button>
+          <Button round color="blue" variant="filled">
+            Blue round filled button
+          </Button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button color="yellow">Yellow standard button</Button>
+          <Button color="yellow" variant="filled">
+            Yellow filled button
+          </Button>
+          <Button color="yellow" variant="outline" disabled>
+            Yellow disabled button
+          </Button>
+          <Button color="yellow" variant="filled" disabled>
+            Yellow filled disabled button
+          </Button>
+          <Button round color="yellow" variant="filled">
+            Yellow round filled button
+          </Button>
+        </div>
       </div>
       <h3>Standard icon buttons</h3>
       <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
@@ -171,6 +201,10 @@ const Btn: React.FC = () => {
         <IconButton color="red" icon={<IconHalfCookie />} />
         <IconButton color="green" variant="filled" icon={<IconHalfCookie />} />
         <IconButton color="green" icon={<IconHalfCookie />} />
+        <IconButton color="blue" variant="filled" icon={<IconHalfCookie />} />
+        <IconButton color="blue" icon={<IconHalfCookie />} />
+        <IconButton color="yellow" variant="filled" icon={<IconHalfCookie />} />
+        <IconButton color="yellow" icon={<IconHalfCookie />} />
       </div>
     </div>
   );
