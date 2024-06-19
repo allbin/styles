@@ -2,7 +2,41 @@ import React from 'react';
 import Input from '@/components/Input/Input';
 import CheckBox from '@/components/Checkbox/Checkbox';
 import Button from '@/components/Button/Button';
-import { IconArrowRight } from '@allbin/icons';
+import IconButton from '@/components/Button/IconButton';
+import { IconArrowRight, IconTrash, IconEdit } from '@allbin/icons';
+
+const tableData = [
+  {
+    id: 1,
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    role: 'Admin',
+  },
+  {
+    id: 2,
+    name: 'Jane Doe',
+    email: 'jane.doe@example.com',
+    role: 'User',
+  },
+  {
+    id: 3,
+    name: 'Nils Nilsson',
+    email: 'nils.nilsson@example.com',
+    role: 'User',
+  },
+  {
+    id: 4,
+    name: 'Bengt Bengtsson',
+    email: 'bengt.bengtsson@example.com',
+    role: 'User',
+  },
+  {
+    id: 5,
+    name: 'Karin Karindotter',
+    email: 'karin.karindotter@example.com',
+    role: 'User',
+  },
+];
 
 const Home: React.FC = () => {
   return (
@@ -79,6 +113,44 @@ const Home: React.FC = () => {
               Next
             </Button>
           </div>
+        </div>
+      </div>
+      <div className="flex size-full flex-col gap-2 rounded-md bg-background-50 p-10">
+        <span className="flex text-sm font-bold">Level - 50</span>
+        <span className="mb-8 text-xl font-bold text-text-600">User List</span>
+        <div className="flex flex-col gap-4">
+          <div className="flex border-b border-background-300 pb-4 last:border-b-0">
+            <span className="w-1/6 text-sm font-bold text-text-600">Role</span>
+            <span className="w-2/6 text-sm font-bold text-text-600">Name</span>
+            <span className="w-2/6 text-sm font-bold text-text-600">Email</span>
+            <span className="flex w-1/6 justify-end text-sm font-bold text-text-600">
+              Edit
+            </span>
+          </div>
+          {tableData.map((user) => (
+            <div
+              key={user.id}
+              className="flex border-b border-background-300 pb-4 last:border-b-0"
+            >
+              <span className="w-1/6">{user.role}</span>
+              <span className="w-2/6">{user.name}</span>
+              <span className="w-2/6">{user.email}</span>
+              <div className="flex w-1/6 justify-end gap-2">
+                <IconButton
+                  variant={'filled'}
+                  size="sm"
+                  color="blue"
+                  icon={<IconEdit />}
+                />
+                <IconButton
+                  variant={'filled'}
+                  size="sm"
+                  color="red"
+                  icon={<IconTrash />}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
