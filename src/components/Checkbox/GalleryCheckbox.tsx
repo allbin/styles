@@ -13,7 +13,7 @@ const GalleryCheckbox: React.FC = () => {
     <div>
       <h2 className="mb-4">Checkbox</h2>
       <h3>Variants</h3>
-      <div className="mb-8 flex flex-col flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-col flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <CheckBox id="checkbox-1" />
         <CheckBox id="checkbox-2" label="Checkbox Label" />
         <CheckBox
@@ -29,7 +29,7 @@ const GalleryCheckbox: React.FC = () => {
         />
       </div>
       <h3>Disabled</h3>
-      <div className="mb-8 flex flex-col flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-col flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <CheckBox id="Checkbox-4" label="Disabled" disabled />
         <CheckBox
           id="checkbox-5"
