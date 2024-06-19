@@ -29,7 +29,7 @@ const NavElement: React.FC<PropsWithChildren<NavElementProps>> = ({
           <div
             className={cn(
               'relative flex items-center gap-2 text-text-800',
-              isActive && 'text-text-50',
+              isActive && 'text-contrast-primary',
             )}
           >
             {children}
