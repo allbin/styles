@@ -1,13 +1,11 @@
 import React from 'react';
-import Button from '../Button/Button';
+import IconButton from '../Button/IconButton';
 import { IconProfileCircle } from '@allbin/icons';
 
 const Profile: React.FC = () => {
   return (
     <div>
-      <Button variant="filled">
-        <IconProfileCircle className="size-6" />
-      </Button>
+      <IconButton variant="filled" icon={<IconProfileCircle />} />
     </div>
   );
 };
