@@ -37,14 +37,14 @@ const Select: React.FC<SelectProps> = ({
             </Listbox.Label>
           )}
           <div className="inline-flex w-full divide-x divide-primary-600 rounded-md shadow-sm">
-            <div className="inline-flex grow items-center gap-x-1.5 rounded-l-md bg-primary-500 px-3 py-2 text-text-50 shadow-sm">
+            <div className="inline-flex grow items-center gap-x-1.5 rounded-l-md bg-primary-500 px-3 py-2 text-contrast-primary shadow-sm">
               <p className="text-sm font-semibold">
                 {selected_option?.label || placeholder}
               </p>
             </div>
             <Listbox.Button className="inline-flex items-center rounded-l-none rounded-r-md bg-primary-500 p-2 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 focus:ring-offset-secondary-50">
               <ChevronDownIcon
-                className="size-5 text-text-50"
+                className="size-5 text-contrast-primary"
                 aria-hidden="true"
               />
             </Listbox.Button>
