@@ -27,7 +27,7 @@ const inputVariants = cva(
           'ring-1',
           'ring-inset',
           'ring-primary-400',
-          'placeholder:text-text-300',
+          'placeholder:text-text-400',
           'hover:ring-primary-600',
         ],
         error: [
