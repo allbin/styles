@@ -12,18 +12,19 @@ const inputVariants = cva(
     'border-0',
     'px-2',
     'py-1.5',
-    'focus:ring-0',
-    'focus:outline-primary-500',
     'disabled:bg-background-300/50',
     'disabled:text-text-700/50',
     'disabled:ring-primary-300',
     'bg-background-50',
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-primary-600',
   ],
   {
     variants: {
       variant: {
         outline: [
-          'border-primary-400',
+          // 'border-primary-400',
           'ring-1',
           'ring-inset',
           'ring-primary-400',
@@ -35,7 +36,7 @@ const inputVariants = cva(
           'ring-1',
           'ring-red-600',
           'hover:ring-red-800',
-          'focus:outline-red-600',
+          'focus:ring-red-600',
         ],
       },
     },

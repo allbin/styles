@@ -19,6 +19,9 @@ const buttonVariants = cva(
     'disabled:pointer-events-none',
     'active:opacity-80',
     'hover:bg-primary-200',
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-primary-600',
   ],
   {
     variants: {
