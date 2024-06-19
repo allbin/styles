@@ -37,6 +37,8 @@ const buttonVariants = cva(
         base: [],
         red: ['border-red-600', 'hover:bg-red-200'],
         green: ['border-green-600', 'hover:bg-green-200'],
+        blue: ['border-blue-600', 'hover:bg-blue-200'],
+        yellow: ['border-yellow-600', 'hover:bg-yellow-200'],
       },
       icon: {
         true: ['aspect-square', 'p-0'],
@@ -97,6 +99,38 @@ const buttonVariants = cva(
           'hover:bg-green-400',
           'disabled:bg-green-800/60',
           'disabled:text-green-700',
+        ],
+      },
+      {
+        color: 'blue',
+        variant: 'outline',
+        class: ['border-blue-500', 'text-blue-500'],
+      },
+      {
+        color: 'blue',
+        variant: 'filled',
+        class: [
+          'bg-blue-500',
+          'text-contrast-blue',
+          'hover:bg-blue-400',
+          'disabled:bg-blue-800/60',
+          'disabled:text-blue-700',
+        ],
+      },
+      {
+        color: 'yellow',
+        variant: 'outline',
+        class: ['border-yellow-500', 'text-yellow-500'],
+      },
+      {
+        color: 'yellow',
+        variant: 'filled',
+        class: [
+          'bg-yellow-500',
+          'text-contrast-yellow',
+          'hover:bg-yellow-400',
+          'disabled:bg-yellow-800/60',
+          'disabled:text-yellow-700',
         ],
       },
       {
