@@ -101,6 +101,14 @@
     --accent-800: 45 57 45;
     --accent-900: 23 28 23;
     --accent-950: 11 14 11;
+
+    --contrast-primary: 253 253 254;
+    --contrast-secondary: 253 253 254;
+    --contrast-accent: 253 253 254;
+    --contrast-red: 255 239 239;
+    --contrast-green: 241 255 239;
+    --contrast-yellow: 255 253 239;
+    --contrast-blue: 239 248 255;
   }
   .dark {
     --text-50: 14 12 11;
@@ -278,6 +286,14 @@
     --accent-800: 92 55 10;
     --accent-900: 46 28 5;
     --accent-950: 23 14 2;
+
+    --contrast-primary: 253 253 254;
+    --contrast-secondary: 253 253 254;
+    --contrast-accent: 255 249 241;
+    --contrast-red: 255 239 239;
+    --contrast-green: 241 255 239;
+    --contrast-yellow: 255 253 239;
+    --contrast-blue: 239 248 255;
   }
   .transport.dark {
     --text-50: 9 10 17;
