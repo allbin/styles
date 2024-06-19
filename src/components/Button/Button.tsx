@@ -35,8 +35,8 @@ const buttonVariants = cva(
       },
       color: {
         base: [],
-        red: ['border-red-700', 'hover:bg-red-200'],
-        green: ['border-green-700', 'hover:bg-green-200'],
+        red: ['border-red-600', 'hover:bg-red-200'],
+        green: ['border-green-600', 'hover:bg-green-200'],
       },
       icon: {
         true: ['aspect-square', 'p-0'],
@@ -80,22 +80,23 @@ const buttonVariants = cva(
           'text-contrast-red',
           'hover:bg-red-400',
           'disabled:bg-red-800/60',
-          'disabled:text-red-800',
+          'disabled:text-red-700',
         ],
       },
       {
         color: 'green',
         variant: 'outline',
-        class: ['border-green-700', 'text-green-700'],
+        class: ['border-green-500', 'text-green-500'],
       },
       {
         color: 'green',
         variant: 'filled',
         class: [
-          'bg-green-700',
-          'hover:bg-green-600',
-          'disabled:bg-green-900/60',
-          'disabled:text-green-900',
+          'bg-green-500',
+          'text-contrast-green',
+          'hover:bg-green-400',
+          'disabled:bg-green-800/60',
+          'disabled:text-green-700',
         ],
       },
       {
