@@ -23,7 +23,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        filled: ['text-text-50', 'border-primary-500'],
+        filled: ['text-contrast-primary', 'border-primary-500'],
         outline: ['disabled:border-gray-400', 'disabled:text-gray-400'],
         ghost: ['border-none', 'bg-transparent', 'hover:bg-transparent'],
       },
@@ -70,16 +70,17 @@ const buttonVariants = cva(
       {
         color: 'red',
         variant: 'outline',
-        class: ['border-red-700', 'text-red-700'],
+        class: ['border-red-500', 'text-red-500'],
       },
       {
         color: 'red',
         variant: 'filled',
         class: [
-          'bg-red-700',
-          'hover:bg-red-600',
-          'disabled:bg-red-900/60',
-          'disabled:text-red-900',
+          'bg-red-500',
+          'text-contrast-red',
+          'hover:bg-red-400',
+          'disabled:bg-red-800/60',
+          'disabled:text-red-800',
         ],
       },
       {
