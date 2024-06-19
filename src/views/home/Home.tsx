@@ -19,7 +19,7 @@ const Home: React.FC = () => {
           dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
           quis pulvinar felis.
         </p>
-        <p className="mb-4 text-text-950">
+        <p className="text-text-950">
           950 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
           diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
           dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
@@ -50,7 +50,7 @@ const Home: React.FC = () => {
                 label="Email"
               />
             </div>
-            <div className="mt-10">
+            <div className="mt-10 rounded bg-background-200 p-4">
               <CheckBox
                 id="consent-start"
                 label="The information I provided is correct"
@@ -68,8 +68,8 @@ const Home: React.FC = () => {
               id="consent"
               label="I consent to the terms and conditions and privacy policy"
             />
-            <div className="flex flex-col gap-2 rounded-md bg-background-200 p-4">
-              <span className="rounded-md text-sm font-bold">Level - 200</span>
+            <div className="flex flex-col gap-2 rounded bg-background-200 p-4">
+              <span className="text-sm font-bold">Level - 200</span>
               <span className="text-text-600">
                 By clicking "Next", you agree to the terms and conditions and
                 privacy policy.
