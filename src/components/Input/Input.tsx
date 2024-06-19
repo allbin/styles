@@ -149,7 +149,7 @@ const Input = React.forwardRef<
           </label>
         )}
         {helperText && (
-          <span className="absolute bottom-[-24px] ml-[7px] mt-1 text-sm text-text-700">
+          <span className="absolute bottom-[-24px] ml-[7px] mt-1 text-sm text-text-600">
             {helperText}
           </span>
         )}
