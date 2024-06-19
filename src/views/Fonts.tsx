@@ -317,6 +317,34 @@ const Fonts: React.FC = () => {
           950 - Quisque id diam lectus
         </span>
       </div>
+      <h3 className="mt-8 text-text-500">Constrast colors</h3>
+      <div className="mb-8 grid grid-cols-3 flex-row gap-2 rounded-md border border-background-300 p-4">
+        <div className="bg-primary-500 p-10">
+          <span className="text-contrast-primary">Contrast bg-primary-500</span>
+        </div>
+        <div className="bg-secondary-500 p-10">
+          <span className="text-contrast-secondary">
+            Contrast bg-secondary-500
+          </span>
+        </div>
+        <div className="bg-accent-500 p-10">
+          <span className="text-contrast-accent">Contrast bg-accent-500</span>
+        </div>
+      </div>
+      <div className="mb-8 grid grid-cols-4 flex-row gap-2 rounded-md border border-background-300 p-4">
+        <div className="bg-red-500 p-10">
+          <span className="text-contrast-accent">Contrast bg-red-500</span>
+        </div>
+        <div className="bg-green-500 p-10">
+          <span className="text-contrast-green">Contrast bg-green-500</span>
+        </div>
+        <div className="bg-yellow-500 p-10">
+          <span className="text-contrast-green">Contrast bg-yellow-500</span>
+        </div>
+        <div className="bg-blue-500 p-10">
+          <span className="text-contrast-green">Contrast bg-blue-500</span>
+        </div>
+      </div>
     </div>
   );
 };
