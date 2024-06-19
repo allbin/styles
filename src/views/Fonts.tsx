@@ -283,39 +283,127 @@ const Fonts: React.FC = () => {
       </div>
       <h3 className="mt-8 text-text-500">Text colored by shade</h3>
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-background-300 p-4">
-        <span className="mb-4 flex text-[32px] font-bold text-text-50">
-          50 - Quisque id diam lectus
-        </span>
-        <span className="mb-4 flex text-[32px] font-bold text-text-100">
-          100 - Quisque id diam lectus
-        </span>
-        <span className="mb-4 flex text-[32px] font-bold text-text-200">
-          200 - Quisque id diam lectus
-        </span>
-        <span className="mb-4 flex text-[32px] font-bold text-text-300">
-          300 - Quisque id diam lectus
-        </span>
-        <span className="mb-4 flex text-[32px] font-bold text-text-400">
-          400 - Quisque id diam lectus
-        </span>
-        <span className="mb-4 flex text-[32px] font-bold text-text-500">
-          500 - Quisque id diam lectus
-        </span>
-        <span className="mb-4 flex text-[32px] font-bold text-text-600">
-          600 - Quisque id diam lectus
-        </span>
-        <span className="mb-4 flex text-[32px] font-bold text-text-700">
-          700 - Quisque id diam lectus
-        </span>
-        <span className="mb-4 flex text-[32px] font-bold text-text-800">
-          800 - Quisque id diam lectus
-        </span>
-        <span className="mb-4 flex text-[32px] font-bold text-text-900">
-          900 - Quisque id diam lectus
-        </span>
         <span className="mb-4 flex text-[32px] font-bold text-text-950">
           950 - Quisque id diam lectus
         </span>
+        <p className="mb-4 font-bold text-text-950">
+          950 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <span className="mb-4 flex text-[32px] font-bold text-text-900">
+          900 - Quisque id diam lectus
+        </span>
+        <p className="mb-4 font-bold text-text-900">
+          900 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <span className="mb-4 flex text-[32px] font-bold text-text-800">
+          800 - Quisque id diam lectus
+        </span>
+        <p className="mb-4 font-bold text-text-800">
+          800 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <span className="mb-4 flex text-[32px] font-bold text-text-700">
+          700 - Quisque id diam lectus
+        </span>
+        <p className="mb-4 font-bold text-text-700">
+          700 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <span className="mb-4 flex text-[32px] font-bold text-text-600">
+          600 - Quisque id diam lectus
+        </span>
+        <p className="mb-4 font-bold text-text-600">
+          600 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <span className="mb-4 flex text-[32px] font-bold text-text-500">
+          500 - Quisque id diam lectus
+        </span>
+        <p className="mb-4 font-bold text-text-500">
+          500 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <span className="mb-4 flex text-[32px] font-bold text-text-400">
+          400 - Quisque id diam lectus
+        </span>
+        <p className="mb-4 font-bold text-text-400">
+          400 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <span className="mb-4 flex text-[32px] font-bold text-text-300">
+          300 - Quisque id diam lectus
+        </span>
+        <p className="mb-4 font-bold text-text-300">
+          300 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <span className="mb-4 flex text-[32px] font-bold text-text-200">
+          200 - Quisque id diam lectus
+        </span>
+        <p className="mb-4 font-bold text-text-200">
+          200 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <span className="mb-4 flex text-[32px] font-bold text-text-100">
+          100 - Quisque id diam lectus
+        </span>
+        <p className="mb-4 font-bold text-text-100">
+          100 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
+        <span className="mb-4 flex text-[32px] font-bold text-text-50">
+          50 - Quisque id diam lectus
+        </span>
+        <p className="mb-4 font-bold text-text-50">
+          50 - Sed laoreet mauris lobortis sapien feugiat pulvinar. Fusce vel
+          diam eu tellus consectetur interdum. Quisque eu libero urna. Aliquam
+          dolor mi, varius sed sodales ac, venenatis condimentum dolor. Fusce
+          quis pulvinar felis. Fusce eu nulla at libero mattis lacinia sed eu
+          ipsum. Proin feugiat dapibus orci ut varius. Sed eu tellus non est
+          posuere bibendum.
+        </p>
       </div>
       <h3 className="mt-8 text-text-500">Constrast colors</h3>
       <div className="mb-8 grid grid-cols-3 flex-row gap-2 rounded-md border border-background-300 p-4">
