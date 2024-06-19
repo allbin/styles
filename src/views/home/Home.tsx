@@ -118,19 +118,19 @@ const Home: React.FC = () => {
       <div className="flex size-full flex-col gap-2 rounded-md bg-background-50 p-10">
         <span className="flex text-sm font-bold">Level - 50</span>
         <span className="mb-8 text-xl font-bold text-text-600">User List</span>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col">
           <div className="flex border-b border-background-300 pb-4 last:border-b-0">
             <span className="w-1/6 text-sm font-bold text-text-600">Role</span>
             <span className="w-2/6 text-sm font-bold text-text-600">Name</span>
             <span className="w-2/6 text-sm font-bold text-text-600">Email</span>
-            <span className="flex w-1/6 justify-end text-sm font-bold text-text-600">
+            <span className="flex w-1/6 justify-end text-sm font-bold">
               Edit
             </span>
           </div>
           {tableData.map((user) => (
             <div
               key={user.id}
-              className="flex border-b border-background-300 pb-4 last:border-b-0"
+              className="flex border-b border-background-300 py-4 last:border-b-0 hover:bg-background-100"
             >
               <span className="w-1/6">{user.role}</span>
               <span className="w-2/6">{user.name}</span>
