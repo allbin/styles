@@ -161,7 +161,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       return options.filter((opt) => !opt.category);
     }, [options]);
 
-    const switchDropDownOpenState = useCallback(() => {
+    const closeDropdown = useCallback(() => {
       setIsOpen(false);
       setClickEnabled(true);
     }, []);
@@ -174,15 +174,15 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         if (onValueChange) {
           onValueChange(value);
         }
-        switchDropDownOpenState();
+        closeDropdown();
       },
 
-      [selectedId, switchDropDownOpenState, onValueChange],
+      [selectedId, closeDropdown, onValueChange],
     );
 
     useClickOutside(dropdownRef, clickEnabled, () => {
       if (isOpen) {
-        switchDropDownOpenState();
+        closeDropdown();
       }
     });
 
@@ -203,7 +203,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     const handleEscape = useCallback(() => {
       const escapeKeyDown = (event: KeyboardEvent) => {
         if (event.code === 'Escape') {
-          switchDropDownOpenState();
+          closeDropdown();
         }
       };
 
@@ -215,7 +215,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           dropdownElement.removeEventListener('keydown', escapeKeyDown);
         };
       }
-    }, [dropdownRef, switchDropDownOpenState]);
+    }, [dropdownRef, closeDropdown]);
 
     const handleClickOpenClose = useCallback(() => {
       if (disabled) {
