@@ -162,6 +162,10 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       return options.filter((opt) => !opt.category);
     }, [options]);
 
+    const getSelectableRefs = useCallback(() => {
+      return optionRefs.current.filter((el) => el !== null);
+    }, [optionRefs]);
+
     const closeDropdown = useCallback(() => {
       setIsOpen(false);
       setClickEnabled(true);
@@ -189,17 +193,18 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
     const checkCurrentIndex = useCallback(() => {
       setTimeout(() => {
+        const selectableRefs = getSelectableRefs();
         const currentIndex = selectableOptions.findIndex(
           (op) => op.id === selectedValue?.id,
         );
         if (currentIndex > -1) {
-          const selectedElement = optionRefs.current[currentIndex];
+          const selectedElement = selectableRefs[currentIndex];
           if (selectedElement) {
             selectedElement.focus();
           }
         }
       }, 0);
-    }, [selectedValue, selectableOptions]);
+    }, [selectedValue, selectableOptions, getSelectableRefs]);
 
     const handleEscape = useCallback(() => {
       const escapeKeyDown = (event: KeyboardEvent) => {
@@ -251,29 +256,29 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         option: OptionsType,
         index: number,
       ) => {
+        // const selectableRefs = optionRefs.current.filter((el) => el !== null);
+        const selectableRefs = getSelectableRefs();
         if (event.code === 'Space' || event.code === 'Enter') {
           event.preventDefault();
           handleChange(option);
         }
         if (event.code === 'ArrowDown') {
           event.preventDefault();
-          const nextElement = optionRefs.current[index + 1];
+          const nextElement = selectableRefs[index + 1];
           if (nextElement) {
             nextElement.focus();
           }
         }
         if (event.code === 'ArrowUp') {
           event.preventDefault();
-          const previousElement = optionRefs.current[index - 1];
+          const previousElement = selectableRefs[index - 1];
           if (previousElement) {
             previousElement.focus();
           }
         }
       },
-      [handleChange],
+      [handleChange, getSelectableRefs],
     );
-
-    console.log(optionRefs.current);
 
     useEffect(() => {
       if (!value) {
@@ -343,7 +348,11 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           >
             {options.map((op, index) => (
               <div
-                ref={(el) => (optionRefs.current[index] = el)}
+                ref={(el) => {
+                  if (!op.category) {
+                    optionRefs.current[index] = el;
+                  }
+                }}
                 onClick={() =>
                   op.category ? null : handleChange(op as OptionsType)
                 }
