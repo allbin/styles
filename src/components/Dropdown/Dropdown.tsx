@@ -149,6 +149,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     const Comp = asChild ? Slot : 'div';
 
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const optionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const [isOpen, setIsOpen] = useState(false);
     const [clickEnabled, setClickEnabled] = useState(true);
@@ -187,18 +188,18 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     });
 
     const checkCurrentIndex = useCallback(() => {
-      const currentIndex = selectableOptions.findIndex(
-        (op) => op.id === selectedValue?.id,
-      );
-      if (currentIndex > -1 && isOpen) {
-        const selectedElement = document.querySelector(
-          `[data-index="${currentIndex}"]`,
+      setTimeout(() => {
+        const currentIndex = selectableOptions.findIndex(
+          (op) => op.id === selectedValue?.id,
         );
-        if (selectedElement) {
-          (selectedElement as HTMLDivElement).focus();
+        if (currentIndex > -1) {
+          const selectedElement = optionRefs.current[currentIndex];
+          if (selectedElement) {
+            selectedElement.focus();
+          }
         }
-      }
-    }, [selectedValue, selectableOptions, isOpen]);
+      }, 0);
+    }, [selectedValue, selectableOptions]);
 
     const handleEscape = useCallback(() => {
       const escapeKeyDown = (event: KeyboardEvent) => {
@@ -226,11 +227,12 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         const newState = !prev;
         if (newState) {
           handleEscape();
+          checkCurrentIndex();
         }
         return newState;
       });
       setClickEnabled(false);
-    }, [disabled, handleEscape]);
+    }, [disabled, handleEscape, checkCurrentIndex]);
 
     const handleKeyDownOpenClose = useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -255,29 +257,23 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         }
         if (event.code === 'ArrowDown') {
           event.preventDefault();
-          const nextElement = document.querySelector(
-            `[data-index="${index + 1}"]`,
-          );
+          const nextElement = optionRefs.current[index + 1];
           if (nextElement) {
-            (nextElement as HTMLDivElement).focus();
+            nextElement.focus();
           }
         }
         if (event.code === 'ArrowUp') {
           event.preventDefault();
-          const previousElement = document.querySelector(
-            `[data-index="${index - 1}"]`,
-          );
+          const previousElement = optionRefs.current[index - 1];
           if (previousElement) {
-            (previousElement as HTMLDivElement).focus();
+            previousElement.focus();
           }
         }
       },
       [handleChange],
     );
 
-    useEffect(() => {
-      checkCurrentIndex();
-    }, [isOpen, checkCurrentIndex]);
+    console.log(optionRefs.current);
 
     useEffect(() => {
       if (!value) {
@@ -345,8 +341,9 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 : {}
             }
           >
-            {options.map((op) => (
+            {options.map((op, index) => (
               <div
+                ref={(el) => (optionRefs.current[index] = el)}
                 onClick={() =>
                   op.category ? null : handleChange(op as OptionsType)
                 }
