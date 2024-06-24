@@ -24,11 +24,10 @@ const inputVariants = cva(
     variants: {
       variant: {
         outline: [
-          // 'border-primary-400',
           'ring-1',
           'ring-inset',
           'ring-primary-400',
-          'placeholder:text-text-400',
+          'placeholder:text-text-500',
           'hover:ring-primary-600',
         ],
         error: [
