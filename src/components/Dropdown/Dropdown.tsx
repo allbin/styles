@@ -153,7 +153,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
     const [isOpen, setIsOpen] = useState(false);
     const [clickEnabled, setClickEnabled] = useState(true);
-    const [selectedId, setSelectedId] = useState<string>();
+    const [selectedId, setSelectedId] = useState('');
     const [selectedValue, setSelectedValue] = useState<OptionsType | undefined>(
       undefined,
     );
@@ -174,7 +174,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     const handleChange = useCallback(
       (value: OptionsType) => {
         const isSelected = selectedId === value.id;
-        setSelectedId(isSelected ? undefined : value.id);
+        setSelectedId(isSelected ? '' : value.id);
         setSelectedValue(isSelected ? undefined : value);
         if (onValueChange) {
           onValueChange(value);
@@ -256,7 +256,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         option: OptionsType,
         index: number,
       ) => {
-        // const selectableRefs = optionRefs.current.filter((el) => el !== null);
         const selectableRefs = getSelectableRefs();
         if (event.code === 'Space' || event.code === 'Enter') {
           event.preventDefault();
