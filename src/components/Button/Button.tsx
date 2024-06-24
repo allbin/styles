@@ -83,7 +83,7 @@ const buttonVariants = cva(
         color: 'red',
         variant: 'filled',
         class: [
-          'bg-red-500',
+          'bg-red-600',
           'text-contrast-red',
           'hover:bg-red-400',
           'disabled:bg-red-800/60',
@@ -99,7 +99,7 @@ const buttonVariants = cva(
         color: 'green',
         variant: 'filled',
         class: [
-          'bg-green-500',
+          'bg-green-600',
           'text-contrast-green',
           'hover:bg-green-400',
           'disabled:bg-green-800/60',
@@ -115,7 +115,7 @@ const buttonVariants = cva(
         color: 'blue',
         variant: 'filled',
         class: [
-          'bg-blue-500',
+          'bg-blue-600',
           'text-contrast-blue',
           'hover:bg-blue-400',
           'disabled:bg-blue-800/60',
@@ -131,7 +131,7 @@ const buttonVariants = cva(
         color: 'yellow',
         variant: 'filled',
         class: [
-          'bg-yellow-500',
+          'bg-yellow-600',
           'text-contrast-yellow',
           'hover:bg-yellow-400',
           'disabled:bg-yellow-800/60',
