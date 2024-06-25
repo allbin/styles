@@ -26,6 +26,7 @@ import { Route as GalleryLayoutTextareaImport } from './routes/gallery/_layout/t
 import { Route as GalleryLayoutSliderImport } from './routes/gallery/_layout/slider'
 import { Route as GalleryLayoutPositionpadImport } from './routes/gallery/_layout/positionpad'
 import { Route as GalleryLayoutInputImport } from './routes/gallery/_layout/input'
+import { Route as GalleryLayoutDropdownImport } from './routes/gallery/_layout/dropdown'
 import { Route as GalleryLayoutCheckboxImport } from './routes/gallery/_layout/checkbox'
 import { Route as GalleryLayoutButtonImport } from './routes/gallery/_layout/button'
 
@@ -106,6 +107,11 @@ const GalleryLayoutInputRoute = GalleryLayoutInputImport.update({
   getParentRoute: () => GalleryLayoutRoute,
 } as any)
 
+const GalleryLayoutDropdownRoute = GalleryLayoutDropdownImport.update({
+  path: '/dropdown',
+  getParentRoute: () => GalleryLayoutRoute,
+} as any)
+
 const GalleryLayoutCheckboxRoute = GalleryLayoutCheckboxImport.update({
   path: '/checkbox',
   getParentRoute: () => GalleryLayoutRoute,
@@ -174,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/checkbox'
       fullPath: '/gallery/checkbox'
       preLoaderRoute: typeof GalleryLayoutCheckboxImport
+      parentRoute: typeof GalleryLayoutImport
+    }
+    '/gallery/_layout/dropdown': {
+      id: '/gallery/_layout/dropdown'
+      path: '/dropdown'
+      fullPath: '/gallery/dropdown'
+      preLoaderRoute: typeof GalleryLayoutDropdownImport
       parentRoute: typeof GalleryLayoutImport
     }
     '/gallery/_layout/input': {
@@ -246,6 +259,7 @@ export const routeTree = rootRoute.addChildren({
     GalleryLayoutRoute: GalleryLayoutRoute.addChildren({
       GalleryLayoutButtonRoute,
       GalleryLayoutCheckboxRoute,
+      GalleryLayoutDropdownRoute,
       GalleryLayoutInputRoute,
       GalleryLayoutPositionpadRoute,
       GalleryLayoutSliderRoute,
