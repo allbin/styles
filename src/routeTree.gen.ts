@@ -21,6 +21,7 @@ import { Route as GalleryLayoutImport } from './routes/gallery/_layout'
 import { Route as GalleryLayoutIndexImport } from './routes/gallery/_layout/index'
 import { Route as GalleryLayoutTogglebuttongroupImport } from './routes/gallery/_layout/togglebuttongroup'
 import { Route as GalleryLayoutTogglebuttonImport } from './routes/gallery/_layout/togglebutton'
+import { Route as GalleryLayoutToastImport } from './routes/gallery/_layout/toast'
 import { Route as GalleryLayoutTextareaImport } from './routes/gallery/_layout/textarea'
 import { Route as GalleryLayoutSliderImport } from './routes/gallery/_layout/slider'
 import { Route as GalleryLayoutPositionpadImport } from './routes/gallery/_layout/positionpad'
@@ -78,6 +79,11 @@ const GalleryLayoutTogglebuttongroupRoute =
 
 const GalleryLayoutTogglebuttonRoute = GalleryLayoutTogglebuttonImport.update({
   path: '/togglebutton',
+  getParentRoute: () => GalleryLayoutRoute,
+} as any)
+
+const GalleryLayoutToastRoute = GalleryLayoutToastImport.update({
+  path: '/toast',
   getParentRoute: () => GalleryLayoutRoute,
 } as any)
 
@@ -211,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryLayoutTextareaImport
       parentRoute: typeof GalleryLayoutImport
     }
+    '/gallery/_layout/toast': {
+      id: '/gallery/_layout/toast'
+      path: '/toast'
+      fullPath: '/gallery/toast'
+      preLoaderRoute: typeof GalleryLayoutToastImport
+      parentRoute: typeof GalleryLayoutImport
+    }
     '/gallery/_layout/togglebutton': {
       id: '/gallery/_layout/togglebutton'
       path: '/togglebutton'
@@ -251,6 +264,7 @@ export const routeTree = rootRoute.addChildren({
       GalleryLayoutPositionpadRoute,
       GalleryLayoutSliderRoute,
       GalleryLayoutTextareaRoute,
+      GalleryLayoutToastRoute,
       GalleryLayoutTogglebuttonRoute,
       GalleryLayoutTogglebuttongroupRoute,
       GalleryLayoutIndexRoute,

@@ -47,7 +47,7 @@ const TopBar: React.FC = () => {
         <Input
           id="search"
           placeholder="Search"
-          icon={<MagnifyingGlassIcon className="size-5" />}
+          startAdornment={<MagnifyingGlassIcon className="size-5" />}
         />
       </div>
       <div className="ml-auto flex w-fit gap-1 px-1">

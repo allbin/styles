@@ -2,6 +2,7 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 import { Tooltip } from 'react-tooltip';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const inputVariants = cva(
   [
@@ -37,10 +38,6 @@ const inputVariants = cva(
           'focus:outline-red-600',
         ],
       },
-      adornment: {
-        start: ['pl-10'],
-        end: ['pr-10'],
-      },
     },
     defaultVariants: {
       variant: 'outline',
@@ -55,9 +52,10 @@ export interface BaseInputProps
   placeholder?: string;
   helperText?: string;
   toolTip?: string;
-  startAdornment?: React.ReactNode;
-  endAdornment?: React.ReactNode;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  disabled?: boolean;
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
 }
 
 type InputTypesProps =
@@ -66,8 +64,37 @@ type InputTypesProps =
       value?: string;
       min?: never;
       max?: never;
+      resize?: never;
+      rows?: never;
+      maxRows?: never;
+      minRows?: never;
+      startAdornment?: React.ReactNode;
+      endAdornment?: React.ReactNode;
     }
-  | { type: 'number'; value?: number; min?: number; max?: number };
+  | {
+      type: 'number';
+      value?: number;
+      min?: number;
+      max?: number;
+      resize?: never;
+      rows?: never;
+      maxRows?: never;
+      minRows?: never;
+      startAdornment?: React.ReactNode;
+      endAdornment?: React.ReactNode;
+    }
+  | {
+      type: 'multiline';
+      value?: string;
+      min?: never;
+      max?: never;
+      resize?: boolean;
+      rows?: number;
+      maxRows?: number;
+      minRows?: number;
+      startAdornment?: never;
+      endAdornment?: never;
+    };
 
 type InputIdLabelProps =
   | { id?: string; label?: never }
@@ -75,17 +102,25 @@ type InputIdLabelProps =
 
 type InputProps = BaseInputProps & InputTypesProps & InputIdLabelProps;
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+const Input = React.forwardRef<
+  HTMLInputElement | HTMLTextAreaElement,
+  InputProps
+>(
   (
     {
       id,
       className,
       type = 'text',
+      disabled = false,
       value,
       min,
       max,
       variant,
       toolTip,
+      resize = false,
+      rows,
+      maxRows,
+      minRows,
       error,
       label,
       placeholder,
@@ -108,13 +143,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={id}
-            className="absolute left-0 top-[-24px] mb-1 block text-sm font-medium leading-6 text-primary-900"
+            className="absolute left-0 top-[-24px] mb-1 ml-[7px] block text-sm font-medium leading-6 text-primary-900"
           >
             {label}
           </label>
         )}
         {helperText && (
-          <span className="absolute bottom-[-24px] mt-1 text-sm text-text-700">
+          <span className="absolute bottom-[-24px] ml-[7px] mt-1 text-sm text-text-700">
             {helperText}
           </span>
         )}
@@ -136,24 +171,50 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               {startAdornment}
             </div>
           )}
-          <input
-            type={type}
-            value={value}
-            className={cn(
-              inputVariants({
-                variant: error ? 'error' : variant,
-              }),
-              className,
-              startAdornment && 'pl-10',
-              endAdornment && 'pr-10',
-            )}
-            ref={ref}
-            placeholder={placeholder}
-            onChange={onChange}
-            min={min}
-            max={max}
-            {...props}
-          />
+          {['text', 'email', 'tel', 'number'].includes(type) && (
+            <input
+              className={cn(
+                inputVariants({
+                  variant: error ? 'error' : variant,
+                }),
+                className,
+                startAdornment && 'pl-10',
+                endAdornment && 'pr-10',
+              )}
+              type={type}
+              disabled={disabled}
+              value={value}
+              ref={ref as React.Ref<HTMLInputElement>}
+              placeholder={placeholder}
+              onChange={onChange}
+              min={min}
+              max={max}
+              {...props}
+            />
+          )}
+          {['multiline'].includes(type) && (
+            <TextareaAutosize
+              className={cn(
+                inputVariants({
+                  variant: error ? 'error' : variant,
+                }),
+                className,
+                resize ? 'resize-y' : 'resize-none',
+                'min-h-[36px]',
+              )}
+              placeholder={placeholder}
+              disabled={disabled}
+              value={value}
+              ref={ref as React.Ref<HTMLTextAreaElement>}
+              maxRows={rows ? rows : maxRows ? maxRows : undefined}
+              minRows={rows ? rows : minRows ? minRows : undefined}
+              onChange={onChange}
+              {...(props as Omit<
+                React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+                'style'
+              >)}
+            />
+          )}
           {endAdornment && (
             <div
               className={cn([
@@ -177,5 +238,4 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   },
 );
 Input.displayName = 'Input';
-
 export default Input;
