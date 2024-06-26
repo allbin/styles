@@ -56,9 +56,7 @@ const buttonVariants = cva(
         false: [],
       },
       hasColor: {
-        true: [
-          /* 'text-text-50' */
-        ],
+        true: [],
         false: [],
       },
     },
