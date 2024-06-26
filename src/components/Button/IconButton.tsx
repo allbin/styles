@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import { iconSizes } from './Button';
 import { Spinner } from '../spinner';
 import Button from './Button';
 
@@ -12,7 +11,7 @@ interface IconButtonProps {
   round?: boolean;
   loading?: boolean;
   disabled?: boolean;
-  color?: 'red' | 'green';
+  color?: 'red' | 'green' | 'blue' | 'yellow';
 }
 
 const IconButton: React.FC<IconButtonProps> = ({
@@ -26,8 +25,6 @@ const IconButton: React.FC<IconButtonProps> = ({
   disabled,
   onClick,
 }) => {
-  // const sizeClass = size ? iconSizes[size] : 'size-5';
-
   return (
     <Button
       size={size}

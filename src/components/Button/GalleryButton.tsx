@@ -18,7 +18,7 @@ const Btn: React.FC = () => {
     <div>
       <h2 className="mb-4">Buttons</h2>
       <h3>Variants</h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <Button onClick={() => console.log('click')}>Standard button</Button>
         <Button variant="filled">Filled button</Button>
         <Button variant="ghost">Ghost button</Button>
@@ -28,7 +28,7 @@ const Btn: React.FC = () => {
         </Button>
       </div>
       <h3>Rounded</h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <Button round>Standard round button</Button>
         <Button round variant="filled">
           Filled round button
@@ -38,14 +38,14 @@ const Btn: React.FC = () => {
         </Button>
       </div>
       <h3>Sizes</h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <Button size="sm">Small button</Button>
         <Button size="md">Default medium button</Button>
         <Button size="lg">Large button</Button>
         <Button size="xl">Extra large button</Button>
       </div>
       <h3>Text with icons </h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <Button startIcon={<IconHalfCookie />}>Start icon button</Button>
         <Button endIcon={<IconHalfCookie />}>End icon button</Button>
         <Button size="lg" endIcon={<IconHalfCookie />}>
@@ -63,7 +63,7 @@ const Btn: React.FC = () => {
         </Button>
       </div>
       <h3>Loading</h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <Button loading={true} endIcon={<IconHalfCookie />}>
           Loading button
         </Button>
@@ -76,7 +76,7 @@ const Btn: React.FC = () => {
         </Button>
       </div>
       <h3>Full width buttons</h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <Button className="w-full">Standard button</Button>
         <Button className="w-full" variant="filled">
           Filled button
@@ -89,7 +89,7 @@ const Btn: React.FC = () => {
         </Button>
       </div>
       <h3>Colors</h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <div className="flex flex-wrap gap-2">
           <Button color="red">Red standard button</Button>
           <Button color="red" variant="filled">
@@ -120,9 +120,39 @@ const Btn: React.FC = () => {
             Green round filled button
           </Button>
         </div>
+        <div className="flex flex-wrap gap-2">
+          <Button color="blue">Blue standard button</Button>
+          <Button color="blue" variant="filled">
+            Blue filled button
+          </Button>
+          <Button color="blue" variant="outline" disabled>
+            Blue disabled button
+          </Button>
+          <Button color="blue" variant="filled" disabled>
+            Blue filled disabled button
+          </Button>
+          <Button round color="blue" variant="filled">
+            Blue round filled button
+          </Button>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button color="yellow">Yellow standard button</Button>
+          <Button color="yellow" variant="filled">
+            Yellow filled button
+          </Button>
+          <Button color="yellow" variant="outline" disabled>
+            Yellow disabled button
+          </Button>
+          <Button color="yellow" variant="filled" disabled>
+            Yellow filled disabled button
+          </Button>
+          <Button round color="yellow" variant="filled">
+            Yellow round filled button
+          </Button>
+        </div>
       </div>
       <h3>Standard icon buttons</h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <IconButton icon={<IconHalfCookie />} />
         <IconButton variant="filled" icon={<IconHalfCookie />} />
         <IconButton variant="ghost" icon={<IconHalfCookie />} />
@@ -140,7 +170,7 @@ const Btn: React.FC = () => {
         />
       </div>
       <h3>Round icon buttons</h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <IconButton round icon={<IconHalfCookie />} />
         <IconButton round variant="filled" icon={<IconHalfCookie />} />
         <IconButton round variant="ghost" icon={<IconHalfCookie />} />
@@ -159,18 +189,22 @@ const Btn: React.FC = () => {
         />
       </div>
       <h3>Icon button sizes</h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <IconButton size="sm" icon={<IconHalfCookie />} />
         <IconButton size="md" icon={<IconHalfCookie />} />
         <IconButton size="lg" icon={<IconHalfCookie />} />
         <IconButton size="xl" icon={<IconHalfCookie />} />
       </div>
       <h3>Icon button colors</h3>
-      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <IconButton color="red" variant="filled" icon={<IconHalfCookie />} />
         <IconButton color="red" icon={<IconHalfCookie />} />
         <IconButton color="green" variant="filled" icon={<IconHalfCookie />} />
         <IconButton color="green" icon={<IconHalfCookie />} />
+        <IconButton color="blue" variant="filled" icon={<IconHalfCookie />} />
+        <IconButton color="blue" icon={<IconHalfCookie />} />
+        <IconButton color="yellow" variant="filled" icon={<IconHalfCookie />} />
+        <IconButton color="yellow" icon={<IconHalfCookie />} />
       </div>
     </div>
   );

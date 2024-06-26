@@ -41,8 +41,8 @@ const themes = [
 const TopBar: React.FC = () => {
   const [theme, setTheme] = useContext(ThemeCtx);
   return (
-    <div className="flex h-full items-center gap-2">
-      <div className="mr-auto">LOGO</div>
+    <div className="flex h-full items-center gap-2 border-b border-b-background-200">
+      <div className="mr-auto pl-4">LOGO</div>
       <div className="flex w-80">
         <Input
           id="search"

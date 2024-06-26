@@ -19,11 +19,14 @@ const buttonVariants = cva(
     'disabled:pointer-events-none',
     'active:opacity-80',
     'hover:bg-primary-200',
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-primary-600',
   ],
   {
     variants: {
       variant: {
-        filled: ['text-text-50', 'border-primary-500'],
+        filled: ['text-contrast-primary', 'border-primary-500'],
         outline: ['disabled:border-gray-400', 'disabled:text-gray-400'],
         ghost: ['border-none', 'bg-transparent', 'hover:bg-transparent'],
       },
@@ -35,8 +38,10 @@ const buttonVariants = cva(
       },
       color: {
         base: [],
-        red: ['border-red-700', 'hover:bg-red-200'],
-        green: ['border-green-700', 'hover:bg-green-200'],
+        red: ['border-red-600', 'hover:bg-red-200'],
+        green: ['border-green-600', 'hover:bg-green-200'],
+        blue: ['border-blue-600', 'hover:bg-blue-200'],
+        yellow: ['border-yellow-600', 'hover:bg-yellow-200'],
       },
       icon: {
         true: ['aspect-square', 'p-0'],
@@ -51,7 +56,7 @@ const buttonVariants = cva(
         false: [],
       },
       hasColor: {
-        true: ['text-text-50'],
+        true: [],
         false: [],
       },
     },
@@ -70,31 +75,65 @@ const buttonVariants = cva(
       {
         color: 'red',
         variant: 'outline',
-        class: ['border-red-700', 'text-red-700'],
+        class: ['border-red-500', 'text-red-500'],
       },
       {
         color: 'red',
         variant: 'filled',
         class: [
-          'bg-red-700',
-          'hover:bg-red-600',
-          'disabled:bg-red-900/60',
-          'disabled:text-red-900',
+          'bg-red-600',
+          'text-contrast-red',
+          'hover:bg-red-400',
+          'disabled:bg-red-800/60',
+          'disabled:text-red-700',
         ],
       },
       {
         color: 'green',
         variant: 'outline',
-        class: ['border-green-700', 'text-green-700'],
+        class: ['border-green-500', 'text-green-500'],
       },
       {
         color: 'green',
         variant: 'filled',
         class: [
-          'bg-green-700',
-          'hover:bg-green-600',
-          'disabled:bg-green-900/60',
-          'disabled:text-green-900',
+          'bg-green-600',
+          'text-contrast-green',
+          'hover:bg-green-400',
+          'disabled:bg-green-800/60',
+          'disabled:text-green-700',
+        ],
+      },
+      {
+        color: 'blue',
+        variant: 'outline',
+        class: ['border-blue-500', 'text-blue-500'],
+      },
+      {
+        color: 'blue',
+        variant: 'filled',
+        class: [
+          'bg-blue-600',
+          'text-contrast-blue',
+          'hover:bg-blue-400',
+          'disabled:bg-blue-800/60',
+          'disabled:text-blue-700',
+        ],
+      },
+      {
+        color: 'yellow',
+        variant: 'outline',
+        class: ['border-yellow-500', 'text-yellow-500'],
+      },
+      {
+        color: 'yellow',
+        variant: 'filled',
+        class: [
+          'bg-yellow-600',
+          'text-contrast-yellow',
+          'hover:bg-yellow-400',
+          'disabled:bg-yellow-800/60',
+          'disabled:text-yellow-700',
         ],
       },
       {

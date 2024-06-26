@@ -12,22 +12,22 @@ const inputVariants = cva(
     'border-0',
     'px-2',
     'py-1.5',
-    'focus:ring-0',
-    'focus:outline-primary-500',
     'disabled:bg-background-300/50',
     'disabled:text-text-700/50',
     'disabled:ring-primary-300',
     'bg-background-50',
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-primary-600',
   ],
   {
     variants: {
       variant: {
         outline: [
-          'border-secondary-500',
           'ring-1',
           'ring-inset',
-          'ring-secondary-300',
-          'placeholder:text-text-300',
+          'ring-primary-400',
+          'placeholder:text-text-500',
           'hover:ring-primary-600',
         ],
         error: [
@@ -35,7 +35,7 @@ const inputVariants = cva(
           'ring-1',
           'ring-red-600',
           'hover:ring-red-800',
-          'focus:outline-red-600',
+          'focus:ring-red-600',
         ],
       },
     },
@@ -149,7 +149,7 @@ const Input = React.forwardRef<
           </label>
         )}
         {helperText && (
-          <span className="absolute bottom-[-24px] ml-[7px] mt-1 text-sm text-text-700">
+          <span className="absolute bottom-[-24px] ml-[7px] mt-1 text-sm text-text-600">
             {helperText}
           </span>
         )}

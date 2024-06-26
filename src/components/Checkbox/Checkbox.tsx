@@ -20,7 +20,6 @@ const checkBoxVariants = cva([
   'duration-100',
   'enabled:cursor-pointer',
   'hover:bg-primary-300',
-  'text-white',
   'bg-white',
   'border',
   'border-primary-400',
@@ -69,7 +68,7 @@ const CheckBox = React.forwardRef<
         disabled={disabled}
         className={cn(checkBoxVariants({}), className)}
       >
-        <CheckboxPrimitives.Indicator className="flex size-full items-center justify-center">
+        <CheckboxPrimitives.Indicator className="flex size-full items-center justify-center text-contrast-primary">
           <IconCheck className="size-4" />
         </CheckboxPrimitives.Indicator>
       </CheckboxPrimitives.Root>
@@ -87,7 +86,7 @@ const CheckBox = React.forwardRef<
             {label}
           </label>
           {description && (
-            <span className="text-sm text-gray-500">{description}</span>
+            <span className="text-sm text-primary-700">{description}</span>
           )}
         </div>
       )}

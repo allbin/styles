@@ -11,7 +11,7 @@ const GalleryInput: React.FC = () => {
     <div>
       <h2 className="mb-4">Inputs</h2>
       <h3>Input default text field</h3>
-      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-primary-200 p-4">
         <Input />
         <Input disabled value={'Disabled'} />
         <Input id="error-1" error="This is an error message" />
@@ -48,15 +48,15 @@ const GalleryInput: React.FC = () => {
         />
       </div>
       <h3>Labels</h3>
-      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pt-10">
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-primary-200 p-4 pt-10">
         <Input id="id-1" label="This is a label with absolute position" />
       </div>
       <h3>Helper Text</h3>
-      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pb-10">
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-primary-200 p-4 pb-10">
         <Input helperText="This is a helper text with absolute position" />
       </div>
       <h3>Input with button example</h3>
-      <div className="mb-8 flex flex-row gap-2 rounded-md border border-gray-300 p-4 py-10">
+      <div className="mb-8 flex flex-row gap-2 rounded-md border border-primary-200 p-4 py-10">
         <Input
           id="id-2"
           placeholder="ex John Doe"
@@ -66,7 +66,7 @@ const GalleryInput: React.FC = () => {
         <Button variant="filled">Add</Button>
       </div>
       <h3>Input multiline text field</h3>
-      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-primary-200 p-4">
         <Input type="multiline" />
         <Input type="multiline" placeholder="This is a placeholder" />
         <Input
@@ -91,7 +91,7 @@ const GalleryInput: React.FC = () => {
         />
       </div>
       <h3>Min and Max multiline rows</h3>
-      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-primary-200 p-4">
         <Input type="multiline" maxRows={4} placeholder="max 4 rows" />
         <Input type="multiline" minRows={2} placeholder="min 2 rows" />
         <Input
