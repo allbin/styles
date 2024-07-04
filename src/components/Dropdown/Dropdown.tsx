@@ -381,7 +381,14 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                 {selectedId && selectedId === op.id && (
                   <CheckIcon className="mr-2 size-4" />
                 )}
-                {op.label || op.category}
+                <div className="flex flex-col">
+                  <span>{op.label || op.category}</span>
+                  {op.description && (
+                    <span className="text-sm text-text-600">
+                      {op.description}
+                    </span>
+                  )}
+                </div>
               </div>
             ))}
           </div>

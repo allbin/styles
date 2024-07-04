@@ -20,6 +20,19 @@ const GalleryDropdown: React.FC = () => {
     { id: '7', label: 'Remove all items', color: 'red' },
   ];
 
+  const dropdownDescriptionData: OptionsProps[] = [
+    { id: '1', label: 'Apple', description: 'Tastes like apple!' },
+    {
+      id: '2',
+      label: 'Orange',
+      description: 'Tastes like Fanta!',
+      color: 'green',
+    },
+    { id: '4', label: 'Cola', description: 'Tastes like Coca Cola!' },
+    { id: '5', label: 'Fanta', description: 'Tastes like Orange!' },
+    { id: '7', label: 'Remove all items', color: 'red' },
+  ];
+
   const selectedValue: OptionsType = {
     id: '1',
     label: 'Apple',
@@ -97,10 +110,63 @@ const GalleryDropdown: React.FC = () => {
           options={dropdownData}
         />
       </div>
+      <h3>Dropdown with description on options</h3>
+      <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4">
+        <Dropdown
+          id="dropdown-10"
+          placeholder="Default dropdown with onChange"
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
+          options={dropdownDescriptionData}
+        />
+        <Dropdown
+          id="dropdown-11"
+          placeholder="This one is disabled"
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
+          disabled
+          options={dropdownDescriptionData}
+        />
+        <Dropdown
+          id="dropdown-12"
+          placeholder="Selected value"
+          value={selectedValue}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
+          options={dropdownDescriptionData}
+        />
+        <Dropdown
+          id="dropdown-13"
+          placeholder="Error"
+          error
+          errorMessage="This is an error"
+          options={dropdownDescriptionData}
+        />
+        <Dropdown
+          id="dropdown-14"
+          placeholder="300px width"
+          dropDownWidth="300px"
+          options={dropdownDescriptionData}
+        />
+        <Dropdown
+          id="dropdown-15"
+          placeholder="With categories"
+          options={dropdownDescriptionData}
+        />
+        <Dropdown
+          id="dropdown-16"
+          placeholder="Defined hight on option box"
+          optionsContainerHeight="200px"
+          options={dropdownDescriptionData}
+        />
+      </div>
       <h3>Dropdown exemple</h3>
       <div className="mb-8 flex w-full flex-row gap-2 rounded-md border border-gray-300 p-4 py-10">
         <Dropdown
-          id="dropdown-10"
+          id="dropdown-17"
           placeholder="Choose an option"
           label="Exemple with button"
           helperText="This is a helper text with absolute position"
