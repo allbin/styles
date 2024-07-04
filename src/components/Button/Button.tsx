@@ -3,6 +3,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 import { Spinner } from '../spinner';
+import { Tooltip } from 'react-tooltip';
 
 const buttonVariants = cva(
   [
@@ -198,6 +199,8 @@ interface ButtonProps
   round?: boolean;
   icon?: boolean;
   loading?: boolean;
+  toolTip?: string;
+  id?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -214,6 +217,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       loading = false,
       round = false,
       asChild = false,
+      toolTip,
+      id,
       ...props
     },
     ref,
@@ -236,8 +241,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         ref={ref}
         type={type}
+        data-tooltip-id={id}
+        data-tooltip-content={toolTip}
         {...props}
       >
+        {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
         {loading && <Spinner />}
         {!loading && startIcon && <span>{startIcon}</span>}
         {props.children}
