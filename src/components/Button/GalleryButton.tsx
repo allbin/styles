@@ -75,6 +75,16 @@ const Btn: React.FC = () => {
           Click for loading state
         </Button>
       </div>
+      <h3>Tooltip</h3>
+      <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
+        <Button
+          id="button-1"
+          toolTip="This is a tooltip"
+          onClick={() => setIsLoading(true)}
+        >
+          Hover for tool tip
+        </Button>
+      </div>
       <h3>Full width buttons</h3>
       <div className="mb-8 flex flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <Button className="w-full">Standard button</Button>

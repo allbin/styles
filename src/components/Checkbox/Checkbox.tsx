@@ -3,6 +3,7 @@ import * as CheckboxPrimitives from '@radix-ui/react-checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 import { IconCheck } from '@allbin/icons';
+import { Tooltip } from 'react-tooltip';
 
 const checkBoxVariants = cva([
   'relative',
@@ -39,6 +40,7 @@ interface CheckboxBaseProps
   id: string;
   checked?: boolean;
   disabled?: boolean;
+  toolTip?: string;
   onClick?: () => void;
 }
 
@@ -57,42 +59,54 @@ type CheckboxProps = CheckboxWithLabelProps | CheckboxWithoutLabelProps;
 const CheckBox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitives.Root>,
   CheckboxProps
->(({ className, checked, disabled, id, label, description, ...props }, ref) => {
-  return (
-    <div className={cn('flex items-start gap-2')}>
-      <CheckboxPrimitives.Root
-        id={id}
-        ref={ref}
-        {...props}
-        checked={checked}
-        disabled={disabled}
-        className={cn(checkBoxVariants({}), className)}
-      >
-        <CheckboxPrimitives.Indicator className="flex size-full items-center justify-center text-contrast-primary">
-          <IconCheck className="size-4" />
-        </CheckboxPrimitives.Indicator>
-      </CheckboxPrimitives.Root>
-      {label && (
-        <div className="flex flex-col gap-1">
-          <label
-            className={cn(
-              !disabled
-                ? 'hover:cursor-pointer hover:text-primary-700'
-                : 'cursor-default, text-gray-400',
-              'text-sm font-medium',
-            )}
-            htmlFor={id}
+>(
+  (
+    { className, checked, disabled, id, label, description, toolTip, ...props },
+    ref,
+  ) => {
+    return (
+      <div className={cn('flex items-start gap-2')}>
+        <div
+          className={cn('flex gap-2')}
+          data-tooltip-id={id}
+          data-tooltip-content={toolTip}
+        >
+          {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
+          <CheckboxPrimitives.Root
+            id={id}
+            ref={ref}
+            {...props}
+            checked={checked}
+            disabled={disabled}
+            className={cn(checkBoxVariants({}), className)}
           >
-            {label}
-          </label>
-          {description && (
-            <span className="text-sm text-primary-700">{description}</span>
+            <CheckboxPrimitives.Indicator className="flex size-full items-center justify-center text-contrast-primary">
+              <IconCheck className="size-4" />
+            </CheckboxPrimitives.Indicator>
+          </CheckboxPrimitives.Root>
+          {label && (
+            <div className="flex flex-col gap-1">
+              <label
+                className={cn(
+                  !disabled
+                    ? 'hover:cursor-pointer hover:text-primary-700'
+                    : 'cursor-default, text-gray-400',
+                  'text-sm font-medium',
+                )}
+                htmlFor={id}
+              >
+                {label}
+              </label>
+              {description && (
+                <span className="text-sm text-primary-700">{description}</span>
+              )}
+            </div>
           )}
         </div>
-      )}
-    </div>
-  );
-});
+      </div>
+    );
+  },
+);
 CheckBox.displayName = 'CheckBox';
 
 export default CheckBox;
