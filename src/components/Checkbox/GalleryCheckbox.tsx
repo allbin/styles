@@ -27,12 +27,17 @@ const GalleryCheckbox: React.FC = () => {
           onClick={() => handleChange(!checkValue)}
           checked={checkValue}
         />
+        <CheckBox
+          id="Checkbox-5"
+          label="Hover for tool tip"
+          toolTip="This is a tooltip"
+        />
       </div>
       <h3>Disabled</h3>
       <div className="mb-8 flex flex-col flex-wrap gap-2 rounded-md border border-primary-200 p-4">
         <CheckBox id="Checkbox-4" label="Disabled" disabled />
         <CheckBox
-          id="checkbox-5"
+          id="checkbox-6"
           label="Disabled and checked"
           checked
           disabled
