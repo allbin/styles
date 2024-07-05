@@ -20,6 +20,13 @@ const GallerySlider: React.FC = () => {
         </h3>
       </div>
       <div>
+        <p>Standard slider (0-1)</p>
+        <Slider
+          id="slider-0"
+          value={value}
+          onChange={(value) => setValue(value)}
+          className="mb-4"
+        />
         <p>Slider (0-100)</p>
         <Slider
           id="slider-1"
@@ -97,6 +104,7 @@ const GallerySlider: React.FC = () => {
           className="mb-4"
           label="Slider Label"
           tooltip="This is a tooltip for the slider"
+          disabledTooltip="This is a tooltip to describe why the slider is disabled!"
           disabled
         />
       </div>
