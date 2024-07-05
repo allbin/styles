@@ -13,29 +13,39 @@ import {
 } from '@heroicons/react/24/outline';
 import { cn } from '../../helpers/classnames';
 
-export type Position = 'tl' | 't' | 'tr' | 'l' | 'c' | 'r' | 'bl' | 'b' | 'br';
-const all_positions: Position[] = [
-  'tl',
-  't',
-  'tr',
-  'l',
-  'c',
-  'r',
-  'bl',
-  'b',
-  'br',
+export type Position =
+  | 'top-left'
+  | 'top'
+  | 'top-right'
+  | 'left'
+  | 'center'
+  | 'right'
+  | 'bottom-left'
+  | 'bottom'
+  | 'bottom-right';
+
+const allPositions: Position[] = [
+  'top-left',
+  'top',
+  'top-right',
+  'left',
+  'center',
+  'right',
+  'bottom-left',
+  'bottom',
+  'bottom-right',
 ];
 
-const icon_by_position = {
-  tl: ArrowUpLeftIcon,
-  t: ArrowUpIcon,
-  tr: ArrowUpRightIcon,
-  r: ArrowRightIcon,
-  c: ArrowsPointingInIcon,
-  l: ArrowLeftIcon,
-  bl: ArrowDownLeftIcon,
-  b: ArrowDownIcon,
-  br: ArrowDownRightIcon,
+const iconByPosition = {
+  'top-left': ArrowUpLeftIcon,
+  top: ArrowUpIcon,
+  'top-right': ArrowUpRightIcon,
+  right: ArrowRightIcon,
+  center: ArrowsPointingInIcon,
+  left: ArrowLeftIcon,
+  'bottom-left': ArrowDownLeftIcon,
+  bottom: ArrowDownIcon,
+  'bottom-right': ArrowDownRightIcon,
 };
 
 interface PositionPadProps {
@@ -55,7 +65,7 @@ const PositionPad: React.FC<PositionPadProps> = ({
   disabled,
   className,
 }) => {
-  const selectable_positions = selectable || all_positions;
+  const selectablePositions = selectable || allPositions;
   return (
     <div className={cn('flex flex-col gap-1', className)}>
       {label && (
@@ -64,29 +74,26 @@ const PositionPad: React.FC<PositionPadProps> = ({
         </div>
       )}
       <div className="flex flex-wrap justify-center">
-        {all_positions.map((position) => {
-          const Icon = icon_by_position[position];
+        {allPositions.map((position) => {
+          const Icon = iconByPosition[position];
+          const positionDisabled =
+            disabled || !selectablePositions.includes(position);
           return (
-            <div
-              key={position}
-              className="flex basis-1/3 justify-center"
-              id={position}
-            >
-              {selectable_positions.includes(position) && (
-                <button
-                  onClick={() => onSelect(position)}
-                  disabled={disabled}
-                  className={cn(
-                    'm-1 grow cursor-pointer rounded border border-primary-600 p-2 text-primary-600 hover:bg-primary-200',
-                    selected === position &&
-                      'bg-primary-600 text-primary-50 hover:bg-primary-700',
-                    disabled &&
-                      'cursor-default border border-background-300 bg-background-200 text-background-300 hover:bg-background-200',
-                  )}
-                >
-                  <Icon className={cn('m-auto size-6')} />
-                </button>
-              )}
+            <div key={position} className="flex basis-1/3 justify-center">
+              <button
+                onClick={() => onSelect(position)}
+                disabled={positionDisabled}
+                className={cn(
+                  'm-1 grow cursor-pointer rounded border border-primary-600 p-2 text-primary-600 hover:bg-primary-200',
+                  selected === position &&
+                    'bg-primary-600 text-primary-50 hover:bg-primary-700',
+                  positionDisabled &&
+                    'cursor-default border border-background-300 bg-background-200 text-background-300 hover:bg-background-200',
+                  !selectablePositions.includes(position) && 'opacity-0',
+                )}
+              >
+                <Icon className={cn('m-auto size-6')} />
+              </button>
             </div>
           );
         })}

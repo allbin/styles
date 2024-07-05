@@ -6,8 +6,13 @@ const GalleryPositionPad: React.FC = () => {
     undefined,
   );
 
-  const cardinals_selectable = ['t', 'r', 'l', 'b'];
-  const ordinals_selectable = ['tl', 'tr', 'bl', 'br'];
+  const cardinals_selectable = ['top', 'right', 'left', 'bottom'];
+  const ordinals_selectable = [
+    'top-left',
+    'top-right',
+    'bottom-left',
+    'bottom-right',
+  ];
 
   return (
     <div className="flex flex-col gap-4">
@@ -21,7 +26,7 @@ const GalleryPositionPad: React.FC = () => {
       />
       <PositionPad
         label="A PositionPad with only cardinals selectable, interactable"
-        selectable={['t', 'r', 'l', 'b']}
+        selectable={['top', 'right', 'left', 'bottom']}
         selected={
           cardinals_selectable.includes(position as string)
             ? position
@@ -33,7 +38,7 @@ const GalleryPositionPad: React.FC = () => {
       />
       <PositionPad
         label="A PositionPad with only ordinals selectable, interactable"
-        selectable={['tl', 'tr', 'bl', 'br']}
+        selectable={['top-left', 'top-right', 'bottom-left', 'bottom-right']}
         selected={
           ordinals_selectable.includes(position as string)
             ? position
