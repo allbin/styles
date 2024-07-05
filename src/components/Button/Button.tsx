@@ -12,6 +12,7 @@ const buttonVariants = cva(
     'items-center',
     'justify-center',
     'gap-2',
+    'w-fit',
     'border',
     'border-primary-600',
     'transition-colors',
@@ -29,7 +30,12 @@ const buttonVariants = cva(
       variant: {
         filled: ['text-contrast-primary', 'border-primary-500'],
         outline: ['disabled:border-gray-400', 'disabled:text-gray-400'],
-        ghost: ['border-none', 'bg-transparent', 'hover:bg-transparent'],
+        ghost: [
+          'border-none',
+          'bg-transparent',
+          'hover:bg-primary-500',
+          'hover:text-contrast-primary',
+        ],
       },
       size: {
         sm: ['h-[24px]', 'text-sm'],
