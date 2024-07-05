@@ -34,11 +34,11 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
           data-tooltip-content={option.tooltip}
           key={option.value}
           className={cn(
-            'flex cursor-pointer items-center justify-between border border-l-0 border-primary-600 bg-background-50 p-1 text-primary-600 ring-inset first:rounded-l first:border-l last:rounded-r hover:bg-primary-100',
+            'flex cursor-pointer items-center justify-between border border-l-0 border-primary-500 bg-background-50 p-1 text-primary-600 ring-inset first:rounded-l first:border-l last:rounded-r hover:bg-primary-100',
             disabled &&
-              'cursor-default bg-background-300 opacity-50 ring-background-600 hover:bg-background-300',
+              'cursor-default bg-background-300 opacity-50 ring-background-500 hover:bg-background-300',
             value === option.value &&
-              'bg-primary-600 text-primary-200 hover:bg-primary-500 disabled:hover:bg-primary-600',
+              'bg-primary-500 !text-contrast-primary hover:bg-primary-400 disabled:hover:bg-primary-500',
             className,
           )}
           onClick={() => (disabled ? undefined : onChange(option.value))}
