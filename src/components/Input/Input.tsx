@@ -173,6 +173,7 @@ const Input = React.forwardRef<
           )}
           {['text', 'email', 'tel', 'number'].includes(type) && (
             <input
+              id={id}
               className={cn(
                 inputVariants({
                   variant: error ? 'error' : variant,
@@ -194,6 +195,7 @@ const Input = React.forwardRef<
           )}
           {['multiline'].includes(type) && (
             <TextareaAutosize
+              id={id}
               className={cn(
                 inputVariants({
                   variant: error ? 'error' : variant,
