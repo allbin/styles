@@ -28,22 +28,17 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
 }) => {
   return (
     <div className="flex">
-      <Tooltip id={id} />
-      {options.map((option, i, arr) => (
+      {options.map((option) => (
         <button
           data-tooltip-id={id}
           data-tooltip-content={option.tooltip}
-          data-tooltip-delay-show={300}
-          data-tooltip-delay-hide={1}
           key={option.value}
           className={cn(
-            'flex cursor-pointer items-center justify-between border border-primary-600 bg-background-50 p-1 text-primary-600',
-            i === 0 && 'rounded-l',
-            i === arr.length - 1 && 'rounded-r',
-            i > 0 && 'border-l-0',
+            'flex cursor-pointer items-center justify-between border border-l-0 border-primary-600 bg-background-50 p-1 text-primary-600 ring-inset first:rounded-l first:border-l last:rounded-r hover:bg-primary-100',
             disabled &&
-              'cursor-default border-background-600 bg-background-300 opacity-50',
-            value === option.value && 'bg-primary-600 text-primary-200',
+              'cursor-default bg-background-300 opacity-50 ring-background-600 hover:bg-background-300',
+            value === option.value &&
+              'bg-primary-600 text-primary-200 hover:bg-primary-500 disabled:hover:bg-primary-600',
             className,
           )}
           onClick={() => (disabled ? undefined : onChange(option.value))}
@@ -53,6 +48,7 @@ const ToggleButtonGroup: React.FC<ToggleButtonGroupProps> = ({
             {option.icon && <div>{option.icon}</div>}
             {option.label && <div>{option.label}</div>}
           </div>
+          <Tooltip id={id} delayShow={300} delayHide={1} />
         </button>
       ))}
     </div>
