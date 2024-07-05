@@ -20,23 +20,23 @@ const GallerySlider: React.FC = () => {
         </h3>
       </div>
       <div>
-        <p>Standard slider (0-1)</p>
         <Slider
           id="slider-0"
+          label="Standard slider (0-1)"
           value={value}
           onChange={(value) => setValue(value)}
           className="mb-4"
         />
-        <p>Slider (0-100)</p>
         <Slider
           id="slider-1"
+          label="Slider (0-100)"
           value={value}
           onChange={(value) => setValue(value)}
           min={0}
           max={100}
           className="mb-4"
         />
-        <p>Slider with label (0-1) (steps 0.1)</p>
+        <p>Slider with no label (0-1) (steps 0.1)</p>
         <Slider
           id="slider-2"
           value={smallValue}
@@ -45,14 +45,13 @@ const GallerySlider: React.FC = () => {
           max={1}
           step={0.1}
           className="mb-4"
-          label="Slider Label"
         />
-        <p>
-          Slider with only tooltip (doesnt work as tooltip is shown on label
-          hover) (steps 0.01)
-        </p>
         <Slider
           id="slider-3"
+          label="
+          Slider with only tooltip (doesnt work as tooltip is shown on label
+          hover) (steps 0.01)
+        "
           value={smallValue}
           onChange={(value) => setSmallValue(value)}
           min={0}
@@ -61,21 +60,20 @@ const GallerySlider: React.FC = () => {
           className="mb-4"
           tooltip="Tooltip"
         />
-        <p>Slider with label and tooltip (steps 0.001)</p>
         <Slider
           id="slider-4"
+          label="Slider with label and tooltip (steps 0.001)"
           value={smallValue}
           onChange={(value) => setSmallValue(value)}
           min={0}
           max={1}
           step={0.001}
           className="mb-4"
-          label="Slider Label"
           tooltip="This is a tooltip for the slider value goes between 0 and 1"
         />
-        <p>Slider with two values (minimum steps between thumbs = 5)</p>
         <Slider
           id="slider-5"
+          label="Slider with two values (minimum steps between thumbs = 5)"
           className="mb-4"
           value={doubleValue}
           onChange={(value) => setDoubleValue(value)}
@@ -83,9 +81,10 @@ const GallerySlider: React.FC = () => {
           max={100}
           minStepsBetweenThumbs={5}
         />
-        <p>Slider with three values (minimum steps between thumbs = 2)</p>
+        <p></p>
         <Slider
           id="slider-6"
+          label="Slider with three values (minimum steps between thumbs = 2)"
           className="mb-4"
           value={tripleValue}
           onChange={(value) => setTripleValue(value)}
@@ -93,7 +92,6 @@ const GallerySlider: React.FC = () => {
           max={100}
           minStepsBetweenThumbs={2}
         />
-        <p>Disabled slider</p>
         <Slider
           id="slider-7"
           value={smallValue}
@@ -102,7 +100,7 @@ const GallerySlider: React.FC = () => {
           max={1}
           step={0.01}
           className="mb-4"
-          label="Slider Label"
+          label="Disabled slider (hover slider for disabled tooltip)"
           tooltip="This is a tooltip for the slider"
           disabledTooltip="This is a tooltip to describe why the slider is disabled!"
           disabled

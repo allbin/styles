@@ -35,14 +35,16 @@ const Slider: React.FC<SliderProps> = ({
   return (
     <div className={cn(className)}>
       <Tooltip noArrow place="top" id={id} delayShow={500} />
-      <label
-        data-tooltip-id={id}
-        data-tooltip-content={tooltip}
-        htmlFor={id}
-        className="text-sm font-medium leading-6"
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          data-tooltip-id={id}
+          data-tooltip-content={tooltip}
+          htmlFor={id}
+          className="mb-1 ml-[7px] block text-sm font-medium leading-6 text-primary-900"
+        >
+          {label}
+        </label>
+      )}
       <Root
         data-tooltip-id={id}
         data-tooltip-content={disabled ? disabledTooltip : undefined}
