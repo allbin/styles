@@ -104,6 +104,7 @@ const GallerySlider: React.FC = () => {
           className="mb-4"
           label="Slider Label"
           tooltip="This is a tooltip for the slider"
+          disabledTooltip="This is a tooltip to describe why the slider is disabled!"
           disabled
         />
       </div>
