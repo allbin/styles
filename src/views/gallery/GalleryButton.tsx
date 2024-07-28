@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../core/Button';
-import IconButton from '../core/IconButton';
+import Button from '@/components/core/Button';
+import IconButton from '@/components/core/IconButton';
 import { IconHalfCookie, IconTrash } from '@allbin/icons';
 
 const Btn: React.FC = () => {

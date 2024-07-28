@@ -1,6 +1,6 @@
 import { FaceSmileIcon, HandThumbUpIcon } from '@heroicons/react/24/solid';
-import Button from '../core/Button';
-import { toast } from './useToast';
+import Button from '@/components/core/Button';
+import { toast } from '../../hooks/useToast';
 import { CloudArrowUpIcon } from '@heroicons/react/24/outline';
 import { IconEmojiTalkingAngry } from '@allbin/icons';
 

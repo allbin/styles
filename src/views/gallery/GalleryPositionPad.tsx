@@ -1,5 +1,5 @@
 import React from 'react';
-import PositionPad, { Position } from '../core/PositionPad';
+import PositionPad, { Position } from '../../components/core/PositionPad';
 
 const GalleryPositionPad: React.FC = () => {
   const [position, setPosition] = React.useState<Position | undefined>(
