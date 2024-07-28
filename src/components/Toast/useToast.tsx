@@ -1,5 +1,5 @@
 import { toast as t, ToastOptions, Id } from 'react-toastify';
-import { ToastMsg, ToastMsgProps } from './Toast';
+import { ToastMsg, ToastMsgProps } from '../core/Toast';
 import {
   CheckCircleIcon,
   ExclamationTriangleIcon,

@@ -1,5 +1,5 @@
 import React from 'react';
-import IconButton from '../Button/IconButton';
+import IconButton from '../core/IconButton';
 import { IconProfileCircle } from '@allbin/icons';
 
 const Profile: React.FC = () => {

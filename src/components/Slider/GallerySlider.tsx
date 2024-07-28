@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from './Slider';
+import Slider from '../core/Slider';
 
 const GallerySlider: React.FC = () => {
   const [value, setValue] = React.useState<number[]>([30]);

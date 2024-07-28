@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconBus } from '@allbin/icons';
 
-import ToggleButton from './ToggleButton';
+import ToggleButton from './core/ToggleButton';
 
 const GalleryToggleButton: React.FC = () => {
   const [toggled, setToggled] = React.useState(false);

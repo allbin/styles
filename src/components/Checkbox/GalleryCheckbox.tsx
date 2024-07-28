@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import CheckBox from './Checkbox';
+import CheckBox from '../core/Checkbox';
 
 const GalleryCheckbox: React.FC = () => {
   const [checkValue, setCheckValue] = React.useState<boolean>(false);

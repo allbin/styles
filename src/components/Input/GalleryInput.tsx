@@ -1,7 +1,7 @@
 import React from 'react';
-import Input from './Input';
+import Input from '../core/Input';
 import { FaceSmileIcon, TrashIcon } from '@heroicons/react/24/solid';
-import Button from '../Button/Button';
+import Button from '../core/Button';
 
 const GalleryInput: React.FC = () => {
   const [textValue, setTextValue] = React.useState('This contains a value');

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TextArea from './TextArea';
+import TextArea from '../core/TextArea';
 
 const GalleryTextArea = () => {
   const [value, setValue] = React.useState<string>('');

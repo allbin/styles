@@ -1,8 +1,8 @@
 import React from 'react';
-import Input from '@/components/Input/Input';
-import CheckBox from '@/components/Checkbox/Checkbox';
-import Button from '@/components/Button/Button';
-import IconButton from '@/components/Button/IconButton';
+import Input from '@/components/core/Input';
+import CheckBox from '@/components/core/Checkbox';
+import IconButton from '@/components/core/IconButton';
+import Button from '@/components/core/Button';
 import { IconArrowRight, IconTrash, IconEdit } from '@allbin/icons';
 
 const tableData = [
@@ -109,7 +109,7 @@ const Home: React.FC = () => {
                 privacy policy.
               </span>
             </div>
-            <Button variant={'filled'} endIcon={<IconArrowRight />}>
+            <Button variant="filled" endIcon={<IconArrowRight />}>
               Next
             </Button>
           </div>
@@ -137,13 +137,13 @@ const Home: React.FC = () => {
               <span className="w-2/6">{user.email}</span>
               <div className="flex w-1/6 justify-end gap-2">
                 <IconButton
-                  variant={'filled'}
+                  variant="filled"
                   size="sm"
                   color="blue"
                   icon={<IconEdit />}
                 />
                 <IconButton
-                  variant={'filled'}
+                  variant="filled"
                   size="sm"
                   color="red"
                   icon={<IconTrash />}
