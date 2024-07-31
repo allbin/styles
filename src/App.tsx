@@ -3,7 +3,7 @@ import { RouterProvider } from '@tanstack/react-router';
 import { ThemeCtx } from './contexts/ThemeContext';
 import { cn } from './helpers/classnames';
 import { router } from './router';
-import Toast from './components/Toast/Toast';
+import Toast from './components/core/Toast';
 
 // needed to make toast work
 import 'react-toastify/dist/ReactToastify.min.css';

@@ -1,5 +1,5 @@
+import { cn } from '@/helpers/classnames';
 import React from 'react';
-import { cn } from '../helpers/classnames';
 import { Tooltip } from 'react-tooltip';
 
 export interface ToggleButtonOption {

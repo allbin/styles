@@ -1,12 +1,12 @@
 import { toast as t, ToastOptions, Id } from 'react-toastify';
-import { ToastMsg, ToastMsgProps } from './Toast';
+import { ToastMsg, ToastMsgProps } from '../components/core/Toast';
 import {
   CheckCircleIcon,
   ExclamationTriangleIcon,
   InformationCircleIcon,
   XCircleIcon,
 } from '@heroicons/react/24/outline';
-import { Spinner } from '../spinner';
+import { Spinner } from '../components/spinner';
 
 const icons = {
   success: <CheckCircleIcon className="size-7" />,

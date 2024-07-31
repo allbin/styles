@@ -1,7 +1,6 @@
 import React from 'react';
-
 import { IconAlignLeft, IconAlignCenter, IconAlignRight } from '@allbin/icons';
-import ToggleButtonGroup from './ToggleButtonGroup';
+import ToggleButtonGroup from '@/components/core/ToggleButtonGroup';
 
 const GalleryToggleButtonGroup: React.FC = () => {
   const options = [

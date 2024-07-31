@@ -1,6 +1,10 @@
 import React from 'react';
-import Button from '../Button/Button';
-import { Dropdown, OptionsType, OptionsProps } from './Dropdown';
+import {
+  OptionsProps,
+  OptionsType,
+  Dropdown,
+} from '@/components/core/Dropdown';
+import Button from '@/components/core/Button';
 
 const GalleryDropdown: React.FC = () => {
   const dropdownCategoryData: OptionsProps[] = [

@@ -2,19 +2,19 @@ import React, { useContext } from 'react';
 import Profile from './Profile';
 import { ThemeCtx } from '../../contexts/ThemeContext';
 import Select from '../Select';
-import Input from '../Input/Input';
+import Input from '../core/Input';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 const themes = [
   {
     id: 'default',
-    label: 'Default theme',
-    description: 'The base AllBinary style',
+    label: 'Transport theme',
+    description: 'Overrides for Transport',
   },
   {
-    id: 'default dark theme',
-    label: 'Default dark',
-    description: 'The base dark AllBinary style',
+    id: 'default dark',
+    label: 'Transport dark theme',
+    description: 'Dark overrides for Transport',
   },
   {
     id: 'viu',
@@ -25,16 +25,6 @@ const themes = [
     id: 'viu dark',
     label: 'Viu dark theme',
     description: 'The dark style overrides used by Viu',
-  },
-  {
-    id: 'transport',
-    label: 'Transport theme',
-    description: 'Overrides for Transport',
-  },
-  {
-    id: 'transport dark',
-    label: 'Transport dark theme',
-    description: 'Dark overrides for Transport',
   },
 ];
 

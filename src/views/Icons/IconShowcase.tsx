@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '@/components/Button/Button';
 import { LinkIcon } from '@heroicons/react/24/outline';
 import { IconBusStop } from '@allbin/icons';
+import Button from '@/components/core/Button';
 
 export interface IconShowcaseProps {
   role: string;
