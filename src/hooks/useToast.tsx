@@ -35,7 +35,7 @@ const warningToast = (props: ToastMsgProps, options?: ToastOptions): Id =>
 const errorToast = (props: ToastMsgProps, options?: ToastOptions): Id =>
   t.error(<ToastMsg {...props} icon={props.icon ?? icons.error} />, {
     ...options,
-    autoClose: false,
+    autoClose: options?.autoClose || false,
   });
 const promiseToast = <TData = unknown,>(
   promise: Promise<TData>,
