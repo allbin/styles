@@ -134,7 +134,7 @@ const Input = React.forwardRef<
   ) => {
     return (
       <div
-        className="group relative grow"
+        className="group relative"
         data-tooltip-id={id}
         data-tooltip-content={error ? error : toolTip}
         data-tooltip-variant={error ? 'error' : 'dark'}
