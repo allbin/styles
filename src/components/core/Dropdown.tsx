@@ -336,7 +336,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         {isOpen && (
           <div
             className={cn(
-              'absolute top-10 z-50 flex w-full cursor-pointer flex-col rounded-md border border-primary-300 bg-background-50 p-2',
+              'absolute top-10 z-[100] flex w-full cursor-pointer flex-col rounded-md border border-primary-300 bg-background-50 p-2',
               className,
             )}
             style={
