@@ -5,7 +5,11 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import { ChevronDownIcon, CheckIcon } from '@heroicons/react/24/solid';
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  CheckIcon,
+} from '@heroicons/react/24/solid';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 import { Slot } from '@radix-ui/react-slot';
@@ -326,7 +330,11 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           ) : (
             <span className="italic">{placeholder}</span>
           )}
-          <ChevronDownIcon className="size-4" />
+          {!isOpen ? (
+            <ChevronDownIcon className="size-4" />
+          ) : (
+            <ChevronUpIcon className="size-4" />
+          )}
         </Comp>
         {helperText && (
           <span className="absolute bottom-[-24px] mt-1 pl-2 text-sm text-text-700">
@@ -336,14 +344,13 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         {isOpen && (
           <div
             className={cn(
-              'absolute top-10 z-[100] flex w-full cursor-pointer flex-col rounded-md border border-primary-300 bg-background-50 p-2',
+              'absolute top-10 z-[100] flex w-full cursor-pointer flex-col overscroll-contain rounded-md border border-primary-300 bg-background-50 p-2',
               className,
             )}
-            style={
-              optionsContainerHeight
-                ? { height: optionsContainerHeight, overflowY: 'auto' }
-                : {}
-            }
+            style={{
+              overflowY: 'auto',
+              maxHeight: optionsContainerHeight ?? '300px',
+            }}
           >
             {options.map((op, index) => (
               <div
