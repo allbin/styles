@@ -5,11 +5,7 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  CheckIcon,
-} from '@heroicons/react/24/solid';
+import { ChevronDownIcon, CheckIcon } from '@heroicons/react/24/solid';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../helpers/classnames';
 import { Slot } from '@radix-ui/react-slot';
@@ -330,11 +326,12 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           ) : (
             <span className="italic">{placeholder}</span>
           )}
-          {!isOpen ? (
-            <ChevronDownIcon className="size-4" />
-          ) : (
-            <ChevronUpIcon className="size-4" />
-          )}
+          <ChevronDownIcon
+            className={cn(
+              'size-4 transition-all duration-200',
+              isOpen && 'rotate-180',
+            )}
+          />
         </Comp>
         {helperText && (
           <span className="absolute bottom-[-24px] mt-1 pl-2 text-sm text-text-700">
