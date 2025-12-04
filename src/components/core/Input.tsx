@@ -9,33 +9,37 @@ const inputVariants = cva(
     'block',
     'w-full',
     'rounded-md',
-    'border-0',
+    'border',
     'px-2',
-    'py-1.5',
-    'disabled:bg-background-300/50',
-    'disabled:text-text-700/50',
-    'disabled:ring-primary-300',
+    'py-1',
+    'text-text-800',
+    'disabled:bg-background-400',
+    'disabled:text-text-800',
+    'disabled:border-background-200',
     'bg-background-50',
+    'transition-colors',
     'focus:outline-none',
-    'focus:ring-2',
-    'focus:ring-primary-600',
+    'focus-visible:outline-none',
+    'focus-visible:ring-2',
+    'focus-visible:ring-inset',
+    'focus-visible:ring-primary-600',
+    'focus-visible:shadow-[0_0_0_3px_inset_white]',
+    'focus:text-text-950',
+    'placeholder:text-opacity-50',
   ],
   {
     variants: {
       variant: {
         outline: [
-          'ring-1',
-          'ring-inset',
-          'ring-primary-400',
-          'placeholder:text-text-500',
-          'hover:ring-primary-600',
+          'border-background-400',
+          'placeholder:text-text-600',
+          'hover:bg-background-200',
         ],
         error: [
           'text-red-700',
-          'ring-1',
-          'ring-red-600',
-          'hover:ring-red-800',
-          'focus:ring-red-600',
+          'border-red-600',
+          'hover:bg-red-200',
+          'focus-visible:bg-red-200',
         ],
       },
     },
@@ -51,7 +55,9 @@ export interface BaseInputProps
   error?: string;
   placeholder?: string;
   helperText?: string;
+  helperTextReserveSpace?: boolean;
   toolTip?: string;
+  maxLength?: number;
   disabled?: boolean;
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -70,6 +76,7 @@ type InputTypesProps =
       minRows?: never;
       startAdornment?: React.ReactNode;
       endAdornment?: React.ReactNode;
+      maxLength?: number;
     }
   | {
       type: 'number';
@@ -82,6 +89,7 @@ type InputTypesProps =
       minRows?: never;
       startAdornment?: React.ReactNode;
       endAdornment?: React.ReactNode;
+      maxLength?: never;
     }
   | {
       type: 'multiline';
@@ -94,6 +102,20 @@ type InputTypesProps =
       minRows?: number;
       startAdornment?: never;
       endAdornment?: never;
+      maxLength?: number;
+    }
+  | {
+      type: 'date';
+      value?: string;
+      min?: string;
+      max?: string;
+      resize?: never;
+      rows?: number;
+      maxRows?: number;
+      minRows?: number;
+      startAdornment?: never;
+      endAdornment?: never;
+      maxLength?: never;
     };
 
 type InputIdLabelProps =
@@ -113,8 +135,6 @@ const Input = React.forwardRef<
       type = 'text',
       disabled = false,
       value,
-      min,
-      max,
       variant,
       toolTip,
       resize = false,
@@ -125,6 +145,7 @@ const Input = React.forwardRef<
       label,
       placeholder,
       helperText,
+      helperTextReserveSpace = false,
       startAdornment,
       endAdornment,
       onChange,
@@ -132,28 +153,34 @@ const Input = React.forwardRef<
     },
     ref,
   ) => {
+    // Generate unique IDs for error and helper text to link with aria-describedby
+    const errorId = id ? `${id}-error` : undefined;
+    const helperTextId = id ? `${id}-helper` : undefined;
+    const describedBy = id
+      ? [error && errorId, helperText && helperTextId]
+          .filter(Boolean)
+          .join(' ') || undefined
+      : undefined;
+
     return (
       <div
-        className="group relative"
+        className="group relative grow"
         data-tooltip-id={id}
         data-tooltip-content={error ? error : toolTip}
         data-tooltip-variant={error ? 'error' : 'dark'}
       >
-        {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
+        {id ? (
+          <Tooltip id={id} delayShow={300} delayHide={1} opacity={1} />
+        ) : null}
         {label && (
           <label
             htmlFor={id}
-            className="absolute left-0 top-[-24px] mb-1 ml-[7px] block text-sm font-medium leading-6 text-primary-900"
+            className="absolute bottom-full left-0 block text-base font-medium leading-6 text-text-900"
           >
             {label}
           </label>
         )}
-        {helperText && (
-          <span className="absolute bottom-[-24px] ml-[7px] mt-1 text-sm text-text-600">
-            {helperText}
-          </span>
-        )}
-        <div className="relative grow rounded-md shadow-sm">
+        <div className="relative grow rounded-md">
           {startAdornment && (
             <div
               className={cn([
@@ -163,15 +190,15 @@ const Input = React.forwardRef<
                 'flex',
                 'items-center',
                 'pl-3',
-                'text-primary-500',
-                'group-focus-within:text-text-700',
-                'group-hover:text-primary-700',
+                'text-text-700',
+                'group-hover:text-text-800',
+                'group-focus-within:text-text-900',
               ])}
             >
               {startAdornment}
             </div>
           )}
-          {['text', 'email', 'tel', 'number'].includes(type) && (
+          {['text', 'email', 'tel', 'number', 'date'].includes(type) && (
             <input
               id={id}
               className={cn(
@@ -188,8 +215,9 @@ const Input = React.forwardRef<
               ref={ref as React.Ref<HTMLInputElement>}
               placeholder={placeholder}
               onChange={onChange}
-              min={min}
-              max={max}
+              aria-invalid={error ? 'true' : undefined}
+              aria-describedby={describedBy}
+              aria-required={props.required ? 'true' : undefined}
               {...props}
             />
           )}
@@ -202,7 +230,6 @@ const Input = React.forwardRef<
                 }),
                 className,
                 resize ? 'resize-y' : 'resize-none',
-                'min-h-[36px]',
               )}
               placeholder={placeholder}
               disabled={disabled}
@@ -211,6 +238,14 @@ const Input = React.forwardRef<
               maxRows={rows ? rows : maxRows ? maxRows : undefined}
               minRows={rows ? rows : minRows ? minRows : undefined}
               onChange={onChange}
+              aria-invalid={error ? 'true' : undefined}
+              aria-describedby={describedBy}
+              aria-required={
+                (props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)
+                  .required
+                  ? 'true'
+                  : undefined
+              }
               {...(props as Omit<
                 React.TextareaHTMLAttributes<HTMLTextAreaElement>,
                 'style'
@@ -226,15 +261,39 @@ const Input = React.forwardRef<
                 'flex',
                 'items-center',
                 'pr-3',
-                'text-primary-500',
-                'group-focus-within:text-text-700',
-                'group-hover:text-primary-700',
+                'text-text-700',
+                'group-hover:text-text-800',
+                'group-focus-within:text-text-900',
               ])}
             >
               {endAdornment}
             </div>
           )}
         </div>
+        {error && (
+          <p
+            id={errorId}
+            role="alert"
+            aria-live="polite"
+            className={cn(
+              'ml-[7px] block text-base leading-4 text-red-700',
+              !helperTextReserveSpace && 'absolute top-full',
+            )}
+          >
+            {error}
+          </p>
+        )}
+        {helperText && !error && (
+          <p
+            id={helperTextId}
+            className={cn(
+              'ml-[7px] block text-base leading-4 text-text-600',
+              !helperTextReserveSpace && 'absolute top-full',
+            )}
+          >
+            {helperText}
+          </p>
+        )}
       </div>
     );
   },

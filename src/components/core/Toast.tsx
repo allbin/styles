@@ -20,44 +20,72 @@ const App: React.FC = () => {
 };*/
 
 import React from 'react';
-import { ToastContainer, ToastContainerProps } from 'react-toastify';
+import {
+  cssTransition,
+  ToastContainer,
+  ToastContainerProps,
+} from 'react-toastify';
+import { useIntl } from 'react-intl';
 import { cn } from '@/helpers/classnames';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { IconXmark } from '@/icons';
 
 const contextClass = {
-  success: 'bg-green-600',
-  error: 'bg-red-600',
-  info: 'bg-blue-600',
-  warning: 'bg-yellow-500',
+  success: 'bg-green-500 text-contrast-green',
+  error: 'bg-red-600 text-contrast-red',
+  info: 'bg-blue-600 text-contrast-blue',
+  warning: 'bg-yellow-500 text-contrast-yellow',
   default: 'bg-background-50 border border-text-800 text-text-800',
 };
 
-const Toast: React.FC<ToastContainerProps> = (props) => {
+interface ToastProps extends ToastContainerProps {
+  animations?: boolean;
+}
+
+const Toast: React.FC<ToastProps> = (props) => {
+  const { formatMessage } = useIntl();
+
+  const disabledTransition = cssTransition({
+    enter: 'noop-enter',
+    exit: 'noop-exit',
+    collapseDuration: 1,
+  });
+
+  const specialProps: ToastProps = {};
+
+  if (!props.animations) {
+    specialProps.transition = disabledTransition;
+  }
+
   return (
     <ToastContainer
       icon={false}
-      hideProgressBar
-      newestOnTop
+      hideProgressBar={true}
+      newestOnTop={true}
       autoClose={5000}
       position="bottom-right"
       className={cn('flex flex-col gap-2')}
-      bodyClassName={cn('flex')}
+      bodyClassName="flex"
+      {...specialProps}
       closeButton={({ closeToast, type }) => (
-        <button onClick={closeToast} className="size-fit min-h-9 pr-1.5">
+        <button
+          onClick={closeToast}
+          className="size-fit min-h-9 pr-1.5"
+          aria-label={formatMessage({ defaultMessage: 'Stäng meddelande' })}
+        >
           <div
             className={cn(
               'flex size-fit items-center justify-center rounded-full p-1 transition-colors hover:bg-white/30',
               type === 'default' && 'hover:bg-background-950/20',
             )}
           >
-            <XMarkIcon className="size-5" />
+            <IconXmark className="size-5" aria-hidden="true" />
           </div>
         </button>
       )}
       toastClassName={(context) =>
         cn(
           contextClass[context?.type || 'default'],
-          'flex p-1 min-h-11 rounded-md justify-between overflow-hidden',
+          'flex p-1 min-h-11 rounded-md shadow-[0_0_0_1px_#fff] justify-between overflow-hidden',
         )
       }
       {...props}
