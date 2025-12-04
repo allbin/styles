@@ -1,13 +1,24 @@
 import React from 'react';
-import { cn } from '../helpers/classnames';
+import { useIntl } from 'react-intl';
+import { cn } from '@/helpers/classnames';
 
-export const Spinner: React.FC<{ className?: string }> = ({ className }) => {
+export const Spinner: React.FC<{
+  className?: string;
+  style?: React.CSSProperties;
+}> = ({ className, style }) => {
+  const { formatMessage } = useIntl();
+
   return (
     <svg
-      className={cn('h-12 w-12 animate-spin text-primary-500', className)}
+      className={cn('size-12 animate-spin text-primary-500', className)}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
+      style={style}
+      role="status"
+      aria-label={formatMessage({
+        defaultMessage: 'Laddar',
+      })}
     >
       <circle
         className="opacity-25"
