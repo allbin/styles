@@ -1,10 +1,9 @@
 import React, { PropsWithChildren } from 'react';
 import { cn } from '../../helpers/classnames';
-import { Link, RoutesByPath } from '@tanstack/react-router';
-import { router } from '@/router';
+import { Link, FileRoutesByPath } from '@tanstack/react-router';
 
 interface NavElementProps {
-  to: keyof RoutesByPath<typeof router.routeTree>;
+  to: keyof FileRoutesByPath;
 }
 
 const NavElement: React.FC<PropsWithChildren<NavElementProps>> = ({

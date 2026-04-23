@@ -1,9 +1,9 @@
 import React from 'react';
 import * as CheckboxPrimitives from '@radix-ui/react-checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../helpers/classnames';
-import { IconCheck } from '@allbin/icons';
+import { cn } from '@/helpers/classnames.ts';
 import { Tooltip } from 'react-tooltip';
+import { IconCheck } from '@/icons';
 
 const checkBoxVariants = cva([
   'relative',
@@ -14,24 +14,27 @@ const checkBoxVariants = cva([
   'items-center',
   'justify-center',
   'rounded',
-  'border',
   'shadow-sm',
   'outline-none',
   'transition',
   'duration-100',
   'enabled:cursor-pointer',
   'hover:bg-primary-300',
-  'bg-white',
+  'bg-background-50',
   'border',
-  'border-primary-400',
-  'data-[disabled]:border-gray-300 data-[disabled]:bg-gray-100 data-[disabled]:text-white',
-  'data-[disabled]:bg-gray-300 ',
-  'enabled:data-[state=checked]:border-0 enabled:data-[state=checked]:border-transparent enabled:data-[state=checked]:bg-primary-600',
-  'enabled:hover:data-[state=checked]:bg-primary-700',
+  'border-2',
+  'border-primary-500',
+  'enabled:data-[state=checked]:border-transparent',
+  'enabled:data-[state=checked]:bg-primary-500',
+  'enabled:hover:data-[state=checked]:opacity-80',
+  'data-[disabled]:border-background-400',
+  'data-[disabled]:text-text-950',
+  'data-[disabled]:bg-background-400',
+  'data-[disabled]:data-[state=checked]:!bg-background-500',
+  'data-[disabled]:data-[state=checked]:border-background-500',
+  'focus-visible:ring-primary-500',
+  'focus-visible:ring-2',
   'focus-visible:ring-offset-2',
-  'focus:ring-primary-600',
-  'focus:ring-2',
-  'focus:ring-offset-2',
 ]);
 
 interface CheckboxBaseProps
@@ -41,17 +44,20 @@ interface CheckboxBaseProps
   checked?: boolean;
   disabled?: boolean;
   toolTip?: string;
+  error?: string;
   onClick?: () => void;
 }
 
 interface CheckboxWithLabelProps extends CheckboxBaseProps {
   label: string;
   description?: string;
+  labelClassName?: string;
 }
 
 interface CheckboxWithoutLabelProps extends CheckboxBaseProps {
   label?: never;
   description?: never;
+  labelClassName?: never;
 }
 
 type CheckboxProps = CheckboxWithLabelProps | CheckboxWithoutLabelProps;
@@ -61,9 +67,31 @@ const CheckBox = React.forwardRef<
   CheckboxProps
 >(
   (
-    { className, checked, disabled, id, label, description, toolTip, ...props },
+    {
+      className,
+      checked,
+      disabled,
+      id,
+      label,
+      description,
+      labelClassName,
+      toolTip,
+      ...props
+    },
     ref,
   ) => {
+    const handleKeyDown = React.useCallback(
+      (event: React.KeyboardEvent<HTMLButtonElement>) => {
+        if ((event.code === 'Space' || event.code === 'Enter') && !disabled) {
+          event.preventDefault();
+          props.onClick?.();
+          props.onChange?.(event);
+          props.onCheckedChange?.(checked || 'indeterminate');
+        }
+      },
+      [disabled, props, checked],
+    );
+
     return (
       <div className={cn('flex items-start gap-2')}>
         <div
@@ -78,6 +106,7 @@ const CheckBox = React.forwardRef<
             {...props}
             checked={checked}
             disabled={disabled}
+            onKeyDown={handleKeyDown}
             className={cn(checkBoxVariants({}), className)}
           >
             <CheckboxPrimitives.Indicator className="flex size-full items-center justify-center text-contrast-primary">
@@ -85,20 +114,20 @@ const CheckBox = React.forwardRef<
             </CheckboxPrimitives.Indicator>
           </CheckboxPrimitives.Root>
           {label && (
-            <div className="flex flex-col gap-1">
+            <div className={cn('flex flex-col gap-1', labelClassName)}>
               <label
                 className={cn(
                   !disabled
-                    ? 'hover:cursor-pointer hover:text-primary-700'
-                    : 'cursor-default, text-gray-400',
-                  'text-sm font-medium',
+                    ? 'hover:cursor-pointer hover:text-text-900'
+                    : 'cursor-default, text-text-400',
+                  'text-sm font-medium text-text-800',
                 )}
                 htmlFor={id}
               >
                 {label}
               </label>
               {description && (
-                <span className="text-sm text-primary-700">{description}</span>
+                <span className="text-sm text-text-700">{description}</span>
               )}
             </div>
           )}
@@ -107,6 +136,6 @@ const CheckBox = React.forwardRef<
     );
   },
 );
-CheckBox.displayName = 'CheckBox';
 
+CheckBox.displayName = 'CheckBox';
 export default CheckBox;

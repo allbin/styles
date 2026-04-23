@@ -79,23 +79,35 @@ const GalleryDropdown: React.FC = () => {
           error
           errorMessage="This is an error"
           options={dropdownData}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
         />
         <Dropdown
           id="dropdown-5"
           placeholder="300px width"
           dropDownWidth="300px"
           options={dropdownData}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
         />
         <Dropdown
           id="dropdown-6"
           placeholder="With categories"
           options={dropdownCategoryData}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
         />
         <Dropdown
           id="dropdown-7"
           placeholder="Defined hight on option box"
           optionsContainerHeight="200px"
           options={dropdownCategoryData}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
         />
       </div>
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pt-8">
@@ -104,6 +116,9 @@ const GalleryDropdown: React.FC = () => {
           placeholder="With label"
           label="This is a label with absolute position"
           options={dropdownData}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
         />
       </div>
       <div className="mb-8 flex flex-col gap-2 rounded-md border border-gray-300 p-4 pb-8">
@@ -112,6 +127,9 @@ const GalleryDropdown: React.FC = () => {
           placeholder="With helper text"
           helperText="This is a helper text with absolute position"
           options={dropdownData}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
         />
       </div>
       <h3>Dropdown with description on options</h3>
@@ -148,23 +166,35 @@ const GalleryDropdown: React.FC = () => {
           error
           errorMessage="This is an error"
           options={dropdownDescriptionData}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
         />
         <Dropdown
           id="dropdown-14"
           placeholder="300px width"
           dropDownWidth="300px"
           options={dropdownDescriptionData}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
         />
         <Dropdown
           id="dropdown-15"
           placeholder="With categories"
           options={dropdownDescriptionData}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
         />
         <Dropdown
           id="dropdown-16"
           placeholder="Defined hight on option box"
           optionsContainerHeight="200px"
           options={dropdownDescriptionData}
+          onValueChange={(value) => {
+            console.log('Selected: ', value);
+          }}
         />
       </div>
       <h3>Dropdown exemple</h3>
