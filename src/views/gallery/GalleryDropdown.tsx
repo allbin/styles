@@ -103,7 +103,7 @@ const GalleryDropdown: React.FC = () => {
         <Dropdown
           id="dropdown-7"
           placeholder="Defined hight on option box"
-          optionsContainerHeight="200px"
+          optionsContainerMaxHeight="200px"
           options={dropdownCategoryData}
           onValueChange={(value) => {
             console.log('Selected: ', value);
@@ -182,7 +182,7 @@ const GalleryDropdown: React.FC = () => {
         <Dropdown
           id="dropdown-15"
           placeholder="With categories"
-          options={dropdownDescriptionData}
+          options={dropdownCategoryData}
           onValueChange={(value) => {
             console.log('Selected: ', value);
           }}
@@ -190,7 +190,7 @@ const GalleryDropdown: React.FC = () => {
         <Dropdown
           id="dropdown-16"
           placeholder="Defined hight on option box"
-          optionsContainerHeight="200px"
+          optionsContainerMaxHeight="200px"
           options={dropdownDescriptionData}
           onValueChange={(value) => {
             console.log('Selected: ', value);

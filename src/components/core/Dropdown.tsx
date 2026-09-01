@@ -3,6 +3,7 @@ import React, {
   useState,
   useMemo,
   useEffect,
+  useImperativeHandle,
   useRef,
 } from 'react';
 import {
@@ -12,12 +13,19 @@ import {
   IconChevronDown,
 } from '@/icons';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../helpers/classnames';
+import { cn } from '@/helpers/classnames';
 import { Slot } from '@radix-ui/react-slot';
-import { Tooltip } from 'react-tooltip';
 import useClickOutside from '@/hooks/useClickOutside';
+import useListPlacement from '@/hooks/useListPlacement';
 import { FormattedMessage } from 'react-intl';
 import Button from './Button';
+
+// The placement logic needs the cap as a number of pixels; other CSS units are
+// left for the stylesheet to apply.
+const parsePxHeight = (value?: string): number | undefined => {
+  const match = value?.match(/^(\d+(?:\.\d+)?)px$/);
+  return match ? parseFloat(match[1]) : undefined;
+};
 
 const dropdownVariants = cva(
   [
@@ -89,7 +97,7 @@ const dropdownVariants = cva(
   },
 );
 
-const optionsColor = {
+const COLORS = {
   default: 'text-primary-500 hover:text-primary-800',
   red: 'text-red-500 hover:text-red-900',
   green: 'text-green-500 hover:text-green-800',
@@ -119,20 +127,22 @@ interface CategoryOptionType extends OptionsBaseProps {
 export type OptionsProps = OptionsType | CategoryOptionType;
 
 export interface BaseProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof dropdownVariants> {
   asChild?: boolean;
   id: string;
-  placeholder: string;
+  placeholder?: string;
   disabled?: boolean;
   label?: string;
   helperText?: string;
   error?: boolean;
   errorMessage?: string;
-  optionsContainerHeight?: string;
+  optionsContainerMaxHeight?: string;
   dropDownWidth?: string;
   options: OptionsProps[];
   containerRef?: React.RefObject<HTMLElement>;
+  preventReselect?: boolean;
 }
 
 interface SingleSelectProps extends BaseProps {
@@ -149,7 +159,14 @@ interface MultiSelectProps extends BaseProps {
 
 type DropdownProps = SingleSelectProps | MultiSelectProps;
 
-const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
+export interface DropdownHandle {
+  /** Moves focus to the field. */
+  focus: () => void;
+  /** Moves focus to the field and opens the options list. */
+  open: () => void;
+}
+
+const Dropdown = React.forwardRef<DropdownHandle, DropdownProps>(
   (
     {
       className,
@@ -163,12 +180,13 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       errorMessage,
       error = false,
       helperText,
-      optionsContainerHeight,
+      optionsContainerMaxHeight,
       dropDownWidth,
       disabled = false,
       asChild = false,
       multiSelect = false,
       containerRef,
+      preventReselect = false,
       ...props
     },
     ref,
@@ -176,13 +194,23 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
     const Comp = asChild ? Slot : 'div';
 
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const fieldRef = useRef<HTMLDivElement>(null);
     const optionsRef = useRef<HTMLDivElement>(null);
     const optionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const [isOpen, setIsOpen] = useState(false);
+    const [openRequested, setOpenRequested] = useState(false);
     const [clickEnabled, setClickEnabled] = useState(true);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [selectedValues, setSelectedValues] = useState<OptionsType[]>([]);
+
+    const { placeAbove, maxListHeight } = useListPlacement({
+      isOpen,
+      anchorRef: dropdownRef,
+      listRef: optionsRef,
+      containerRef,
+      maxHeight: parsePxHeight(optionsContainerMaxHeight),
+    });
 
     const selectableOptions = useMemo(() => {
       return options.filter((opt) => !opt.category);
@@ -204,6 +232,11 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
 
     const handleChange = useCallback(
       (value: OptionsType) => {
+        if (preventReselect && !multiSelect && selectedIds.includes(value.id)) {
+          closeDropdown();
+          return;
+        }
+
         if (multiSelect) {
           const newSelectedIds = selectedIds.includes(value.id)
             ? selectedIds.filter((id) => id !== value.id)
@@ -222,21 +255,24 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           // Type assertion is safe here because we know multiSelect is true
           (onValueChange as (value: OptionsType[]) => void)(newSelectedValues);
         } else {
-          const isSelected = selectedIds.includes(value.id);
-          const newSelectedIds = isSelected ? [] : [value.id];
-          const newSelectedValues = isSelected ? [] : [value];
-
-          setSelectedIds(newSelectedIds);
-          setSelectedValues(newSelectedValues);
+          // Single-select does not toggle off: that would pass undefined to a
+          // required onValueChange. preventReselect skips the callback instead.
+          setSelectedIds([value.id]);
+          setSelectedValues([value]);
 
           // Type assertion is safe here because we know multiSelect is false
-          (onValueChange as (value: OptionsType) => void)(
-            newSelectedValues[0] || undefined,
-          );
+          (onValueChange as (value: OptionsType) => void)(value);
           closeDropdown();
         }
       },
-      [selectedIds, selectedValues, multiSelect, closeDropdown, onValueChange],
+      [
+        selectedIds,
+        selectedValues,
+        multiSelect,
+        closeDropdown,
+        onValueChange,
+        preventReselect,
+      ],
     );
 
     useClickOutside([dropdownRef, optionsRef], clickEnabled, () => {
@@ -244,115 +280,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         closeDropdown();
       }
     });
-
-    useEffect(() => {
-      if (!isOpen || !dropdownRef.current || !optionsRef.current) return;
-
-      const calculatePosition = () => {
-        const dropdownElement = dropdownRef.current;
-        const optionsElement = optionsRef.current;
-
-        if (!dropdownElement || !optionsElement) return;
-
-        const container = containerRef?.current || window;
-        let containerRect: DOMRect;
-        let containerHeight: number;
-        let containerWidth: number;
-
-        if (container === window) {
-          containerHeight = window.innerHeight;
-          containerWidth = window.innerWidth;
-          containerRect = new DOMRect(0, 0, containerWidth, containerHeight);
-        } else {
-          containerRect = (container as HTMLElement).getBoundingClientRect();
-          containerHeight = containerRect.height;
-          containerWidth = containerRect.width;
-        }
-
-        const dropdownRect = dropdownElement.getBoundingClientRect();
-
-        let spaceBelow: number;
-        let spaceAbove: number;
-
-        if (container === window) {
-          spaceBelow = containerHeight - dropdownRect.bottom;
-          spaceAbove = dropdownRect.top;
-        } else {
-          spaceBelow = containerRect.bottom - dropdownRect.bottom;
-          spaceAbove = dropdownRect.top - containerRect.top;
-        }
-
-        let desiredOptionsHeight = optionsElement.scrollHeight;
-        if (optionsContainerHeight) {
-          desiredOptionsHeight = parseInt(
-            optionsContainerHeight.replace(/\D/g, ''),
-            10,
-          );
-        }
-
-        const buffer = 20;
-        const requiredSpace = desiredOptionsHeight + buffer;
-
-        let finalHeight = desiredOptionsHeight;
-        let shouldPositionAbove = false;
-
-        if (spaceBelow >= requiredSpace) {
-          finalHeight = desiredOptionsHeight;
-          shouldPositionAbove = false;
-        } else if (spaceAbove >= requiredSpace) {
-          finalHeight = desiredOptionsHeight;
-          shouldPositionAbove = true;
-        } else {
-          const availableSpaceAbove = Math.max(120, spaceAbove - buffer);
-          const availableSpaceBelow = Math.max(120, spaceBelow - buffer);
-
-          if (availableSpaceAbove > availableSpaceBelow) {
-            finalHeight = availableSpaceAbove;
-            shouldPositionAbove = true;
-          } else {
-            finalHeight = availableSpaceBelow;
-            shouldPositionAbove = false;
-          }
-        }
-
-        if (finalHeight < desiredOptionsHeight) {
-          optionsElement.style.maxHeight = `${finalHeight}px`;
-          optionsElement.style.overflowY = 'auto';
-        } else if (optionsContainerHeight) {
-          optionsElement.style.maxHeight = optionsContainerHeight;
-          optionsElement.style.overflowY = 'auto';
-        } else {
-          optionsElement.style.maxHeight = 'none';
-          optionsElement.style.overflowY = 'visible';
-        }
-
-        if (shouldPositionAbove) {
-          optionsElement.style.bottom = '100%';
-          optionsElement.style.top = 'auto';
-        } else {
-          optionsElement.style.top = '100%';
-          optionsElement.style.bottom = 'auto';
-        }
-      };
-
-      // Use a short delay to ensure DOM is ready
-      const timer = setTimeout(calculatePosition, 10);
-
-      const handleEvents = () => {
-        if (isOpen) {
-          calculatePosition();
-        }
-      };
-
-      window.addEventListener('resize', handleEvents);
-      window.addEventListener('scroll', handleEvents, true);
-
-      return () => {
-        clearTimeout(timer);
-        window.removeEventListener('resize', handleEvents);
-        window.removeEventListener('scroll', handleEvents, true);
-      };
-    }, [isOpen, optionsContainerHeight, containerRef]);
 
     const checkCurrentIndex = useCallback(() => {
       setTimeout(() => {
@@ -371,23 +298,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       }, 0);
     }, [selectedValues, selectableOptions, getSelectableRefs]);
 
-    const handleEscape = useCallback(() => {
-      const escapeKeyDown = (event: KeyboardEvent) => {
-        if (event.code === 'Escape') {
-          closeDropdown();
-        }
-      };
-
-      const dropdownElement = dropdownRef.current;
-      if (dropdownElement) {
-        dropdownElement.addEventListener('keydown', escapeKeyDown);
-
-        return () => {
-          dropdownElement.removeEventListener('keydown', escapeKeyDown);
-        };
-      }
-    }, [dropdownRef, closeDropdown]);
-
     // Handle focus leaving the dropdown component
     const handleBlur = useCallback(
       (event: React.FocusEvent) => {
@@ -403,31 +313,64 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
       [closeDropdown],
     );
 
+    const openDropdown = useCallback(() => {
+      if (disabled) {
+        return;
+      }
+      setIsOpen(true);
+      setClickEnabled(false);
+      checkCurrentIndex();
+    }, [disabled, checkCurrentIndex]);
+
     const handleClickOpenClose = useCallback(() => {
       if (disabled) {
         return;
       }
 
-      setIsOpen((prev) => {
-        const newState = !prev;
-        if (newState) {
-          handleEscape();
-          checkCurrentIndex();
-        }
-        return newState;
-      });
-      setClickEnabled(false);
-    }, [disabled, handleEscape, checkCurrentIndex]);
+      if (isOpen) {
+        closeDropdown();
+        return;
+      }
+      openDropdown();
+    }, [disabled, isOpen, openDropdown, closeDropdown]);
+
+    // An open asked for through the ref can arrive in the same commit the
+    // dropdown mounted in, before the selected value has been picked up from
+    // the props, so it is carried out on the following render instead.
+    useEffect(() => {
+      if (!openRequested) {
+        return;
+      }
+      setOpenRequested(false);
+      openDropdown();
+    }, [openRequested, openDropdown]);
+
+    useImperativeHandle(
+      ref,
+      () => ({
+        focus: () => fieldRef.current?.focus(),
+        open: () => {
+          fieldRef.current?.focus();
+          setOpenRequested(true);
+        },
+      }),
+      [],
+    );
 
     const handleKeyDownOpenClose = useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.code === 'Escape' && isOpen) {
+          event.preventDefault();
+          closeDropdown();
+          return;
+        }
         if (event.code === 'Space' || event.code === 'Enter') {
           event.preventDefault();
           setClickEnabled(false);
           handleClickOpenClose();
         }
       },
-      [handleClickOpenClose],
+      [handleClickOpenClose, isOpen, closeDropdown],
     );
 
     const handleKeyDownUpOptions = useCallback(
@@ -455,12 +398,18 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             previousElement.focus();
           }
         }
+        if (event.code === 'Escape') {
+          event.preventDefault();
+          closeDropdown();
+        }
       },
-      [handleChange, getSelectableRefs],
+      [handleChange, getSelectableRefs, closeDropdown],
     );
 
     useEffect(() => {
       if (!value) {
+        setSelectedValues([]);
+        setSelectedIds([]);
         return;
       }
 
@@ -468,15 +417,15 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         setSelectedValues(value);
         setSelectedIds(value.map((v) => v.id));
       } else if (!multiSelect && !Array.isArray(value)) {
-        setSelectedValues(value ? [value] : []);
-        setSelectedIds(value ? [value.id] : []);
+        setSelectedValues([value]);
+        setSelectedIds([value.id]);
       }
     }, [value, multiSelect]);
 
-    const renderSelectedValue = () => {
+    const renderSelectedValue = (): React.ReactNode => {
       if (selectedValues.length === 0) {
         return (
-          <span className="pr-1 font-light italic text-text-600">
+          <span className="pr-1 font-light italic text-text-700">
             {/* pr-1 to prevent text from being cut off */}
             {placeholder}
           </span>
@@ -499,7 +448,6 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
         ref={dropdownRef}
         onBlur={handleBlur}
       >
-        {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
         {label && (
           <label
             id={`${id}-label`}
@@ -520,27 +468,35 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             dropDownWidth && `w-[${dropDownWidth}]`,
             className,
           )}
-          ref={ref}
+          ref={fieldRef}
+          role="combobox"
           onClick={handleClickOpenClose}
           onKeyDown={handleKeyDownOpenClose}
-          tabIndex={0}
+          tabIndex={disabled ? -1 : 0}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-controls={`${id}-listbox`}
           aria-labelledby={label ? `${id}-label` : undefined}
           aria-label={label ? undefined : placeholder}
+          aria-invalid={error || undefined}
+          aria-disabled={disabled || undefined}
           {...props}
         >
-          <span className="truncate">{renderSelectedValue()}</span>
+          <span className="min-h-5 truncate">{renderSelectedValue()}</span>
           <IconChevronDown
             className={cn(
               'size-4 min-w-4 transition-transform',
               isOpen && 'rotate-180',
             )}
+            aria-hidden="true"
           />
         </Comp>
         {helperText && (
-          <span className="absolute bottom-full pl-2 text-base text-text-700">
+          <span
+            className={cn(
+              'absolute top-full ml-[7px] text-base leading-4 text-text-700',
+            )}
+          >
             {helperText}
           </span>
         )}
@@ -552,17 +508,17 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
             aria-multiselectable={multiSelect}
             className={cn(
               'absolute z-50 flex w-full flex-col overflow-y-auto overflow-x-hidden overscroll-contain rounded-md border border-background-300 bg-background-100 p-2 shadow-lg',
+              placeAbove ? 'bottom-full' : 'top-full',
               className,
             )}
-            style={
-              optionsContainerHeight ? { height: optionsContainerHeight } : {}
-            }
+            style={{ maxHeight: maxListHeight ?? optionsContainerMaxHeight }}
           >
             {multiSelect && (
               <div className="mb-1 flex items-center justify-between border-b border-background-300 pb-1">
                 <span className="text-sm text-text-900">
                   <FormattedMessage
-                    defaultMessage="{count} valda"
+                    id="dropdown.selected_count"
+                    defaultMessage="{count} selected"
                     values={{ count: selectedIds.length }}
                   />
                 </span>
@@ -577,13 +533,19 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   }}
                   className="text-sm"
                 >
-                  <FormattedMessage defaultMessage="Rensa val" />
+                  <FormattedMessage
+                    id="dropdown.clear_selection"
+                    defaultMessage="Clear selection"
+                  />
                 </Button>
               </div>
             )}
             {options.length === 0 && (
-              <span className="text-sm italic text-text-600">
-                <FormattedMessage defaultMessage="Inga alternativ tillgängliga" />
+              <span className="text-sm italic text-text-700">
+                <FormattedMessage
+                  id="dropdown.no_options"
+                  defaultMessage="No options available"
+                />
               </span>
             )}
             {options.map((op, index) => {
@@ -591,13 +553,26 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
               if (multiSelect) {
                 if (op.id && selectedIds.includes(op.id)) {
                   icon = (
-                    <IconCheckboxChecked className="mr-2 size-5 min-w-5" />
+                    <IconCheckboxChecked
+                      className="mr-2 size-5 min-w-5"
+                      aria-hidden="true"
+                    />
                   );
                 } else {
-                  icon = <IconCheckboxEmpty className="mr-2 size-5 min-w-5" />;
+                  icon = (
+                    <IconCheckboxEmpty
+                      className="mr-2 size-5 min-w-5"
+                      aria-hidden="true"
+                    />
+                  );
                 }
               } else if (op.id && selectedIds.includes(op.id)) {
-                icon = <IconCheck className="mr-2 size-5 min-w-5" />;
+                icon = (
+                  <IconCheck
+                    className="mr-2 size-5 min-w-5"
+                    aria-hidden="true"
+                  />
+                );
               }
 
               return (
@@ -611,15 +586,15 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                     op.category ? null : handleChange(op as OptionsType)
                   }
                   className={cn(
-                    'flex cursor-pointer items-center rounded-md p-2 hover:bg-primary-300 focus:outline-none',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-600',
+                    'flex cursor-pointer items-center rounded-md px-2 py-1.5 text-text-900 hover:bg-primary-300 focus:outline-none',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-600 active:opacity-80',
                     op.id && selectedIds.includes(op.id)
                       ? 'bg-primary-500 text-contrast-primary'
                       : '',
                     op.category &&
-                      'mt-2 cursor-default text-sm font-semibold hover:bg-transparent',
-                    op.color === 'red' && optionsColor.red,
-                    op.color === 'green' && optionsColor.green,
+                      'mt-2 cursor-default pl-1 text-sm font-semibold hover:bg-transparent',
+                    op.color === 'red' && COLORS.red,
+                    op.color === 'green' && COLORS.green,
                   )}
                   tabIndex={!op.category ? 0 : -1}
                   onKeyDown={(e) =>
@@ -635,7 +610,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   }
                   key={op.id ?? op.category}
                   data-type={!op.category ? ['option'] : undefined}
-                  role={!op.category ? 'option' : undefined}
+                  role={!op.category ? 'option' : 'presentation'}
                   aria-selected={
                     !op.category && op.id
                       ? selectedIds.includes(op.id)
@@ -643,10 +618,20 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   }
                 >
                   {icon}
-                  <div className="flex flex-col leading-4">
-                    <span>{op.label || op.category}</span>
+                  <div className="flex flex-col leading-5">
+                    <span>
+                      {op.label || op.category}
+                      {op.category ? ':' : null}
+                    </span>
                     {op.description && (
-                      <span className="text-sm leading-3 text-text-700">
+                      <span
+                        className={cn(
+                          'text-sm leading-4',
+                          op.id && selectedIds.includes(op.id)
+                            ? 'text-contrast-primary opacity-80'
+                            : 'text-text-800',
+                        )}
+                      >
                         {op.description}
                       </span>
                     )}

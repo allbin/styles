@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../helpers/classnames';
+import { cn } from '@/helpers/classnames';
 import { Tooltip } from 'react-tooltip';
 import TextareaAutosize from 'react-textarea-autosize';
+import { FormattedMessage } from 'react-intl';
 
 const inputVariants = cva(
   [
@@ -32,7 +33,7 @@ const inputVariants = cva(
       variant: {
         outline: [
           'border-background-400',
-          'placeholder:text-text-600',
+          'placeholder:text-text-700',
           'hover:bg-background-200',
         ],
         error: [
@@ -49,8 +50,30 @@ const inputVariants = cva(
   },
 );
 
+/**
+ * WebKit/Blink's UA stylesheet adds ~1px of vertical padding to the shadow-DOM
+ * fields of temporal inputs, making `type="date"` render 2px taller (26px inner
+ * height) than the other input types (24px). Zeroing that padding—and letting
+ * the spin button size itself—keeps the date input the same height as the rest.
+ */
+const dateInputResetClasses = [
+  '[&::-webkit-datetime-edit]:p-0',
+  '[&::-webkit-datetime-edit-fields-wrapper]:p-0',
+  '[&::-webkit-datetime-edit-text]:p-0',
+  '[&::-webkit-datetime-edit-year-field]:p-0',
+  '[&::-webkit-datetime-edit-month-field]:p-0',
+  '[&::-webkit-datetime-edit-day-field]:p-0',
+  '[&::-webkit-datetime-edit-hour-field]:p-0',
+  '[&::-webkit-datetime-edit-minute-field]:p-0',
+  '[&::-webkit-datetime-edit-second-field]:p-0',
+  '[&::-webkit-datetime-edit-millisecond-field]:p-0',
+  '[&::-webkit-datetime-edit-meridiem-field]:p-0',
+  '[&::-webkit-inner-spin-button]:h-auto',
+].join(' ');
+
 export interface BaseInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
+  extends
+    React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof inputVariants> {
   error?: string;
   placeholder?: string;
@@ -149,18 +172,17 @@ const Input = React.forwardRef<
       startAdornment,
       endAdornment,
       onChange,
+      'aria-describedby': externalDescribedBy,
       ...props
     },
     ref,
   ) => {
-    // Generate unique IDs for error and helper text to link with aria-describedby
     const errorId = id ? `${id}-error` : undefined;
     const helperTextId = id ? `${id}-helper` : undefined;
-    const describedBy = id
-      ? [error && errorId, helperText && helperTextId]
-          .filter(Boolean)
-          .join(' ') || undefined
-      : undefined;
+    const describedBy =
+      [error && errorId, helperText && helperTextId, externalDescribedBy]
+        .filter(Boolean)
+        .join(' ') || undefined;
 
     return (
       <div
@@ -178,23 +200,25 @@ const Input = React.forwardRef<
             className="absolute bottom-full left-0 block text-base font-medium leading-6 text-text-900"
           >
             {label}
+            {props.required && (
+              <>
+                <span className="ml-1" aria-hidden="true">
+                  *
+                </span>
+                <span className="sr-only">
+                  {' '}
+                  <FormattedMessage
+                    id="formElement.requiredFieldHint"
+                    defaultMessage="(obligatoriskt fält)"
+                  />
+                </span>
+              </>
+            )}
           </label>
         )}
         <div className="relative grow rounded-md">
           {startAdornment && (
-            <div
-              className={cn([
-                'absolute',
-                'inset-y-0',
-                'left-0',
-                'flex',
-                'items-center',
-                'pl-3',
-                'text-text-700',
-                'group-hover:text-text-800',
-                'group-focus-within:text-text-900',
-              ])}
-            >
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-text-700 group-focus-within:text-text-900 group-hover:text-text-800">
               {startAdornment}
             </div>
           )}
@@ -208,6 +232,7 @@ const Input = React.forwardRef<
                 className,
                 startAdornment && 'pl-10',
                 endAdornment && 'pr-10',
+                type === 'date' && dateInputResetClasses,
               )}
               type={type}
               disabled={disabled}
@@ -253,19 +278,7 @@ const Input = React.forwardRef<
             />
           )}
           {endAdornment && (
-            <div
-              className={cn([
-                'absolute',
-                'inset-y-0',
-                'right-0',
-                'flex',
-                'items-center',
-                'pr-3',
-                'text-text-700',
-                'group-hover:text-text-800',
-                'group-focus-within:text-text-900',
-              ])}
-            >
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-text-700 group-focus-within:text-text-900 group-hover:text-text-800">
               {endAdornment}
             </div>
           )}
@@ -287,7 +300,7 @@ const Input = React.forwardRef<
           <p
             id={helperTextId}
             className={cn(
-              'ml-[7px] block text-base leading-4 text-text-600',
+              'ml-[7px] mt-[2px] block text-base leading-4 text-text-700',
               !helperTextReserveSpace && 'absolute top-full',
             )}
           >

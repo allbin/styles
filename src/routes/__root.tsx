@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
 import TopBar from '../components/TopBar/TopBar';
 import LeftPanel from '../components/LeftPanel/LeftPanel';

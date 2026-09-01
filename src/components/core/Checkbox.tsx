@@ -1,7 +1,7 @@
 import React from 'react';
 import * as CheckboxPrimitives from '@radix-ui/react-checkbox';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/helpers/classnames.ts';
+import { cn } from '@/helpers/classnames';
 import { Tooltip } from 'react-tooltip';
 import { IconCheck } from '@/icons';
 
@@ -37,15 +37,30 @@ const checkBoxVariants = cva([
   'focus-visible:ring-offset-2',
 ]);
 
+/** Handled by the wrapper element rather than the checkbox itself, so that the
+ * label is part of the hover/focus area of `asChild` parents such as Tooltip. */
+type WrapperInteractionProps = Pick<
+  React.ComponentPropsWithoutRef<'div'>,
+  'onPointerMove' | 'onPointerLeave' | 'onPointerDown' | 'onFocus' | 'onBlur'
+>;
+
 interface CheckboxBaseProps
-  extends VariantProps<typeof checkBoxVariants>,
-    React.ComponentPropsWithoutRef<typeof CheckboxPrimitives.Root> {
+  extends
+    VariantProps<typeof checkBoxVariants>,
+    Omit<
+      React.ComponentPropsWithoutRef<typeof CheckboxPrimitives.Root>,
+      keyof WrapperInteractionProps
+    >,
+    WrapperInteractionProps {
   id: string;
   checked?: boolean;
   disabled?: boolean;
   toolTip?: string;
   error?: string;
   onClick?: () => void;
+  /** Set by `asChild` parents such as Tooltip. Kept off the checkbox itself so
+   * it cannot overwrite Radix' checked/unchecked state attribute. */
+  'data-state'?: string;
 }
 
 interface CheckboxWithLabelProps extends CheckboxBaseProps {
@@ -62,10 +77,7 @@ interface CheckboxWithoutLabelProps extends CheckboxBaseProps {
 
 type CheckboxProps = CheckboxWithLabelProps | CheckboxWithoutLabelProps;
 
-const CheckBox = React.forwardRef<
-  React.ElementRef<typeof CheckboxPrimitives.Root>,
-  CheckboxProps
->(
+const CheckBox = React.forwardRef<HTMLDivElement, CheckboxProps>(
   (
     {
       className,
@@ -76,6 +88,12 @@ const CheckBox = React.forwardRef<
       description,
       labelClassName,
       toolTip,
+      onPointerMove,
+      onPointerLeave,
+      onPointerDown,
+      onFocus,
+      onBlur,
+      'data-state': triggerState,
       ...props
     },
     ref,
@@ -93,45 +111,49 @@ const CheckBox = React.forwardRef<
     );
 
     return (
-      <div className={cn('flex items-start gap-2')}>
-        <div
-          className={cn('flex gap-2')}
-          data-tooltip-id={id}
-          data-tooltip-content={toolTip}
+      <div
+        ref={ref}
+        className={cn('flex items-start gap-2')}
+        data-tooltip-id={id}
+        data-tooltip-content={toolTip}
+        data-state={triggerState}
+        onPointerMove={onPointerMove}
+        onPointerLeave={onPointerLeave}
+        onPointerDown={onPointerDown}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      >
+        {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
+        <CheckboxPrimitives.Root
+          id={id}
+          {...props}
+          checked={checked}
+          disabled={disabled}
+          onKeyDown={handleKeyDown}
+          className={cn(checkBoxVariants({}), className)}
         >
-          {id ? <Tooltip id={id} delayShow={300} delayHide={1} /> : null}
-          <CheckboxPrimitives.Root
-            id={id}
-            ref={ref}
-            {...props}
-            checked={checked}
-            disabled={disabled}
-            onKeyDown={handleKeyDown}
-            className={cn(checkBoxVariants({}), className)}
-          >
-            <CheckboxPrimitives.Indicator className="flex size-full items-center justify-center text-contrast-primary">
-              <IconCheck className="size-4" />
-            </CheckboxPrimitives.Indicator>
-          </CheckboxPrimitives.Root>
-          {label && (
-            <div className={cn('flex flex-col gap-1', labelClassName)}>
-              <label
-                className={cn(
-                  !disabled
-                    ? 'hover:cursor-pointer hover:text-text-900'
-                    : 'cursor-default, text-text-400',
-                  'text-sm font-medium text-text-800',
-                )}
-                htmlFor={id}
-              >
-                {label}
-              </label>
-              {description && (
-                <span className="text-sm text-text-700">{description}</span>
+          <CheckboxPrimitives.Indicator className="flex size-full items-center justify-center text-contrast-primary">
+            <IconCheck className="size-4" />
+          </CheckboxPrimitives.Indicator>
+        </CheckboxPrimitives.Root>
+        {label && (
+          <div className={cn('flex flex-col gap-1', labelClassName)}>
+            <label
+              className={cn(
+                !disabled
+                  ? 'hover:cursor-pointer hover:text-text-900'
+                  : 'cursor-default text-text-400',
+                'text-sm font-medium text-text-800',
               )}
-            </div>
-          )}
-        </div>
+              htmlFor={id}
+            >
+              {label}
+            </label>
+            {description && (
+              <span className="text-sm text-text-700">{description}</span>
+            )}
+          </div>
+        )}
       </div>
     );
   },

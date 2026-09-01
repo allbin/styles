@@ -3,8 +3,7 @@ import { Spinner } from '../spinner';
 import Button from './Button';
 import type { LinkProps } from '@tanstack/react-router';
 
-interface IconButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   icon: React.ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'xl' | null;

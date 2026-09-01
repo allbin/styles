@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../helpers/classnames';
+import { cn } from '@/helpers/classnames';
 import { Spinner } from '../spinner';
 import { Tooltip } from 'react-tooltip';
 import { Link, type LinkProps } from '@tanstack/react-router';
@@ -30,7 +30,6 @@ const buttonVariants = cva(
     'focus-visible:ring-primary-600',
     'focus-visible:shadow-[0_0_0_3px_inset_white]',
     'h-min',
-    // 'whitespace-nowrap',
   ],
   {
     variants: {
@@ -79,6 +78,7 @@ const buttonVariants = cva(
         variant: 'filled',
         class: [
           'bg-primary-500',
+          'text-contrast-primary',
           'hover:bg-primary-400',
           'hover:border-primary-400',
           'disabled:bg-background-500',
@@ -189,22 +189,22 @@ const buttonVariants = cva(
       {
         size: 'sm',
         hasStartEndIcon: true,
-        class: ['[&>*:first-child]:size-4'],
+        class: ['[&>svg]:size-4', '[&>svg]:shrink-0'],
       },
       {
         size: 'md',
         hasStartEndIcon: true,
-        class: ['[&>*:first-child]:size-5'],
+        class: ['[&>svg]:size-5', '[&>svg]:shrink-0'],
       },
       {
         size: 'lg',
         hasStartEndIcon: true,
-        class: ['[&>*:first-child]:size-6'],
+        class: ['[&>svg]:size-6', '[&>svg]:shrink-0'],
       },
       {
         size: 'xl',
         hasStartEndIcon: true,
-        class: ['[&>*:first-child]:size-7'],
+        class: ['[&>svg]:size-7', '[&>svg]:shrink-0'],
       },
       {
         size: 'sm',
@@ -239,7 +239,8 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'>,
+  extends
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   startIcon?: React.ReactNode;
