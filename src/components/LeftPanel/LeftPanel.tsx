@@ -15,13 +15,13 @@ const LeftPanel: React.FC = () => {
         <NavElement to="/fonts">Text and fonts</NavElement>
         <NavElement to="/icons">Icons</NavElement>
         <span className="mt-3 text-sm font-bold">Components</span>
+        <NavElement to="/autocomplete">Autocomplete</NavElement>
         <NavElement to="/button">Button</NavElement>
         <NavElement to="/checkbox">Checkbox</NavElement>
         <NavElement to="/dropdown">Dropdown</NavElement>
         <NavElement to="/input">Input</NavElement>
         <NavElement to="/positionpad">PositionPad</NavElement>
         <NavElement to="/slider">Slider</NavElement>
-        <NavElement to="/textarea">Textarea</NavElement>
         <NavElement to="/toast">Toast</NavElement>
         <NavElement to="/togglebutton">ToggleButton</NavElement>
         <NavElement to="/togglebuttongroup">ToggleButtonGroup</NavElement>

@@ -21,6 +21,7 @@ import { Route as DropdownRouteImport } from './routes/dropdown'
 import { Route as ColorsRouteImport } from './routes/colors'
 import { Route as CheckboxRouteImport } from './routes/checkbox'
 import { Route as ButtonRouteImport } from './routes/button'
+import { Route as AutocompleteRouteImport } from './routes/autocomplete'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TogglebuttongroupRoute = TogglebuttongroupRouteImport.update({
@@ -83,6 +84,11 @@ const ButtonRoute = ButtonRouteImport.update({
   path: '/button',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AutocompleteRoute = AutocompleteRouteImport.update({
+  id: '/autocomplete',
+  path: '/autocomplete',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -91,6 +97,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/autocomplete': typeof AutocompleteRoute
   '/button': typeof ButtonRoute
   '/checkbox': typeof CheckboxRoute
   '/colors': typeof ColorsRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/autocomplete': typeof AutocompleteRoute
   '/button': typeof ButtonRoute
   '/checkbox': typeof CheckboxRoute
   '/colors': typeof ColorsRoute
@@ -122,6 +130,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/autocomplete': typeof AutocompleteRoute
   '/button': typeof ButtonRoute
   '/checkbox': typeof CheckboxRoute
   '/colors': typeof ColorsRoute
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/autocomplete'
     | '/button'
     | '/checkbox'
     | '/colors'
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/autocomplete'
     | '/button'
     | '/checkbox'
     | '/colors'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/autocomplete'
     | '/button'
     | '/checkbox'
     | '/colors'
@@ -185,6 +197,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AutocompleteRoute: typeof AutocompleteRoute
   ButtonRoute: typeof ButtonRoute
   CheckboxRoute: typeof CheckboxRoute
   ColorsRoute: typeof ColorsRoute
@@ -285,6 +298,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ButtonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/autocomplete': {
+      id: '/autocomplete'
+      path: '/autocomplete'
+      fullPath: '/autocomplete'
+      preLoaderRoute: typeof AutocompleteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -297,6 +317,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AutocompleteRoute: AutocompleteRoute,
   ButtonRoute: ButtonRoute,
   CheckboxRoute: CheckboxRoute,
   ColorsRoute: ColorsRoute,
@@ -306,7 +327,6 @@ const rootRouteChildren: RootRouteChildren = {
   InputRoute: InputRoute,
   PositionpadRoute: PositionpadRoute,
   SliderRoute: SliderRoute,
-  TextareaRoute: TextareaRoute,
   ToastRoute: ToastRoute,
   TogglebuttonRoute: TogglebuttonRoute,
   TogglebuttongroupRoute: TogglebuttongroupRoute,
