@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TogglebuttongroupRouteImport } from './routes/togglebuttongroup'
 import { Route as TogglebuttonRouteImport } from './routes/togglebutton'
 import { Route as ToastRouteImport } from './routes/toast'
-import { Route as TextareaRouteImport } from './routes/textarea'
 import { Route as SliderRouteImport } from './routes/slider'
 import { Route as PositionpadRouteImport } from './routes/positionpad'
 import { Route as InputRouteImport } from './routes/input'
@@ -37,11 +36,6 @@ const TogglebuttonRoute = TogglebuttonRouteImport.update({
 const ToastRoute = ToastRouteImport.update({
   id: '/toast',
   path: '/toast',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TextareaRoute = TextareaRouteImport.update({
-  id: '/textarea',
-  path: '/textarea',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SliderRoute = SliderRouteImport.update({
@@ -106,7 +100,6 @@ export interface FileRoutesByFullPath {
   '/input': typeof InputRoute
   '/positionpad': typeof PositionpadRoute
   '/slider': typeof SliderRoute
-  '/textarea': typeof TextareaRoute
   '/toast': typeof ToastRoute
   '/togglebutton': typeof TogglebuttonRoute
   '/togglebuttongroup': typeof TogglebuttongroupRoute
@@ -122,7 +115,6 @@ export interface FileRoutesByTo {
   '/input': typeof InputRoute
   '/positionpad': typeof PositionpadRoute
   '/slider': typeof SliderRoute
-  '/textarea': typeof TextareaRoute
   '/toast': typeof ToastRoute
   '/togglebutton': typeof TogglebuttonRoute
   '/togglebuttongroup': typeof TogglebuttongroupRoute
@@ -139,7 +131,6 @@ export interface FileRoutesById {
   '/input': typeof InputRoute
   '/positionpad': typeof PositionpadRoute
   '/slider': typeof SliderRoute
-  '/textarea': typeof TextareaRoute
   '/toast': typeof ToastRoute
   '/togglebutton': typeof TogglebuttonRoute
   '/togglebuttongroup': typeof TogglebuttongroupRoute
@@ -157,7 +148,6 @@ export interface FileRouteTypes {
     | '/input'
     | '/positionpad'
     | '/slider'
-    | '/textarea'
     | '/toast'
     | '/togglebutton'
     | '/togglebuttongroup'
@@ -173,7 +163,6 @@ export interface FileRouteTypes {
     | '/input'
     | '/positionpad'
     | '/slider'
-    | '/textarea'
     | '/toast'
     | '/togglebutton'
     | '/togglebuttongroup'
@@ -189,7 +178,6 @@ export interface FileRouteTypes {
     | '/input'
     | '/positionpad'
     | '/slider'
-    | '/textarea'
     | '/toast'
     | '/togglebutton'
     | '/togglebuttongroup'
@@ -206,7 +194,6 @@ export interface RootRouteChildren {
   InputRoute: typeof InputRoute
   PositionpadRoute: typeof PositionpadRoute
   SliderRoute: typeof SliderRoute
-  TextareaRoute: typeof TextareaRoute
   ToastRoute: typeof ToastRoute
   TogglebuttonRoute: typeof TogglebuttonRoute
   TogglebuttongroupRoute: typeof TogglebuttongroupRoute
@@ -233,13 +220,6 @@ declare module '@tanstack/react-router' {
       path: '/toast'
       fullPath: '/toast'
       preLoaderRoute: typeof ToastRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/textarea': {
-      id: '/textarea'
-      path: '/textarea'
-      fullPath: '/textarea'
-      preLoaderRoute: typeof TextareaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/slider': {
