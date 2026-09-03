@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/helpers/classnames';
-import { Spinner } from '../spinner';
+import { Spinner } from '@/components/core/Spinner';
 import { Tooltip } from 'react-tooltip';
 import { Link, type LinkProps } from '@tanstack/react-router';
 

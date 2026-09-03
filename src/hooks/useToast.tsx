@@ -6,7 +6,7 @@ import {
   InformationCircleIcon,
   XCircleIcon,
 } from '@heroicons/react/24/outline';
-import { Spinner } from '../components/spinner';
+import { Spinner } from '../components/core/Spinner';
 
 const icons = {
   success: <CheckCircleIcon className="size-7" />,

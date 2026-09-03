@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Spinner } from '../spinner';
+import { Spinner } from './Spinner';
 import Button from './Button';
 import type { LinkProps } from '@tanstack/react-router';
 
